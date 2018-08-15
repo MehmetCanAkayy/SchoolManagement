@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         k_adlari[1]="onr";
         k_adlari[2]="meh";
 
+        System.out.println("Hello");
         final String[] k_sifreleri = new String[10];
         k_sifreleri[0]="111";
         k_sifreleri[1]="222";
