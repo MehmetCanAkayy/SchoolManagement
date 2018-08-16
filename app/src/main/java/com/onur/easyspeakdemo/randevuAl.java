@@ -82,6 +82,7 @@ public class randevuAl extends AppCompatActivity {
                         System.out.println(timePickerDialog.getHour() + " " + timePickerDialog.getMinute());
                     }
                 });
+
         calendarView.setOnDayClickListener(new OnDayClickListener() {
             @Override
             public void onDayClick(EventDay eventDay) {
@@ -90,12 +91,12 @@ String key;
                 timePickerDialog.show();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd");
                 System.out.println(dateFormat.format(clickedDayCalendar.getTime()));
+                System.out.println(timePickerDialog.getHour() + " " + timePickerDialog.getMinute());
+
                 date = dateFormat.format(clickedDayCalendar.getTime()).split(" ");
 
             }
         });
-
-
 
 
 
@@ -127,8 +128,10 @@ String key;
     };// using CustomTimePickerDialog
 
     private static void DosyayaEkle(String[] metin){
+        System.out.println(Environment.getExternalStorageDirectory());
+
         try{
-            File dosya = new File("/storage/emulated/0/yeni.txt");
+            File dosya = new File( Environment.getExternalStorageDirectory() +"/yeni.txt");
             FileWriter yazici = new FileWriter(dosya,true);
             BufferedWriter yaz = new BufferedWriter(yazici);
             for (int i = 0 ; i < metin.length ; i ++){
