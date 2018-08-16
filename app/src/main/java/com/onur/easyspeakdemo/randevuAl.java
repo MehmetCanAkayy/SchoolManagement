@@ -95,8 +95,10 @@ String key;
 
                 date = dateFormat.format(clickedDayCalendar.getTime()).split(" ");
 
+
             }
         });
+
 
 
 
