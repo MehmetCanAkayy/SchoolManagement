@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "476640038910",
+    "firebase_url": "https://easyspeakdemo2.firebaseio.com",
+    "project_id": "easyspeakdemo2",
+    "storage_bucket": "easyspeakdemo2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:476640038910:android:e91ee4104ca63031",
+        "android_client_info": {
+          "package_name": "com.onur.easyspeakdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "476640038910-jslq91c2j5hooa0bjs3va66j5br4dfsm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.onur.easyspeakdemo",
+            "certificate_hash": "33006eb224bc1bd534c8d391af6e5d7e6babce88"
+          }
+        },
+        {
+          "client_id": "476640038910-k7oqhmec9904eln07dbgd0680vvcb1pd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvz2dn_urvtQ5ROO4GThE-z78mbXTGp6k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "476640038910-k7oqhmec9904eln07dbgd0680vvcb1pd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
