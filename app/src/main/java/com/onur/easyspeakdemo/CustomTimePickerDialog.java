@@ -36,6 +36,13 @@ public class CustomTimePickerDialog extends TimePickerDialog {
         }
     }
 
+    public void onTimeSet(TimePicker view,int hourOfDay,int minute){
+
+        System.out.println(hour + " " + minute);
+    }
+
+
+
     public int getHour() {
         return hour;
     }

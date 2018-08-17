@@ -19,6 +19,8 @@ import android.widget.TimePicker;
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import net.steamcrafted.lineartimepicker.dialog.LinearTimePickerDialog;
 
@@ -38,13 +40,16 @@ public class randevuAl extends AppCompatActivity {
     CustomTimePickerDialog timePickerDialog = null;
     CalendarView calendarView;
     String date[] = new String[2];
+    FirebaseDatabase db;
 
 //    Bundle bundle = new Bundle();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_randevu_al);
+        db= FirebaseDatabase.getInstance();
 
         List<EventDay> events = new ArrayList<>();
 
@@ -78,10 +83,12 @@ public class randevuAl extends AppCompatActivity {
              dizi[2] = String.valueOf(date[0]);
              dizi[3] = String.valueOf(date[1]);
 
+
              DosyayaEkle(dizi);
                         System.out.println(timePickerDialog.getHour() + " " + timePickerDialog.getMinute());
                     }
                 });
+
 
         calendarView.setOnDayClickListener(new OnDayClickListener() {
             @Override
@@ -93,8 +100,13 @@ String key;
                 System.out.println(dateFormat.format(clickedDayCalendar.getTime()));
                 System.out.println(timePickerDialog.getHour() + " " + timePickerDialog.getMinute());
 
-                date = dateFormat.format(clickedDayCalendar.getTime()).split(" ");
 
+                String dateTime=null;
+                dateTime+=dateFormat.format(clickedDayCalendar.getTime());
+                dateTime+=" "+timePickerDialog.getHour()+" "+timePickerDialog.getMinute();
+                date = dateFormat.format(clickedDayCalendar.getTime()).split(" ");
+                DatabaseReference dbRef=db.getReference("tarih");
+                dbRef.setValue(dateTime);
 
             }
         });
