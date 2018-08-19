@@ -22,6 +22,9 @@ public class dersSecimi extends AppCompatActivity {
         setContentView(R.layout.ders_secimi);
 
         final Intent sayfagecis=new Intent(this, randevuAl.class);
+        final Intent sayfagecis2=new Intent(this, ListWeek.class);
+
+
         ran_al= (Button) findViewById(R.id.rand_al);
         ran_al.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +61,7 @@ public class dersSecimi extends AppCompatActivity {
                 activity.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startActivity(sayfagecis);
+                        startActivity(sayfagecis2);
                     }
                 });
                 social.setOnClickListener(new View.OnClickListener() {

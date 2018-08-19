@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">EasySpeakDemo</string>
-    <color name="white">#FFFFFF</color>
+    <color name="white">#ffffff</color>
     <color name="background">#e2dee4</color>
     <string name="show_dialog">Show dialog</string>
     <string name="login">Login</string>
@@ -9,4 +9,5 @@
     <string name="login_label">Login</string>
     <string name="success_login_msg">Login successful</string>
     <string name="error_login_msg">Please fill any empty fields</string>
+    <string name="title_activity_week_view">WeekView</string>
 </resources>

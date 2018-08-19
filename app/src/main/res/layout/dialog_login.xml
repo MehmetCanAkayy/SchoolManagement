@@ -2,44 +2,45 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@drawable/gradient"
 
     android:padding="5dp">
 
 
-
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Activity"
-        android:background="@color/colorPrimaryDark"
 
-        android:textColor="@android:color/white" />
-    <Button
+        android:textColor="@android:color/white"
+        app:backgroundTint="@color/secondaryColor"/>
+
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/social"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/colorPrimaryDark"
         android:text="Social"
-        android:textColor="@android:color/white" />
-    <Button
+        android:textColor="@color/white"
+        app:backgroundTint="@color/secondaryColor"/>
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/chat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/colorPrimaryDark"
         android:text="Chat"
-        android:textColor="@android:color/white" />
-    <Button
+        android:textColor="@color/white"
+        app:backgroundTint="@color/secondaryColor"/>
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/speaking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/colorPrimaryDark"
         android:text="Speaking"
-        android:textColor="@android:color/white" />
+        android:textColor="@color/white"
+        app:backgroundTint="@color/secondaryColor"/>
 </LinearLayout>

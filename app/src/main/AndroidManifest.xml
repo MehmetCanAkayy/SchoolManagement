@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.onur.easyspeakdemo">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,7 +20,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".dersSecimi" />
-        <activity android:name=".randevuAl"></activity>
+        <activity android:name=".randevuAl" />
+        <activity android:name=".WeekView" />
+        <activity android:name=".ListWeek"></activity>
     </application>
 
 </manifest>
