@@ -23,6 +23,7 @@ public class dersSecimi extends AppCompatActivity {
 
         final Intent sayfagecis=new Intent(this, randevuAl.class);
         final Intent sayfagecis2=new Intent(this, ListWeek.class);
+        final Intent sayfagecis3=new Intent(this, BasicActivity.class);
 
 
         ran_al= (Button) findViewById(R.id.rand_al);
@@ -67,7 +68,7 @@ public class dersSecimi extends AppCompatActivity {
                 social.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startActivity(sayfagecis);
+                        startActivity(sayfagecis3);
                     }
                 });
                 chat.setOnClickListener(new View.OnClickListener() {
