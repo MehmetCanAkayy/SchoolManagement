@@ -23,7 +23,7 @@ public class dersSecimi extends AppCompatActivity {
 
         final Intent sayfagecis=new Intent(this, randevuAl.class);
         final Intent sayfagecis2=new Intent(this, ListWeek.class);
-        final Intent sayfagecis3=new Intent(this, BasicActivity.class);
+        final Intent sayfagecis3=new Intent(this, AlamKanakActivity.class);
 
 
         ran_al= (Button) findViewById(R.id.rand_al);

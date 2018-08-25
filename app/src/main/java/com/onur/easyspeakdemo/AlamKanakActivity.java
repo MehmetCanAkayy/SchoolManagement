@@ -28,7 +28,7 @@ import java.util.Locale;
  * Created by Raquib-ul-Alam Kanak on 1/3/2014.
  * Website: http://alamkanak.github.io
  */
-public abstract class BaseActivity extends AppCompatActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener,WeekView.EmptyViewClickListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
+public class AlamKanakActivity extends AppCompatActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener,WeekView.EmptyViewClickListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
     private static final int TYPE_DAY_VIEW = 1;
     private static final int TYPE_THREE_DAY_VIEW = 2;
     private static final int TYPE_WEEK_VIEW = 3;
@@ -63,11 +63,11 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         mNewEvents = new ArrayList<WeekViewEvent>();
 
 
+
         // Set up a date time interpreter to interpret how the date and time will be formatted in
         // the week view. This is optional.
         setupDateTimeInterpreter(false);
     }
-
 
     @Override
     public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
@@ -113,6 +113,9 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         }
         return events;
     }
+
+
+
 
 
     @Override
@@ -213,9 +216,35 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         Toast.makeText(this, "Clicked " + event.getName(), Toast.LENGTH_SHORT).show();
     }
 
-
+//    @Override
+//    public void onEmptyViewClicked(Calendar time) {
+//        // Set the new event with duration one hour.
+//        Calendar endTime = (Calendar) time.clone();
+//        endTime.add(Calendar.HOUR, 1);
+//
+//        // Create a new event.
+//        WeekViewEvent event = new WeekViewEvent(20, "New event", time, endTime);
+//        mNewEvents.add(event);
+//
+//        // Refresh the week view. onMonthChange will be called again.
+//        mWeekView.notifyDatasetChanged();
+//    }
     @Override
     public void onEmptyViewClicked(Calendar time) {
+
+
+
+        Calendar endTime = (Calendar) time.clone();
+        endTime.add(Calendar.HOUR, 1);
+
+        // Create a new event.
+        WeekViewEvent event = new WeekViewEvent(20, "New event", time, endTime);
+        mNewEvents.add(event);
+
+        // Refresh the week view. onMonthChange will be called again.
+        mWeekView.notifyDatasetChanged();
+
+
         final Intent eventActivity=new Intent(this, EventActvity.class);
         eventActivity.putExtra("hour", time.get(Calendar.HOUR_OF_DAY));
         eventActivity.putExtra("minute", time.get(Calendar.MINUTE));
@@ -239,6 +268,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
                 System.out.println(bitis);
                 System.out.println(baslik);
                 System.out.println(icerik);
+
 
 
 

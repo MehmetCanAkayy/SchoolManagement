@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.onur.easyspeakdemo">
 
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -24,12 +23,11 @@
         <activity android:name=".randevuAl" />
         <activity
             android:name=".BasicActivity"
-            android:label="@string/title_activity_basic" >
-        </activity>
+            android:label="@string/title_activity_basic" />
         <activity android:name=".ListWeek" />
+        <activity android:name=".EventActvity" />
+        <activity android:name=".AlamKanakActivity"></activity>
+
     </application>
-
-
-
 
 </manifest>
