@@ -1,6 +1,7 @@
 package com.alamkanak.weekview;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by jesse on 6/02/2016.
@@ -29,11 +30,13 @@ public class WeekViewUtil {
      * @return the calendar instance
      */
     public static Calendar today(){
-        Calendar today = Calendar.getInstance();
-        today.set(Calendar.HOUR_OF_DAY, 0);
-        today.set(Calendar.MINUTE, 0);
-        today.set(Calendar.SECOND, 0);
-        today.set(Calendar.MILLISECOND, 0);
-        return today;
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DAY_OF_WEEK, cal.getActualMinimum(Calendar.DAY_OF_WEEK));
+        Date now = new Date();
+        cal.setTime(now);
+        int week = cal.get(Calendar.DAY_OF_WEEK);
+        cal.setTime(new Date(now.getTime() - 24 * 60 * 60 * 1000 * (week -2)));
+        return cal;
     }
 }

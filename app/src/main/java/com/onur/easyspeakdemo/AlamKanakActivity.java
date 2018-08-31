@@ -35,6 +35,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     private int mWeekViewType = TYPE_THREE_DAY_VIEW;
     private WeekView mWeekView;
     private ArrayList<WeekViewEvent> mNewEvents;
+    private Calendar selectedDate;
 
 
     @Override
@@ -234,20 +235,13 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
 
 
-        Calendar endTime = (Calendar) time.clone();
-        endTime.add(Calendar.HOUR, 1);
-
-        // Create a new event.
-        WeekViewEvent event = new WeekViewEvent(20, "New event", time, endTime);
-        mNewEvents.add(event);
-
-        // Refresh the week view. onMonthChange will be called again.
-        mWeekView.notifyDatasetChanged();
 
 
+        selectedDate = time;
         final Intent eventActivity=new Intent(this, EventActvity.class);
         eventActivity.putExtra("hour", time.get(Calendar.HOUR_OF_DAY));
         eventActivity.putExtra("minute", time.get(Calendar.MINUTE));
+
         startActivityForResult(eventActivity,1);
         Toast.makeText(this, "Empty view clicked: " + getEventTitle(time), Toast.LENGTH_SHORT).show();
 
@@ -269,6 +263,15 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
                 System.out.println(baslik);
                 System.out.println(icerik);
 
+                Calendar endTime = (Calendar) selectedDate.clone();
+                endTime.add(Calendar.HOUR, 1);
+
+                // Create a new event.
+                WeekViewEvent event = new WeekViewEvent(20, "New event", selectedDate, endTime);
+                mNewEvents.add(event);
+
+                // Refresh the week view. onMonthChange will be called again.
+                mWeekView.notifyDatasetChanged();
 
 
 
