@@ -72,8 +72,6 @@ public class StudentsActivity extends AppCompatActivity {
                 mAdapter = new MyAdapter(artistList);
                 recyclerView.setAdapter(mAdapter);
 
-
-
             }
 
             @Override

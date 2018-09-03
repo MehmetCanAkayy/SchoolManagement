@@ -20,6 +20,7 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_gravity="center_horizontal"
+            android:background="@color/blue"
             android:src="@drawable/logo" />
 
         <LinearLayout

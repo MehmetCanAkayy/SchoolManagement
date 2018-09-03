@@ -28,7 +28,7 @@ public class UserRegister extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_register);
-
+        
         editTextName= (EditText) findViewById(R.id.userName);
         databaseArtists = FirebaseDatabase.getInstance().getReference("students");
 
