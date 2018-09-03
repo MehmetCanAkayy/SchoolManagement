@@ -10,10 +10,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.firebaseDemo.StudentsActivity;
+import com.user.UserRegister;
 
 public class dersSecimi extends AppCompatActivity {
 
-    private Button ran_al,rand_iptal;
+    private Button ran_al,rand_iptal,userAddButton;
 
 
 
@@ -27,7 +28,15 @@ public class dersSecimi extends AppCompatActivity {
         final Intent sayfagecis2=new Intent(this, ListWeek.class);
         final Intent sayfagecis3=new Intent(this, AlamKanakActivity.class);
         final Intent studentsActivity=new Intent(this, StudentsActivity.class);
+        final Intent userAdd=new Intent(this, UserRegister.class);
 
+        userAddButton=  findViewById(R.id.user_add);
+        userAddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(userAdd);
+            }
+        });
 
         ran_al= (Button) findViewById(R.id.rand_al);
         ran_al.setOnClickListener(new View.OnClickListener() {

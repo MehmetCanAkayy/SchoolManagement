@@ -19,15 +19,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // you provide access to all the views for a data item in a view holder
     public class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView txtHeader;
-        public TextView txtFooter;
+        public TextView txtName;
+        public TextView txtGrade;
         public ImageView Image ;
         public View layout;
 
         public ViewHolder(View v) {
             super(v);
             layout = v;
-            txtHeader = v.findViewById(R.id.isim);
+            txtName = v.findViewById(R.id.isim);
+            txtGrade = v.findViewById(R.id.grade);
 
         }
     }
@@ -67,7 +68,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         final String name = values.get(position).getArtistName();
-        holder.txtHeader.setText(name);
+        final String grade = values.get(position).getArtistGrade();
+
+        holder.txtName.setText(name);
+        holder.txtGrade.setText(grade);
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)

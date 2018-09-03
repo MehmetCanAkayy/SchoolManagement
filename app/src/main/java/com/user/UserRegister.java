@@ -68,6 +68,10 @@ public class UserRegister extends AppCompatActivity {
         }else {
             Toast.makeText(this,"You should enter a name",Toast.LENGTH_LONG).show();
         }
+        finish();
+
+
+
     }
 
 

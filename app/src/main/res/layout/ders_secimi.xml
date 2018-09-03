@@ -41,4 +41,16 @@
 
         />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="OGRENCI EKLE"
+        android:id="@+id/user_add"
+        android:background="@drawable/gradient"
+        android:layout_gravity="center_horizontal"
+
+
+        />
+
 </LinearLayout>
