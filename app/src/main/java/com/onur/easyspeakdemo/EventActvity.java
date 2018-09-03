@@ -42,19 +42,18 @@ public class EventActvity extends AppCompatActivity {
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.grades, android.R.layout.simple_spinner_item);
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(adapter);
 
-        Spinner spinnerTeachers = (Spinner) findViewById(R.id.teachers);
 
+        Spinner spinnerTeachers = (Spinner) findViewById(R.id.teachers);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
                 R.array.teachers, android.R.layout.simple_spinner_item);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spinner.setAdapter(adapter1);
+        spinnerTeachers.setAdapter(adapter1);
 
         baslangic = findViewById(R.id.text_start_time_1);
         bitis = findViewById(R.id.text_end_time_1);

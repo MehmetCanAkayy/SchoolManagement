@@ -40,6 +40,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         notifyItemRemoved(position);
     }
 
+
+
     // Provide a suitable constructor (depends on the kind of dataset)
     public MyAdapter(List<String> myDataset) {
         values = myDataset;

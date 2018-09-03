@@ -43,6 +43,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         notifyItemRemoved(position);
     }
 
+    public void clear() {
+        int size = values.size();
+        values.clear();
+        notifyItemRangeRemoved(0, size);
+    }
+
     // Provide a suitable constructor (depends on the kind of dataset)
     public MyAdapter(List<Artist> artistList) {
         values = artistList;
