@@ -35,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Intent sayfagecis= new Intent(MainActivity.this, com.user.UserRegister.class);
         Intent sayfagecis= new Intent(MainActivity.this, dersSecimi.class);
+
         startActivity(sayfagecis);
         ad=(TextView)findViewById(R.id.kul_ad);
         sifre=(TextView) findViewById(R.id.kul_sifre);

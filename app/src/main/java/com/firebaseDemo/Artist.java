@@ -5,34 +5,24 @@ package com.firebaseDemo;
  */
 
 public class Artist {
-    String artistId;
     String artistName;
-    String artistGenre;
-    String addSession;
+    String artistGrade;
 
     public Artist(){
 
     }
 
-    public Artist(String artistId, String artistName, String artistGenre, String addSession) {
-        this.artistId = artistId;
+    public Artist(String artistName, String artistGrade) {
         this.artistName = artistName;
-        this.artistGenre = artistGenre;
-        this.addSession=addSession;
+        this.artistGrade = artistGrade;
     }
 
-    public String getArtistId() {
-        return artistId;
-    }
 
     public String getArtistName() {
         return artistName;
     }
 
-    public String getArtistGenre() {
-        return artistGenre;
-    }
-    public String getAddSession(){
-        return addSession;
+    public String getArtistGrade() {
+        return artistGrade;
     }
 }

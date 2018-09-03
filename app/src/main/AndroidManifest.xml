@@ -27,7 +27,8 @@
         <activity android:name=".ListWeek" />
         <activity android:name=".EventActvity" />
         <activity android:name=".AlamKanakActivity" />
-        <activity android:name="com.firebaseDemo.StudentsActivity"></activity>
+        <activity android:name="com.firebaseDemo.StudentsActivity" />
+        <activity android:name="com.user.UserRegister"></activity>
     </application>
 
 </manifest>

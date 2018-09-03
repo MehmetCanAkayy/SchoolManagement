@@ -40,6 +40,16 @@
         <item>Uranus</item>
         <item>Neptune</item>
     </string-array>
+    <string-array name="user_grade_array">
+        <item>A1</item>
+        <item>A2</item>
+        <item>A2+</item>
+        <item>B1</item>
+        <item>B2</item>
+        <item>C1</item>
+        <item>C2</item>
+        <item>Advenced</item>
+    </string-array>
 
 
 </resources>

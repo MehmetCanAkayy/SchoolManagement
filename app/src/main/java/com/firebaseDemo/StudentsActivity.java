@@ -50,7 +50,7 @@ public class StudentsActivity extends AppCompatActivity {
         databaseArtists.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                artistList.clear();
+                //artistList.clear();
                 for (DataSnapshot artistSnapshot : dataSnapshot.getChildren() ){
                     //Create Artist Class Object and Returning Value
                     Artist artist = artistSnapshot.getValue(Artist.class);
