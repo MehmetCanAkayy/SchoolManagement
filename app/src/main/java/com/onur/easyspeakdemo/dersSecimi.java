@@ -24,7 +24,7 @@ public class dersSecimi extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ders_secimi);
 
-        final Intent sayfagecis=new Intent(this, randevuAl.class);
+        //final Intent sayfagecis=new Intent(this, randevuAl.class);
         final Intent sayfagecis2=new Intent(this, ListWeek.class);
         final Intent sayfagecis3=new Intent(this, AlamKanakActivity.class);
         final Intent studentsActivity=new Intent(this, StudentsActivity.class);
@@ -92,7 +92,7 @@ public class dersSecimi extends AppCompatActivity {
                 speaking.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startActivity(sayfagecis);
+                        //startActivity(sayfagecis);
                     }
                 });
 //                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {

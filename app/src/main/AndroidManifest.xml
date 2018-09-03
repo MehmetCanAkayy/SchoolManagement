@@ -20,7 +20,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".dersSecimi" />
-        <activity android:name=".randevuAl" />
         <activity
             android:name=".BasicActivity"
             android:label="@string/title_activity_basic" />
