@@ -26,8 +26,8 @@
             android:label="@string/title_activity_basic" />
         <activity android:name=".ListWeek" />
         <activity android:name=".EventActvity" />
-        <activity android:name=".AlamKanakActivity"></activity>
-
+        <activity android:name=".AlamKanakActivity" />
+        <activity android:name="com.firebaseDemo.StudentsActivity"></activity>
     </application>
 
 </manifest>

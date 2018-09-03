@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.firebaseDemo.StudentsActivity;
+
 public class dersSecimi extends AppCompatActivity {
 
     private Button ran_al,rand_iptal;
@@ -24,6 +26,7 @@ public class dersSecimi extends AppCompatActivity {
         final Intent sayfagecis=new Intent(this, randevuAl.class);
         final Intent sayfagecis2=new Intent(this, ListWeek.class);
         final Intent sayfagecis3=new Intent(this, AlamKanakActivity.class);
+        final Intent studentsActivity=new Intent(this, StudentsActivity.class);
 
 
         ran_al= (Button) findViewById(R.id.rand_al);
@@ -74,7 +77,7 @@ public class dersSecimi extends AppCompatActivity {
                 chat.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startActivity(sayfagecis);
+                        startActivity(studentsActivity);
                     }
                 });
                 speaking.setOnClickListener(new View.OnClickListener() {

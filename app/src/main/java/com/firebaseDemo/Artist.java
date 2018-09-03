@@ -1,6 +1,4 @@
-package com.example.bulbul.universityfinder;
-
-import android.widget.ArrayAdapter;
+package com.firebaseDemo;
 
 /**
  * Created by bulbul on 2/1/2018.
@@ -16,7 +14,7 @@ public class Artist {
 
     }
 
-    public Artist(String artistId, String artistName, String artistGenre,String addSession) {
+    public Artist(String artistId, String artistName, String artistGenre, String addSession) {
         this.artistId = artistId;
         this.artistName = artistName;
         this.artistGenre = artistGenre;

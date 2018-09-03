@@ -1,17 +1,18 @@
-package com.onur.easyspeakdemo;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.firebaseDemo;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.onur.easyspeakdemo.R;
+
+import java.util.List;
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private List<String> values;
+    private List<Artist> values;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -20,17 +21,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // each data item is just a string in this case
         public TextView txtHeader;
         public TextView txtFooter;
+        public ImageView Image ;
         public View layout;
 
         public ViewHolder(View v) {
             super(v);
             layout = v;
-            txtHeader = (TextView) v.findViewById(R.id.firstLine);
+            txtHeader = v.findViewById(R.id.isim);
 
         }
     }
 
-    public void add(int position, String item) {
+    public void add(int position, Artist item) {
         values.add(position, item);
         notifyItemInserted(position);
     }
@@ -41,8 +43,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(List<String> myDataset) {
-        values = myDataset;
+    public MyAdapter(List<Artist> artistList) {
+        values = artistList;
     }
 
     // Create new views (invoked by the layout manager)
@@ -53,7 +55,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(
                 parent.getContext());
         View v =
-                inflater.inflate(R.layout.row_layout, parent, false);
+                inflater.inflate(R.layout.students, parent, false);
         // set the view's size, margins, paddings and layout parameters
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -64,9 +66,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        final String name = values.get(position);
+        final String name = values.get(position).getArtistName();
         holder.txtHeader.setText(name);
-
     }
 
     // Return the size of your dataset (invoked by the layout manager)
