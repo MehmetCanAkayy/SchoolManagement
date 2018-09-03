@@ -30,17 +30,13 @@
     <string name="end_icon_button">Add/Remove End Icon</string>
 
 
-    <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+    <string-array name="teachers">
+        <item>Frank</item>
+        <item>Alice</item>
+        <item>Brand</item>
+        <item>Micheal</item>
     </string-array>
-    <string-array name="user_grade_array">
+    <string-array name="grades">
         <item>A1</item>
         <item>A2</item>
         <item>A2+</item>
@@ -48,8 +44,9 @@
         <item>B2</item>
         <item>C1</item>
         <item>C2</item>
-        <item>Advenced</item>
+        <item>Advanced</item>
     </string-array>
+
 
 
 </resources>

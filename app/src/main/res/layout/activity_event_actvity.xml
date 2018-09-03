@@ -19,21 +19,14 @@
 
 
         <Spinner
-            android:id="@+id/planets_spinner"
+            android:id="@+id/grades"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width = "match_parent"
-            android:layout_height = "wrap_content" >
-
-            <EditText
-                android:id="@+id/baslik"
-                android:layout_width = "match_parent"
-                android:layout_height = "wrap_content"
-                android:hint = "Başlık"  />
-
-        </android.support.design.widget.TextInputLayout>
+        <Spinner
+            android:id="@+id/teachers"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width = "match_parent"

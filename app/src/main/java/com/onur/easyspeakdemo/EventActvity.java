@@ -26,7 +26,6 @@ public class EventActvity extends AppCompatActivity {
 
     TextInputLayout baslangic =null;
     TextInputLayout bitis =null;
-    EditText baslik =null;
     EditText icerik =null;
     EditText baslangicEdit = null;
     EditText bitisEdit = null;
@@ -39,18 +38,26 @@ public class EventActvity extends AppCompatActivity {
 
 
 
-        Spinner spinner = (Spinner) findViewById(R.id.planets_spinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
+        Spinner spinner = (Spinner) findViewById(R.id.grades);
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.planets_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
+                R.array.grades, android.R.layout.simple_spinner_item);
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
+
         spinner.setAdapter(adapter);
+
+        Spinner spinnerTeachers = (Spinner) findViewById(R.id.teachers);
+
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
+                R.array.teachers, android.R.layout.simple_spinner_item);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(adapter1);
 
         baslangic = findViewById(R.id.text_start_time_1);
         bitis = findViewById(R.id.text_end_time_1);
-        baslik = findViewById(R.id.baslik);
         icerik = findViewById(R.id.icerik);
         baslangicEdit = findViewById(R.id.text_start_time_edit_1);
         bitisEdit = findViewById(R.id.text_end_time_edit_1);
@@ -203,7 +210,6 @@ public class EventActvity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.putExtra("baslangic", baslangicEdit.getText().toString());
                 intent.putExtra("bitis", bitisEdit.getText().toString());
-                intent.putExtra("baslik", baslik.getText().toString());
                 intent.putExtra("icerik", icerik.getText().toString());
 
                 setResult(Activity.RESULT_OK, intent);
