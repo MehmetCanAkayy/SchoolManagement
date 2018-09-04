@@ -1,5 +1,6 @@
 package com.user;
 
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -7,13 +8,16 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.firebaseDemo.Artist;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.jackandphantom.blurimage.BlurImage;
 import com.onur.easyspeakdemo.R;
+
 
 
 public class UserRegister extends AppCompatActivity {
@@ -22,6 +26,7 @@ public class UserRegister extends AppCompatActivity {
     private Spinner userGrade;
     DatabaseReference databaseArtists;
     private Button add;
+    private ImageView background;
 
 
     @Override
@@ -32,6 +37,7 @@ public class UserRegister extends AppCompatActivity {
         editTextName= (EditText) findViewById(R.id.userName);
         databaseArtists = FirebaseDatabase.getInstance().getReference("students");
 
+        background=findViewById(R.id.background);
         add = findViewById(R.id.add);
 
         userGrade = (Spinner) findViewById(R.id.user_grade);
@@ -49,6 +55,7 @@ public class UserRegister extends AppCompatActivity {
                 addArtist();
             }
         });
+        BlurImage.with(getApplicationContext()).load(R.drawable.backgorund).intensity(20).Async(true).into(background);
 
 
     }

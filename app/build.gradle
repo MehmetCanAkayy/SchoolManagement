@@ -9,6 +9,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        renderscriptTargetApi 19
+        renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {
@@ -32,6 +35,7 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:27.1.1"
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.github.HITGIF:TextFieldBoxes:1.4.4'
+    compile 'com.jackandphantom.android:blurimage:1.2.0'
 
     //implementation 'com.github.alamkanak:android-week-view:1.2.6'
 
