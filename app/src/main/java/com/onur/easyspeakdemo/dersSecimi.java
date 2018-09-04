@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.firebaseDemo.StudentsActivity;
 import com.user.StudentRegister;
+import com.user.TeacherRegister;
 
 public class dersSecimi extends AppCompatActivity {
 
@@ -26,15 +27,11 @@ public class dersSecimi extends AppCompatActivity {
         final Intent sayfagecis2=new Intent(this, ListWeek.class);
         final Intent sayfagecis3=new Intent(this, AlamKanakActivity.class);
         final Intent studentsActivity=new Intent(this, StudentsActivity.class);
-        final Intent userAdd=new Intent(this, StudentRegister.class);
+        final Intent studentAdd=new Intent(this, StudentRegister.class);
+        final Intent teacherAdd=new Intent(this, TeacherRegister.class);
 
         userAddButton=  findViewById(R.id.user_add);
-        userAddButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(userAdd);
-            }
-        });
+
 
         ran_al= (Button) findViewById(R.id.rand_al);
         ran_al.setOnClickListener(new View.OnClickListener() {
@@ -115,8 +112,34 @@ public class dersSecimi extends AppCompatActivity {
             }
         });
 
+        userAddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(dersSecimi.this);
+                View mView = getLayoutInflater().inflate(R.layout.dialog_register, null);
+                Button student = (Button) mView.findViewById(R.id.student);
 
+                Button teacher = (Button) mView.findViewById(R.id.teacher);
+
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+                student.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(studentAdd);
+                    }
+                });
+                teacher.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(teacherAdd);
+                    }
+                });
+
+            }
+        });
 
     }
 
