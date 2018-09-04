@@ -20,7 +20,7 @@ import com.onur.easyspeakdemo.R;
 
 
 
-public class UserRegister extends AppCompatActivity {
+public class StudentRegister extends AppCompatActivity {
 
     private EditText editTextName;
     private Spinner userGrade;

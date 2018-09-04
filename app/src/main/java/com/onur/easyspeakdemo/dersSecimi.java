@@ -6,11 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.firebaseDemo.StudentsActivity;
-import com.user.UserRegister;
+import com.user.StudentRegister;
 
 public class dersSecimi extends AppCompatActivity {
 
@@ -28,7 +26,7 @@ public class dersSecimi extends AppCompatActivity {
         final Intent sayfagecis2=new Intent(this, ListWeek.class);
         final Intent sayfagecis3=new Intent(this, AlamKanakActivity.class);
         final Intent studentsActivity=new Intent(this, StudentsActivity.class);
-        final Intent userAdd=new Intent(this, UserRegister.class);
+        final Intent userAdd=new Intent(this, StudentRegister.class);
 
         userAddButton=  findViewById(R.id.user_add);
         userAddButton.setOnClickListener(new View.OnClickListener() {

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.jackandphantom.blurimage.BlurImage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private Button giris;
     private TextView ad,sifre;
+    private ImageView background;
     // List<String> kullanicilar = new ArrayList<String>();
 
 
@@ -35,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Intent sayfagecis= new Intent(MainActivity.this, com.user.UserRegister.class);
+        //Intent sayfagecis= new Intent(MainActivity.this, com.user.StudentRegister.class);
         Intent sayfagecis= new Intent(MainActivity.this, dersSecimi.class);
+        background=findViewById(R.id.background);
+
 
         startActivity(sayfagecis);
         ad=(TextView)findViewById(R.id.kul_ad);
@@ -54,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+        BlurImage.with(getApplicationContext()).load(R.drawable.backgorund).intensity(20).Async(true).into(background);
         giris= (Button) findViewById(R.id.giris);
         giris.setOnClickListener(new View.OnClickListener() {
             @Override
