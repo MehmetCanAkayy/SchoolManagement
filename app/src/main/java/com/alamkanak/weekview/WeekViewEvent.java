@@ -79,16 +79,9 @@ public class WeekViewEvent {
         return mStartTime;
     }
 
-
-
     public Calendar getEndTime() {
         return mEndTime;
     }
-
-
-
-
-
 
     public int getColor() {
         return mColor;
@@ -114,7 +107,14 @@ public class WeekViewEvent {
         return teacher;
     }
 
+    public String getStartEnd()
+    {
+        return mStartTime.get(Calendar.HOUR_OF_DAY)+":"+mStartTime.get(Calendar.MINUTE)+" - "+mEndTime.get(Calendar.HOUR_OF_DAY)+":"+mEndTime.get(Calendar.MINUTE);
+    }
     public String getContent() {
+        return grade+"\n"+teacher;
+    }
+    public String mGetContent() {
         return content;
     }
 

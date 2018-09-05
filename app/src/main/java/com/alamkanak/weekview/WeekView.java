@@ -173,12 +173,13 @@ public class WeekView extends View {
                 case NONE: {
                     // Allow scrolling only in one direction.
                     if (Math.abs(distanceX) > Math.abs(distanceY)) {
-//                        if (distanceX > 0) {
-//                            mCurrentScrollDirection = Direction.LEFT;
-//                        } else {
-//                            mCurrentScrollDirection = Direction.RIGHT;
-//                        }
-                    } else {
+                    /*   if (distanceX > 0) {
+                           mCurrentScrollDirection = Direction.LEFT;
+                        } else {
+                            mCurrentScrollDirection = Direction.RIGHT;
+                       }*/
+                    }
+                    else {
                         mCurrentFlingDirection = Direction.VERTICAL;
                         mCurrentScrollDirection = Direction.VERTICAL;
                         //mCurrentScrollDirection = Direction.VERTICAL;
@@ -1011,9 +1012,9 @@ public class WeekView extends View {
 
                 // Clear events.
                 mEventRects.clear();
-                sortAndCacheEvents(previousPeriodEvents);
+               // sortAndCacheEvents(previousPeriodEvents); /* Açıklama tekrarını engellemek için yaptık.
                 sortAndCacheEvents(currentPeriodEvents);
-                sortAndCacheEvents(nextPeriodEvents);
+               // sortAndCacheEvents(nextPeriodEvents);
                 calculateHeaderHeight();
 
                 mPreviousPeriodEvents = previousPeriodEvents;

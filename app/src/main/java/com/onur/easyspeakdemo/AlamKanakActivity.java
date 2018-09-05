@@ -1,9 +1,11 @@
 package com.onur.easyspeakdemo;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.RectF;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -211,6 +213,13 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     public void onEventClick(WeekViewEvent event, RectF eventRect) {
 
         Toast.makeText(this, "Clicked " + event.getContent(), Toast.LENGTH_SHORT).show();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(AlamKanakActivity.this);
+        builder.setTitle("Lesson Content");
+        builder.setMessage(event.getGrade()+"\n"+event.getTeacher()+"\n"+event.getStartEnd()+"\n"+event.mGetContent());
+
+
+        builder.show();
     }
 
 //    @Override
