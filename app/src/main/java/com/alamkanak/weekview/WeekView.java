@@ -1915,6 +1915,8 @@ public class WeekView extends View {
      */
     public void goToToday() {
         Calendar today = Calendar.getInstance();
+
+
         goToDate(today);
     }
 

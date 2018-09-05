@@ -230,7 +230,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     @Override
     public void onEmptyViewClicked(Calendar time) {
 
-
+        System.out.println(time.getTime());
 
 
 
