@@ -7,6 +7,9 @@ import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +20,15 @@ import com.alamkanak.weekview.DateTimeInterpreter;
 import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
+import com.firebaseDemo.Artist;
+import com.firebaseDemo.LessonInfo;
+import com.firebaseDemo.MyAdapter;
+import com.firebaseDemo.StudentsActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,12 +50,28 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     private WeekView mWeekView;
     private ArrayList<WeekViewEvent> mNewEvents;
     private Calendar selectedDate;
+    private DatabaseReference databaseLessonInfo;
+
+    String baslangic;
+    String bitis;
+    String grade;
+    String teacher;
+    String icerik ;
+    List <LessonInfo> lessonInfoList;
+    Calendar calendarStartTime;
+    Calendar calendarEndTime;
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample);
+
+        databaseLessonInfo = FirebaseDatabase.getInstance().getReference("lessonInfo");
+
+
 
 
         // Get a reference for the week view in the layout.
@@ -66,12 +94,46 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
         mNewEvents = new ArrayList<WeekViewEvent>();
 
 
-
         // Set up a date time interpreter to interpret how the date and time will be formatted in
         // the week view. This is optional.
         setupDateTimeInterpreter(false);
     }
 
+   /* @Override
+    protected void onStart() {
+        super.onStart();
+        //Retriving data From Firebase
+        databaseLessonInfo.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                lessonInfoList.clear();
+
+                for (DataSnapshot lessonInfoSnapshot : dataSnapshot.getChildren() ){
+                    //Create Artist Class Object and Returning Value
+                    LessonInfo lessonInfo = lessonInfoSnapshot.getValue(LessonInfo.class);
+                    lessonInfoList.add(lessonInfo);
+
+                    WeekViewEvent myEvent = new WeekViewEvent(grade, teacher, icerik, selectedDate, endTime);
+                    myEvent.setColor(R.color.event_color_02);
+                    mNewEvents.add(myEvent);
+
+                    // Refresh the week view. onMonthChange will be called again.
+
+                }
+                mWeekView.notifyDatasetChanged();
+            }
+
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Student Verisi Çekilemedi.");
+
+            }
+
+
+        });
+    }*/
     @Override
     public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
         // Populate the week view with the events that was added by tapping on empty view.
@@ -83,7 +145,8 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
     /**
      * Get events that were added by tapping on empty view.
-     * @param year The year currently visible on the week view.
+     *
+     * @param year  The year currently visible on the week view.
      * @param month The month currently visible on the week view.
      * @return The events of the given year and month.
      */
@@ -110,14 +173,11 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
         ArrayList<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
         for (WeekViewEvent event : mNewEvents) {
 
-                events.add(event);
+            events.add(event);
 
         }
         return events;
     }
-
-
-
 
 
     @Override
@@ -130,7 +190,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         setupDateTimeInterpreter(id == R.id.action_week_view);
-        switch (id){
+        switch (id) {
             case R.id.action_day_view:
                 if (mWeekViewType != TYPE_DAY_VIEW) {
                     item.setChecked(!item.isChecked());
@@ -175,6 +235,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     /**
      * Set up a date time interpreter which will show short date values when in week view and long
      * date values otherwise.
+     *
      * @param shortDate True if the date values should be short.
      */
     private void setupDateTimeInterpreter(final boolean shortDate) {
@@ -195,10 +256,9 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
             @Override
             public String interpretTime(int hour) {
-                if(hour >12){
-                    return (hour-12) + " PM";
-                }
-                else{
+                if (hour > 12) {
+                    return (hour - 12) + " PM";
+                } else {
                     return (hour) + " AM";
                 }
             }
@@ -206,7 +266,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     }
 
     protected String getEventTitle(Calendar time) {
-        return String.format("Event of %02d:%02d %s/%d", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), time.get(Calendar.MONTH)+1, time.get(Calendar.DAY_OF_MONTH));
+        return String.format("Event of %02d:%02d %s/%d", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), time.get(Calendar.MONTH) + 1, time.get(Calendar.DAY_OF_MONTH));
     }
 
     @Override
@@ -216,13 +276,13 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
         AlertDialog.Builder builder = new AlertDialog.Builder(AlamKanakActivity.this);
         builder.setTitle("Lesson Content");
-        builder.setMessage(event.getGrade()+"\n"+event.getTeacher()+"\n"+event.getStartEnd()+"\n"+event.mGetContent());
+        builder.setMessage(event.getGrade() + "\n" + event.getTeacher() + "\n" + event.getStartEnd() + "\n" + event.mGetContent());
 
 
         builder.show();
     }
 
-//    @Override
+    //    @Override
 //    public void onEmptyViewClicked(Calendar time) {
 //        // Set the new event with duration one hour.
 //        Calendar endTime = (Calendar) time.clone();
@@ -241,13 +301,17 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
         System.out.println(time.getTime());
 
 
-
         selectedDate = time;
-        final Intent eventActivity=new Intent(this, EventActvity.class);
+        final Intent eventActivity = new Intent(this, EventActvity.class);
         eventActivity.putExtra("hour", time.get(Calendar.HOUR_OF_DAY));
         eventActivity.putExtra("minute", time.get(Calendar.MINUTE));
+        calendarStartTime=time;
+        calendarEndTime=time;
 
-        startActivityForResult(eventActivity,1);
+        calendarEndTime.set(Calendar.HOUR_OF_DAY,time.get(Calendar.HOUR_OF_DAY));
+
+
+        startActivityForResult(eventActivity, 1);
         Toast.makeText(this, "Empty view clicked: " + getEventTitle(time), Toast.LENGTH_SHORT).show();
 
     }
@@ -258,11 +322,11 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
-                String baslangic=data.getStringExtra("baslangic");
-                String bitis=data.getStringExtra("bitis");
-                String grade=data.getStringExtra("grade");
-                String teacher=data.getStringExtra("teacher");
-                String icerik=data.getStringExtra("icerik");
+                baslangic = data.getStringExtra("baslangic");
+                bitis = data.getStringExtra("bitis");
+                grade = data.getStringExtra("grade");
+                teacher = data.getStringExtra("teacher");
+                icerik = data.getStringExtra("icerik");
 
 
                 System.out.println(baslangic);
@@ -277,12 +341,14 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
                 // Create a new event.
                 //WeekViewEvent event = new WeekViewEvent(20, "New event", selectedDate, endTime);
-                WeekViewEvent myEvent = new WeekViewEvent(grade,teacher,icerik,selectedDate,endTime);
+                WeekViewEvent myEvent = new WeekViewEvent(grade, teacher, icerik, selectedDate, endTime);
                 myEvent.setColor(R.color.event_color_02);
                 mNewEvents.add(myEvent);
 
                 // Refresh the week view. onMonthChange will be called again.
                 mWeekView.notifyDatasetChanged();
+                addLessonInfo();
+
 
 
 
@@ -291,6 +357,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
             }
         }
     }
+
     @Override
     public void onEventLongPress(WeekViewEvent event, RectF eventRect) {
         Toast.makeText(this, "Long pressed event: " + event.getContent(), Toast.LENGTH_SHORT).show();
@@ -304,4 +371,20 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     public WeekView getWeekView() {
         return mWeekView;
     }
+
+
+    private void addLessonInfo(){
+
+            String id = databaseLessonInfo.push().getKey();
+            //Create An Artist Object
+            LessonInfo lessonInfo= new LessonInfo(calendarStartTime,calendarEndTime,grade,teacher,icerik);
+
+            databaseLessonInfo.child(id).setValue(lessonInfo);
+            Toast.makeText(this,"Succesfully Stored Data",Toast.LENGTH_LONG).show();
+    }
+
+
+
+
+
 }

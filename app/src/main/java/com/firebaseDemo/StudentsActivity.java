@@ -76,6 +76,7 @@ public class StudentsActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Student Verisi Çekilemedi.");
 
             }
         });
