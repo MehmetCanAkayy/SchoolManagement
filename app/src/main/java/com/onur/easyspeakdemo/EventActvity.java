@@ -29,7 +29,8 @@ public class EventActvity extends AppCompatActivity {
     EditText icerik =null;
     EditText baslangicEdit = null;
     EditText bitisEdit = null;
-
+    Spinner grades ;
+    Spinner spinnerTeachers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +39,17 @@ public class EventActvity extends AppCompatActivity {
 
 
 
-        Spinner spinner = (Spinner) findViewById(R.id.grades);
+        grades = (Spinner) findViewById(R.id.grades);
+
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.grades, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spinner.setAdapter(adapter);
+        grades.setAdapter(adapter);
 
 
-        Spinner spinnerTeachers = (Spinner) findViewById(R.id.teachers);
+        spinnerTeachers = (Spinner) findViewById(R.id.teachers);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
                 R.array.teachers, android.R.layout.simple_spinner_item);
 
@@ -207,7 +209,10 @@ public class EventActvity extends AppCompatActivity {
             case R.id.kaydet:
                 Toast.makeText(getApplicationContext(),"Kaydet Selected",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent();
+                intent.putExtra("teacher", spinnerTeachers.getSelectedItem().toString());
+                intent.putExtra("grade", grades.getSelectedItem().toString());
                 intent.putExtra("baslangic", baslangicEdit.getText().toString());
+
                 intent.putExtra("bitis", bitisEdit.getText().toString());
                 intent.putExtra("icerik", icerik.getText().toString());
 

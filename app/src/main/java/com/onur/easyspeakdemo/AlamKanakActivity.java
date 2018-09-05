@@ -107,10 +107,9 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
         // time frame.
         ArrayList<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
         for (WeekViewEvent event : mNewEvents) {
-            if (event.getEndTime().getTimeInMillis() > startOfMonth.getTimeInMillis() &&
-                    event.getStartTime().getTimeInMillis() < endOfMonth.getTimeInMillis()) {
+
                 events.add(event);
-            }
+
         }
         return events;
     }
@@ -211,7 +210,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     @Override
     public void onEventClick(WeekViewEvent event, RectF eventRect) {
 
-        Toast.makeText(this, "Clicked " + event.getName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Clicked " + event.getContent(), Toast.LENGTH_SHORT).show();
     }
 
 //    @Override
@@ -252,20 +251,26 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
             if (resultCode == Activity.RESULT_OK) {
                 String baslangic=data.getStringExtra("baslangic");
                 String bitis=data.getStringExtra("bitis");
-                String baslik=data.getStringExtra("baslik");
+                String grade=data.getStringExtra("grade");
+                String teacher=data.getStringExtra("teacher");
                 String icerik=data.getStringExtra("icerik");
+
 
                 System.out.println(baslangic);
                 System.out.println(bitis);
-                System.out.println(baslik);
+                System.out.println(grade);
+                System.out.println(teacher);
                 System.out.println(icerik);
+
 
                 Calendar endTime = (Calendar) selectedDate.clone();
                 endTime.add(Calendar.HOUR, 1);
 
                 // Create a new event.
-                WeekViewEvent event = new WeekViewEvent(20, "New event", selectedDate, endTime);
-                mNewEvents.add(event);
+                //WeekViewEvent event = new WeekViewEvent(20, "New event", selectedDate, endTime);
+                WeekViewEvent myEvent = new WeekViewEvent(grade,teacher,icerik,selectedDate,endTime);
+                myEvent.setColor(R.color.event_color_02);
+                mNewEvents.add(myEvent);
 
                 // Refresh the week view. onMonthChange will be called again.
                 mWeekView.notifyDatasetChanged();
@@ -279,7 +284,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     }
     @Override
     public void onEventLongPress(WeekViewEvent event, RectF eventRect) {
-        Toast.makeText(this, "Long pressed event: " + event.getName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Long pressed event: " + event.getContent(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

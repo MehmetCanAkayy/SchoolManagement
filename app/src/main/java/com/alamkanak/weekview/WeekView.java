@@ -879,15 +879,15 @@ public class WeekView extends View {
 
         // Prepare the name of the event.
         SpannableStringBuilder bob = new SpannableStringBuilder();
-        if (event.getName() != null) {
-            bob.append(event.getName());
+        if (event.getContent() != null) {
+            bob.append(event.getContent());
             bob.setSpan(new StyleSpan(Typeface.BOLD), 0, bob.length(), 0);
             bob.append(' ');
         }
 
         // Prepare the location of the event.
-        if (event.getLocation() != null) {
-            bob.append(event.getLocation());
+        if (event.getmLocation() != null) {
+            bob.append(event.getmLocation());
         }
 
         int availableHeight = (int) (rect.bottom - originalTop - mEventPadding * 2);
