@@ -37,6 +37,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -78,6 +79,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     TextView titleTv,messageTv;
     ImageView closeButton;
     CardView card;
+    Button delete,update;
 
 
 
@@ -212,6 +214,11 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
         });
     }
+
+
+
+
+
     @Override
     public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
         // Populate the week view with the events that was added by tapping on empty view.
@@ -348,7 +355,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     }
 
     @Override
-    public void onEventClick(WeekViewEvent event, RectF eventRect) {
+    public void onEventClick(final WeekViewEvent event, RectF eventRect) {
 
         Toast.makeText(this, "Clicked " + event.getContent(), Toast.LENGTH_SHORT).show();
 
@@ -364,6 +371,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
         card.setBackgroundColor(event.getColor());
 
         closeButton = myDialog.findViewById(R.id.close);
+        delete = myDialog.findViewById(R.id.delete);
 
         messageTv.setText(event.getGrade() + "\n" + event.getTeacher() + "\n" + event.getStartEnd() + "\n" + event.mGetContent());
 
@@ -372,6 +380,55 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
             @Override
             public void onClick(View view) {
                 myDialog.dismiss();
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                databaseLessonInfo.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot lessonInfoSnapshot : dataSnapshot.getChildren() ){
+                            //Create Artist Class Object and Returning Value
+                            LessonInfo lessonInfo = lessonInfoSnapshot.getValue(LessonInfo.class);
+                            Calendar startTime=Calendar.getInstance();
+                            Calendar endTime=Calendar.getInstance();
+
+                            String[] calendarStartItem = lessonInfo.getBaslangic().split("%");
+                            String[] calendarEndItem = lessonInfo.getBitis().split("%");
+
+                            for (String t : calendarStartItem)
+                                System.out.println(t);
+
+
+                            startTime.set(Integer.parseInt(calendarStartItem[0]),Integer.parseInt(calendarStartItem[1]),Integer.parseInt(calendarStartItem[2]),Integer.parseInt(calendarStartItem[3]),Integer.parseInt(calendarStartItem[4]));
+                            endTime.set(Integer.parseInt(calendarEndItem[0]),Integer.parseInt(calendarEndItem[1]),Integer.parseInt(calendarEndItem[2]),Integer.parseInt(calendarEndItem[3]),Integer.parseInt(calendarEndItem[4]));
+
+
+                            WeekViewEvent myEvent = new WeekViewEvent(lessonInfo.getGrade(), lessonInfo.getTeacher(), lessonInfo.getIcerik(), startTime, endTime);
+
+                            if(event.getGrade()==myEvent.getGrade()){
+                                lessonInfoSnapshot.getRef().removeValue();
+                            }
+
+                            myDialog.dismiss();
+
+                            // Refresh the week view. onMonthChange will be called again.
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        System.out.println("Student Verisi Çekilemedi.");
+
+                    }
+
+
+                });
+
+
             }
         });
 
