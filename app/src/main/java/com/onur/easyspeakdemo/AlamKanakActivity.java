@@ -1,13 +1,17 @@
 package com.onur.easyspeakdemo;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.RectF;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -15,6 +19,9 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -67,6 +74,12 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     String startHour;
 
 
+    Dialog myDialog;
+    TextView titleTv,messageTv;
+    ImageView closeButton;
+    CardView card;
+
+
 
 
 
@@ -74,6 +87,8 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample);
+
+        myDialog = new Dialog(this);
 
         databaseLessonInfo = FirebaseDatabase.getInstance().getReference("lessonInfo");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -337,12 +352,34 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
         Toast.makeText(this, "Clicked " + event.getContent(), Toast.LENGTH_SHORT).show();
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(AlamKanakActivity.this);
-        builder.setTitle("Lesson Content");
-        builder.setMessage(event.getGrade() + "\n" + event.getTeacher() + "\n" + event.getStartEnd() + "\n" + event.mGetContent());
+//        AlertDialog.Builder builder = new AlertDialog.Builder(AlamKanakActivity.this);
+//        builder.setTitle("Lesson Content");
+//        builder.setMessage(event.getGrade() + "\n" + event.getTeacher() + "\n" + event.getStartEnd() + "\n" + event.mGetContent());
 
 
-        builder.show();
+        myDialog.setContentView(R.layout.custom_dialog_box);
+        messageTv = myDialog.findViewById(R.id.content);
+        card = myDialog.findViewById(R.id.mycard);
+
+        card.setBackgroundColor(event.getColor());
+
+        closeButton = myDialog.findViewById(R.id.close);
+
+        messageTv.setText(event.getGrade() + "\n" + event.getTeacher() + "\n" + event.getStartEnd() + "\n" + event.mGetContent());
+
+
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+
+
+        //builder.show();
     }
 
     //    @Override
