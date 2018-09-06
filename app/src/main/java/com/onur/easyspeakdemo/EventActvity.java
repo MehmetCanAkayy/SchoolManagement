@@ -30,6 +30,8 @@ public class EventActvity extends AppCompatActivity {
     EditText baslangicEdit = null;
     EditText bitisEdit = null;
     Spinner grades ;
+    Spinner days ;
+
     Spinner spinnerTeachers;
 
     @Override
@@ -37,7 +39,14 @@ public class EventActvity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_actvity);
 
+        days = (Spinner) findViewById(R.id.day);
 
+
+        ArrayAdapter<CharSequence> adapterDays = ArrayAdapter.createFromResource(this,
+                R.array.days, android.R.layout.simple_spinner_item);
+        adapterDays.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        days.setAdapter(adapterDays);
 
         grades = (Spinner) findViewById(R.id.grades);
 
@@ -68,7 +77,14 @@ public class EventActvity extends AppCompatActivity {
         int minute = intent.getExtras().getInt("minute");
         baslangicEdit.setText(hour+":30");
         bitisEdit.setText((hour+1) + ":30");
+        boolean control = intent.getExtras().getBoolean("isFloatingButtonClicked");
 
+        if(control){
+            days.setVisibility(View.VISIBLE);
+        }
+        else{
+            days.setVisibility(View.GONE);
+        }
         baslangicEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -209,6 +225,7 @@ public class EventActvity extends AppCompatActivity {
             case R.id.kaydet:
                 Toast.makeText(getApplicationContext(),"Kaydet Selected",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent();
+                intent.putExtra("day", (days.getSelectedItemPosition()));
                 intent.putExtra("teacher", spinnerTeachers.getSelectedItem().toString());
                 intent.putExtra("grade", grades.getSelectedItem().toString());
                 intent.putExtra("baslangic", baslangicEdit.getText().toString());

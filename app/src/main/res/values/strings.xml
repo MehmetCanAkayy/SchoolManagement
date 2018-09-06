@@ -38,13 +38,21 @@
     </string-array>
     <string-array name="grades">
         <item>A1</item>
+        <item>A1+</item>
         <item>A2</item>
-        <item>A2+</item>
         <item>B1</item>
         <item>B2</item>
         <item>C1</item>
-        <item>C2</item>
         <item>Advanced</item>
+    </string-array>
+    <string-array name="days">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
     </string-array>
     <string-array name="from">
         <item>Native</item>

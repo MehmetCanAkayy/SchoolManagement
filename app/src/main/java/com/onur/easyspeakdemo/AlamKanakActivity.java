@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.RectF;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 
@@ -53,6 +55,8 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     private DatabaseReference databaseLessonInfo;
 
     String baslangic;
+    int day;
+
     String bitis;
     String grade;
     String teacher;
@@ -72,7 +76,36 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
         setContentView(R.layout.activity_sample);
 
         databaseLessonInfo = FirebaseDatabase.getInstance().getReference("lessonInfo");
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Click action
 
+                selectedDate = Calendar.getInstance();
+                selectedDate.setFirstDayOfWeek(Calendar.MONDAY);
+
+                calendarStartTime=Calendar.getInstance();
+                calendarEndTime=Calendar.getInstance();
+                calendarStartTime.setFirstDayOfWeek(Calendar.MONDAY);
+                calendarEndTime.setFirstDayOfWeek(Calendar.MONDAY);
+
+                while (selectedDate.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
+                    selectedDate.add(Calendar.DATE, -1);
+                    calendarStartTime.add(Calendar.DATE, -1);
+                    calendarEndTime.add(Calendar.DATE, -1);
+
+                }
+
+                Intent eventActivity = new Intent(AlamKanakActivity.this, EventActvity.class);
+                eventActivity.putExtra("hour", 10);
+                eventActivity.putExtra("minute", 30);
+                eventActivity.putExtra("isFloatingButtonClicked", true);
+
+                startActivityForResult(eventActivity, 1);
+
+            }
+        });
 
 
 
@@ -128,7 +161,23 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
 
                     WeekViewEvent myEvent = new WeekViewEvent(lessonInfo.getGrade(), lessonInfo.getTeacher(), lessonInfo.getIcerik(), startTime, endTime);
-                    myEvent.setColor(R.color.event_color_02);
+                    if(lessonInfo.getGrade().equals("A1")){
+                        myEvent.setColor(getResources().getColor(R.color.a1LessonColor));
+                    }else if(lessonInfo.getGrade().equals("A1+")){
+                        myEvent.setColor(getResources().getColor(R.color.a1PlusLessonColor));
+                    }else if(lessonInfo.getGrade().equals("A2")){
+                        myEvent.setColor(getResources().getColor(R.color.a2LessonColor));
+                    }else if(lessonInfo.getGrade().equals("B1")){
+                        myEvent.setColor(getResources().getColor(R.color.b1LessonColor));
+                    }else if(lessonInfo.getGrade().equals("B2")){
+                        myEvent.setColor(getResources().getColor(R.color.b2LessonColor));
+                    }else if(lessonInfo.getGrade().equals("C1")){
+                        myEvent.setColor(getResources().getColor(R.color.c1LessonColor));
+                    }else if(lessonInfo.getGrade().equals("Advanced")){
+                        myEvent.setColor(getResources().getColor(R.color.advencedLessonColor));
+                    }
+
+
                     mNewEvents.add(myEvent);
 
                     // Refresh the week view. onMonthChange will be called again.
@@ -319,6 +368,8 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
         final Intent eventActivity = new Intent(this, EventActvity.class);
         eventActivity.putExtra("hour", time.get(Calendar.HOUR_OF_DAY));
         eventActivity.putExtra("minute", time.get(Calendar.MINUTE));
+        eventActivity.putExtra("isFloatingButtonClicked", false);
+
         calendarStartTime=time;
         calendarEndTime=time;
 
@@ -339,6 +390,8 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
                 grade = data.getStringExtra("grade");
                 teacher = data.getStringExtra("teacher");
                 icerik = data.getStringExtra("icerik");
+                day = data.getIntExtra("day",2);
+                System.out.println("dayyyyyyyyyyyyyyyyyyyyyyyyyyy " + day);
 
                 String[] parse;
                 String[] parse2;
@@ -351,6 +404,12 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
                 System.out.println(grade);
                 System.out.println(teacher);
                 System.out.println(icerik);
+
+                selectedDate  .add(Calendar.DATE,day);
+
+                calendarStartTime.add(Calendar.DATE,day);
+                calendarEndTime.add(Calendar.DATE,day);
+
 
 
                 Calendar endTime = (Calendar) selectedDate.clone();
