@@ -1,5 +1,6 @@
 package com.onur.easyspeakdemo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -49,6 +50,10 @@ public class dersSecimi extends AppCompatActivity {
                 Button chat = (Button) mView.findViewById(R.id.chat);
                 Button speaking = (Button) mView.findViewById(R.id.speaking);
                 Button teacherListe=(Button) mView.findViewById(R.id.teacherList);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6d33ffaf89d189881d4d95e4536a890635bf5cad
 
 
 
@@ -92,7 +97,10 @@ public class dersSecimi extends AppCompatActivity {
                         //startActivity(sayfagecis);
                     }
                 });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6d33ffaf89d189881d4d95e4536a890635bf5cad
                 teacherListe.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -100,6 +108,11 @@ public class dersSecimi extends AppCompatActivity {
                     }
                 });
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 6d33ffaf89d189881d4d95e4536a890635bf5cad
 //                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View view) {

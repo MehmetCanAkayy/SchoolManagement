@@ -22,7 +22,7 @@ public class StudentsActivity extends AppCompatActivity {
 
     DatabaseReference databaseArtists;
     List<Artist> artistList;
-    ListView listViewArtists;
+
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
