@@ -1,5 +1,6 @@
 package com.onur.easyspeakdemo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.firebaseDemo.StudentsActivity;
+import com.firebaseDemo.TeacherActivity;
 import com.user.StudentRegister;
 import com.user.TeacherRegister;
 
@@ -29,6 +31,7 @@ public class dersSecimi extends AppCompatActivity {
         final Intent studentsActivity=new Intent(this, StudentsActivity.class);
         final Intent studentAdd=new Intent(this, StudentRegister.class);
         final Intent teacherAdd=new Intent(this, TeacherRegister.class);
+        final Intent teacherList= new Intent(this, TeacherActivity.class);
 
         userAddButton=  findViewById(R.id.user_add);
 
@@ -46,6 +49,7 @@ public class dersSecimi extends AppCompatActivity {
 
                 Button chat = (Button) mView.findViewById(R.id.chat);
                 Button speaking = (Button) mView.findViewById(R.id.speaking);
+                Button teacherListe=(Button) mView.findViewById(R.id.teacherList);
 
 
 
@@ -90,6 +94,15 @@ public class dersSecimi extends AppCompatActivity {
                         //startActivity(sayfagecis);
                     }
                 });
+                teacherListe.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(teacherList);
+                    }
+                });
+
+
+
 //                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View view) {
