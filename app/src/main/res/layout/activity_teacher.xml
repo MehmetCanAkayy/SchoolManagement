@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="5dp"
+    app:cardCornerRadius="5dp"
+    android:id="@+id/rootCardView">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorGray"
+
+        android:paddingBottom="5dip">
+
+
+        <TextView
+            android:id="@+id/firstLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignWithParentIfMissing="true"
+            android:background="@color/primaryColor"
+            android:gravity="center_vertical"
+            android:text="01.01.20018 DayOfWeek"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textAppearance="@android:style/TextAppearance.Holo.Widget.ActionBar.Title.Inverse"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/sinif"
+            android:layout_below="@+id/firstLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@tools:sample/full_names" />
+
+        <TextView
+            android:id="@+id/seviye"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/firstLine"
+            android:layout_marginStart="94dp"
+            tools:text="@tools:sample/us_phones" />
+    </RelativeLayout>
+
+
+
+
+
+
+
+</android.support.v7.widget.CardView>
+
+
