@@ -3,8 +3,8 @@ package com.firebaseDemo;
 import java.util.Calendar;
 
 public class LessonInfo {
-    Calendar baslangic;
-    Calendar bitis;
+    String baslangic;
+    String bitis;
     String grade;
     String teacher;
     String icerik ;
@@ -12,7 +12,7 @@ public class LessonInfo {
 
     public LessonInfo(){}
 
-    public LessonInfo(Calendar baslangic, Calendar bitis, String grade, String teacher, String icerik){
+    public LessonInfo(String baslangic, String bitis, String grade, String teacher, String icerik){
         this.baslangic=baslangic;
         this.bitis=bitis;
         this.grade=grade;
@@ -20,11 +20,11 @@ public class LessonInfo {
         this.icerik=icerik;
     }
 
-    public Calendar getBaslangic() {
+    public String getBaslangic() {
         return baslangic;
     }
 
-    public Calendar getBitis() {
+    public String getBitis() {
         return bitis;
     }
 

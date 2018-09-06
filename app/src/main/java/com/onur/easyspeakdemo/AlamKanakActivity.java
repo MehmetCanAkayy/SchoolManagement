@@ -57,9 +57,11 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     String grade;
     String teacher;
     String icerik ;
-    List <LessonInfo> lessonInfoList;
     Calendar calendarStartTime;
     Calendar calendarEndTime;
+    String endHour;
+    String startHour;
+
 
 
 
@@ -99,21 +101,33 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
         setupDateTimeInterpreter(false);
     }
 
-   /* @Override
+    @Override
     protected void onStart() {
         super.onStart();
         //Retriving data From Firebase
+
         databaseLessonInfo.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                lessonInfoList.clear();
-
+                mNewEvents.clear();
                 for (DataSnapshot lessonInfoSnapshot : dataSnapshot.getChildren() ){
                     //Create Artist Class Object and Returning Value
                     LessonInfo lessonInfo = lessonInfoSnapshot.getValue(LessonInfo.class);
-                    lessonInfoList.add(lessonInfo);
+                    Calendar startTime=Calendar.getInstance();
+                    Calendar endTime=Calendar.getInstance();
 
-                    WeekViewEvent myEvent = new WeekViewEvent(grade, teacher, icerik, selectedDate, endTime);
+                    String[] calendarStartItem = lessonInfo.getBaslangic().split("%");
+                    String[] calendarEndItem = lessonInfo.getBitis().split("%");
+
+                    for (String t : calendarStartItem)
+                        System.out.println(t);
+
+
+                    startTime.set(Integer.parseInt(calendarStartItem[0]),Integer.parseInt(calendarStartItem[1]),Integer.parseInt(calendarStartItem[2]),Integer.parseInt(calendarStartItem[3]),Integer.parseInt(calendarStartItem[4]));
+                    endTime.set(Integer.parseInt(calendarEndItem[0]),Integer.parseInt(calendarEndItem[1]),Integer.parseInt(calendarEndItem[2]),Integer.parseInt(calendarEndItem[3]),Integer.parseInt(calendarEndItem[4]));
+
+
+                    WeekViewEvent myEvent = new WeekViewEvent(lessonInfo.getGrade(), lessonInfo.getTeacher(), lessonInfo.getIcerik(), startTime, endTime);
                     myEvent.setColor(R.color.event_color_02);
                     mNewEvents.add(myEvent);
 
@@ -133,7 +147,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
 
         });
-    }*/
+    }
     @Override
     public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
         // Populate the week view with the events that was added by tapping on empty view.
@@ -308,8 +322,6 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
         calendarStartTime=time;
         calendarEndTime=time;
 
-        calendarEndTime.set(Calendar.HOUR_OF_DAY,time.get(Calendar.HOUR_OF_DAY));
-
 
         startActivityForResult(eventActivity, 1);
         Toast.makeText(this, "Empty view clicked: " + getEventTitle(time), Toast.LENGTH_SHORT).show();
@@ -328,6 +340,11 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
                 teacher = data.getStringExtra("teacher");
                 icerik = data.getStringExtra("icerik");
 
+                String[] parse;
+                String[] parse2;
+
+                parse = baslangic.split(":");
+                parse2 = bitis.split(":");
 
                 System.out.println(baslangic);
                 System.out.println(bitis);
@@ -339,14 +356,23 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
                 Calendar endTime = (Calendar) selectedDate.clone();
                 endTime.add(Calendar.HOUR, 1);
 
+                System.out.println("Month = "+selectedDate.get(Calendar.MONTH));
+
                 // Create a new event.
                 //WeekViewEvent event = new WeekViewEvent(20, "New event", selectedDate, endTime);
-                WeekViewEvent myEvent = new WeekViewEvent(grade, teacher, icerik, selectedDate, endTime);
-                myEvent.setColor(R.color.event_color_02);
-                mNewEvents.add(myEvent);
+//                WeekViewEvent myEvent = new WeekViewEvent(grade, teacher, icerik, selectedDate, endTime);
+//                myEvent.setColor(R.color.event_color_02);
+//                mNewEvents.add(myEvent);
+
+                endHour = parse2[0];
+                startHour = parse[0];
+                calendarStartTime.set(Calendar.HOUR_OF_DAY,Integer.parseInt(parse[0]));
+                System.out.println(calendarStartTime.get(Calendar.HOUR_OF_DAY));
+                calendarEndTime.set(Calendar.HOUR_OF_DAY,Integer.parseInt(parse2[0]));
+                System.out.println(calendarEndTime.get(Calendar.HOUR_OF_DAY));
 
                 // Refresh the week view. onMonthChange will be called again.
-                mWeekView.notifyDatasetChanged();
+                //mWeekView.notifyDatasetChanged();
                 addLessonInfo();
 
 
@@ -377,7 +403,22 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
             String id = databaseLessonInfo.push().getKey();
             //Create An Artist Object
-            LessonInfo lessonInfo= new LessonInfo(calendarStartTime,calendarEndTime,grade,teacher,icerik);
+
+            int startYear= calendarStartTime.get(Calendar.YEAR);
+            int startMonth = calendarStartTime.get(Calendar.MONTH);
+            int startDay = calendarStartTime.get(Calendar.DAY_OF_MONTH);
+            //int startHour = calendarStartTime.get(Calendar.HOUR_OF_DAY);
+            int startMinute = 30;
+            //calendarEndTime.set(Calendar.HOUR_OF_DAY,(calendarStartTime.get(Calendar.HOUR_OF_DAY)+1));
+
+        //int endHour = calendarEndTime.get(Calendar.HOUR_OF_DAY);
+            int endMinute = 30;
+
+            String startTime = startYear+"%" + startMonth +"%" + startDay + "%" + Integer.parseInt(startHour) + "%" + startMinute;
+            String endTime = startYear+"%" + startMonth+"%" + startDay + "%" + Integer.parseInt(endHour) + "%" + endMinute;
+        System.out.println("start time = " + startTime);
+        System.out.println("end time = " + endTime);
+            LessonInfo lessonInfo= new LessonInfo(startTime,endTime,grade,teacher,icerik);
 
             databaseLessonInfo.child(id).setValue(lessonInfo);
             Toast.makeText(this,"Succesfully Stored Data",Toast.LENGTH_LONG).show();
