@@ -126,11 +126,7 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.ViewHold
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-<<<<<<< HEAD
                 myDialog.setContentView(R.layout.custom_dialog_teacher);
-=======
-                myDialog.setContentView(R.layout.custom_dialog_box);
->>>>>>> 6d33ffaf89d189881d4d95e4536a890635bf5cad
                 messageTv = myDialog.findViewById(R.id.content);
                 card = myDialog.findViewById(R.id.mycard);
                 closeButton = myDialog.findViewById(R.id.close);

@@ -20,22 +20,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".dersSecimi" />
-        <activity
-            android:name=".BasicActivity"
-            android:label="@string/title_activity_basic" />
         <activity android:name=".ListWeek" />
         <activity android:name=".EventActvity" />
         <activity android:name=".AlamKanakActivity" />
         <activity android:name="com.firebaseDemo.StudentsActivity" />
         <activity android:name="com.user.StudentRegister" />
-<<<<<<< HEAD
         <activity android:name="com.user.TeacherRegister"></activity>
         <activity android:name="com.firebaseDemo.TeacherActivity"></activity>
 
-=======
-        <activity android:name="com.user.TeacherRegister" />
-        <activity android:name="com.firebaseDemo.TeacherActivity"></activity>
->>>>>>> 6d33ffaf89d189881d4d95e4536a890635bf5cad
     </application>
 
 </manifest>

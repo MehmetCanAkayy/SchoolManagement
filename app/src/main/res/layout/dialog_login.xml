@@ -43,10 +43,7 @@
         android:text="Speaking"
         android:textColor="@color/white"
         app:backgroundTint="@color/secondaryColor"/>
-<<<<<<< HEAD
 
-=======
->>>>>>> 6d33ffaf89d189881d4d95e4536a890635bf5cad
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/teacherList"
         android:layout_width="match_parent"
@@ -55,8 +52,5 @@
         android:text="TeacherList"
         android:textColor="@color/white"
         app:backgroundTint="@color/secondaryColor"/>
-<<<<<<< HEAD
 
-=======
->>>>>>> 6d33ffaf89d189881d4d95e4536a890635bf5cad
 </LinearLayout>
