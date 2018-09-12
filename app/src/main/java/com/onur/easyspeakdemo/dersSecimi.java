@@ -25,13 +25,24 @@ public class dersSecimi extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ders_secimi);
 
+        Intent intent = getIntent();
+        final String phoneNumber = intent.getExtras().getString("phoneNumber");
+        final String grade = intent.getExtras().getString("grade");
+
+
         //final Intent sayfagecis=new Intent(this, randevuAl.class);
-        final Intent sayfagecis2=new Intent(this, ListWeek.class);
+        final Intent studentListWeek=new Intent(this, ListWeek.class);
         final Intent sayfagecis3=new Intent(this, AlamKanakActivity.class);
-        final Intent studentsActivity=new Intent(this, StudentsActivity.class);
+        //final Intent studentsActivity=new Intent(this, StudentsActivity.class);
         final Intent studentAdd=new Intent(this, StudentRegister.class);
         final Intent teacherAdd=new Intent(this, TeacherRegister.class);
         final Intent teacherList= new Intent(this, TeacherActivity.class);
+
+        final Intent studentActivity = new Intent(this, StudentsActivity.class);
+
+
+
+
 
         userAddButton=  findViewById(R.id.user_add);
 
@@ -73,7 +84,11 @@ public class dersSecimi extends AppCompatActivity {
                 activity.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startActivity(sayfagecis2);
+                        studentListWeek.putExtra("phoneNumber",phoneNumber);
+                        studentListWeek.putExtra("grade",grade);
+
+
+                        startActivityForResult(studentListWeek, 1);
                     }
                 });
                 social.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +100,8 @@ public class dersSecimi extends AppCompatActivity {
                 chat.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startActivity(studentsActivity);
+
+                        startActivity(studentActivity);
                     }
                 });
                 speaking.setOnClickListener(new View.OnClickListener() {

@@ -29,6 +29,20 @@ public class LessonInfo {
     public String getBaslangic() {
         return baslangic;
     }
+    public int getDay(){
+        Calendar startTime=Calendar.getInstance();
+        Calendar endTime=Calendar.getInstance();
+
+        String[] calendarStartItem = baslangic.split("%");
+
+
+
+        startTime.set(Integer.parseInt(calendarStartItem[0]),Integer.parseInt(calendarStartItem[1]),Integer.parseInt(calendarStartItem[2]),Integer.parseInt(calendarStartItem[3]),Integer.parseInt(calendarStartItem[4]));
+
+
+
+        return startTime.get(Calendar.DAY_OF_MONTH);
+    }
 
     public String getBitis() {
         return bitis;

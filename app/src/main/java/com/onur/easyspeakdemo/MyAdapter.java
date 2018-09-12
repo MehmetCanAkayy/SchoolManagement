@@ -1,6 +1,7 @@
 package com.onur.easyspeakdemo;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +11,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.firebaseDemo.LessonInfo;
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private List<String> values;
+    private List<LessonInfo> values;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -19,18 +22,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView txtHeader;
-        public TextView txtFooter;
+        public TextView txtContent;
         public View layout;
 
         public ViewHolder(View v) {
             super(v);
             layout = v;
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
+            txtContent = (TextView) v.findViewById(R.id.secondLine);
 
         }
     }
 
-    public void add(int position, String item) {
+    public void add(int position, LessonInfo item) {
         values.add(position, item);
         notifyItemInserted(position);
     }
@@ -43,7 +47,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(List<String> myDataset) {
+    public MyAdapter(List<LessonInfo> myDataset) {
         values = myDataset;
     }
 
@@ -66,8 +70,41 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        final String name = values.get(position);
-        holder.txtHeader.setText(name);
+
+
+        Calendar startTime=Calendar.getInstance();
+        Calendar endTime=Calendar.getInstance();
+
+        String[] calendarStartItem = values.get(position).getBaslangic().split("%");
+        String[] calendarEndItem = values.get(position).getBitis().split("%");
+
+        for (String t : calendarStartItem)
+            System.out.println(t);
+
+
+        startTime.set(Integer.parseInt(calendarStartItem[0]),Integer.parseInt(calendarStartItem[1]),Integer.parseInt(calendarStartItem[2]),Integer.parseInt(calendarStartItem[3]),Integer.parseInt(calendarStartItem[4]));
+        endTime.set(Integer.parseInt(calendarEndItem[0]),Integer.parseInt(calendarEndItem[1]),Integer.parseInt(calendarEndItem[2]),Integer.parseInt(calendarEndItem[3]),Integer.parseInt(calendarEndItem[4]));
+
+        String day = null;
+
+        if(startTime.get((Calendar.DAY_OF_WEEK))==Calendar.MONDAY){
+            day = "MONDAY";
+        }else if(startTime.get((Calendar.DAY_OF_WEEK))==Calendar.TUESDAY){
+            day = "TUESDAY";
+        }else if(startTime.get((Calendar.DAY_OF_WEEK))==Calendar.WEDNESDAY){
+            day = "WEDNESDAY";
+        }else if(startTime.get((Calendar.DAY_OF_WEEK))==Calendar.THURSDAY){
+            day = "THURSDAY";
+        }else if(startTime.get((Calendar.DAY_OF_WEEK))==Calendar.FRIDAY){
+            day = "FRIDAY";
+        }else if(startTime.get((Calendar.DAY_OF_WEEK))==Calendar.SATURDAY){
+            day = "SATURDAY";
+        }else if(startTime.get((Calendar.DAY_OF_WEEK))==Calendar.SUNDAY){
+            day = "SUNDAY";
+        }
+        holder.txtHeader.setText(startTime.get(Calendar.DAY_OF_MONTH)+"." + startTime.get(Calendar.MONTH)+"." + startTime.get(Calendar.YEAR) + " " + day);
+        String content = values.get(position).getTeacher() + "\n" + values.get(position).getDers()  + "\n" +startTime.get(Calendar.HOUR_OF_DAY) + ":" +startTime.get(Calendar.MINUTE) + " - " +endTime.get(Calendar.HOUR_OF_DAY) + ":" + endTime.get(Calendar.MINUTE) + "\n" +values.get(position).getIcerik();
+                holder.txtContent.setText(content);
 
     }
 
