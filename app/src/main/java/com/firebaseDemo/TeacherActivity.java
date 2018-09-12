@@ -49,7 +49,6 @@ public class TeacherActivity extends AppCompatActivity {
                     //Create Artist Class Object and Returning Value
                     LessonInfo teachers = teacherSnapshot.getValue(LessonInfo.class);
                     teacherList.add(teachers);
-
                 }
                 recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view_teacher);
                 // use this setting to

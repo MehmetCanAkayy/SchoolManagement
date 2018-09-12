@@ -23,6 +23,8 @@ import com.onur.easyspeakdemo.R;
 public class StudentRegister extends AppCompatActivity {
 
     private EditText editTextName;
+    private EditText editTextPhoneNumber;
+
     private Spinner userGrade;
     DatabaseReference databaseArtists;
     private Button add;
@@ -35,6 +37,8 @@ public class StudentRegister extends AppCompatActivity {
         setContentView(R.layout.activity_user_register);
         
         editTextName= (EditText) findViewById(R.id.userName);
+        editTextPhoneNumber= (EditText) findViewById(R.id.phoneNumber);
+
         databaseArtists = FirebaseDatabase.getInstance().getReference("students");
 
         background=findViewById(R.id.background);
@@ -62,6 +66,8 @@ public class StudentRegister extends AppCompatActivity {
 
     private void addArtist(){
         String name = editTextName.getText().toString().trim();
+        String phoneNumber = editTextPhoneNumber.getText().toString().trim();
+
         String grade = userGrade.getSelectedItem().toString();
 
 
@@ -69,15 +75,13 @@ public class StudentRegister extends AppCompatActivity {
             String id = databaseArtists.push().getKey();
 
             //Create An Artist Object
-            Artist artist = new Artist(name,grade);
+            Artist artist = new Artist(name,grade,phoneNumber);
             databaseArtists.child(id).setValue(artist);
             Toast.makeText(this,"Succesfully Stored Data",Toast.LENGTH_LONG).show();
         }else {
             Toast.makeText(this,"You should enter a name",Toast.LENGTH_LONG).show();
         }
         finish();
-
-
 
     }
 

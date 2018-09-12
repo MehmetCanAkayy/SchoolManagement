@@ -21,6 +21,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // each data item is just a string in this case
         public TextView txtName;
         public TextView txtGrade;
+        public TextView txtPhoneNumber;
+
         public ImageView Image ;
         public View layout;
 
@@ -29,6 +31,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             layout = v;
             txtName = v.findViewById(R.id.isim);
             txtGrade = v.findViewById(R.id.grade);
+            txtPhoneNumber = v.findViewById(R.id.phoneNumber);
+
 
         }
     }
@@ -75,9 +79,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // - replace the contents of the view with that element
         final String name = values.get(position).getArtistName();
         final String grade = values.get(position).getArtistGrade();
+        final String phone = values.get(position).getPhoneNumber();
 
-        holder.txtName.setText(name);
-        holder.txtGrade.setText(grade);
+        holder.txtName.setText("Name: " + name);
+        holder.txtGrade.setText("Grade: " + grade);
+        holder.txtPhoneNumber.setText("Phone Number: " + phone);
+
 
     }
 

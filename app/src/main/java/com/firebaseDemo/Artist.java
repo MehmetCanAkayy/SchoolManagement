@@ -7,16 +7,21 @@ package com.firebaseDemo;
 public class Artist {
     String artistName;
     String artistGrade;
+    String phoneNumber;
 
     public Artist(){
 
     }
 
-    public Artist(String artistName, String artistGrade) {
+    public Artist(String artistName, String artistGrade,String phoneNumber) {
         this.artistName = artistName;
         this.artistGrade = artistGrade;
+        this.phoneNumber = phoneNumber;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
     public String getArtistName() {
         return artistName;
@@ -25,4 +30,6 @@ public class Artist {
     public String getArtistGrade() {
         return artistGrade;
     }
+
+
 }
