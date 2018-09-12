@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -105,6 +106,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.txtHeader.setText(startTime.get(Calendar.DAY_OF_MONTH)+"." + startTime.get(Calendar.MONTH)+"." + startTime.get(Calendar.YEAR) + " " + day);
         String content = values.get(position).getTeacher() + "\n" + values.get(position).getDers()  + "\n" +startTime.get(Calendar.HOUR_OF_DAY) + ":" +startTime.get(Calendar.MINUTE) + " - " +endTime.get(Calendar.HOUR_OF_DAY) + ":" + endTime.get(Calendar.MINUTE) + "\n" +values.get(position).getIcerik();
                 holder.txtContent.setText(content);
+        if(values.get(position).getDers().equals("Activity")){
+            holder.txtContent.setBackgroundColor(Color.parseColor("#59dbe0"));
+        }else if(values.get(position).getDers().equals("Social")){
+            holder.txtContent.setBackgroundColor(Color.parseColor("#f57f68"));
+        }else if(values.get(position).getDers().equals("Chat")){
+            holder.txtContent.setBackgroundColor(Color.parseColor("#87d288"));
+        }else if(values.get(position).getDers().equals("Speaking")){
+            holder.txtContent.setBackgroundColor(Color.parseColor("#f8b552"));
+        }
+
+
 
     }
 

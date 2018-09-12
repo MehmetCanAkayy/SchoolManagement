@@ -9,7 +9,15 @@ public class LessonInfo {
     String teacher;
     String icerik ;
     String ders;
+    int color;
 
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
 
     public LessonInfo(){}
 
@@ -43,6 +51,7 @@ public class LessonInfo {
 
         return startTime.get(Calendar.DAY_OF_MONTH);
     }
+
 
     public String getBitis() {
         return bitis;

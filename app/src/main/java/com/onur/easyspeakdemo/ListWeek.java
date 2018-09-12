@@ -102,7 +102,7 @@ public class ListWeek extends AppCompatActivity {
                         }
 
 
-
+                        lessonInfo.setColor(myEvent.getColor());
                         input.add(lessonInfo);
                         mNewEvents.add(myEvent);
 
