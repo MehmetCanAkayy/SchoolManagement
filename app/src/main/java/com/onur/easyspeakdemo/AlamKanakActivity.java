@@ -60,6 +60,8 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     private ArrayList<WeekViewEvent> mNewEvents;
     private Calendar selectedDate;
     private DatabaseReference databaseLessonInfo;
+    private DatabaseReference databaseUpdate;
+
 
     String baslangic;
     int day;
@@ -92,6 +94,8 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
         myDialog = new Dialog(this);
 
         databaseLessonInfo = FirebaseDatabase.getInstance().getReference("lessonInfo");
+        databaseUpdate = FirebaseDatabase.getInstance().getReference("lessonInfo");
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,6 +121,13 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
                 eventActivity.putExtra("hour", 10);
                 eventActivity.putExtra("minute", 30);
                 eventActivity.putExtra("isFloatingButtonClicked", true);
+                eventActivity.putExtra("isUpdate",false);
+                eventActivity.putExtra("Day",0);
+                eventActivity.putExtra("Grade",0);
+                eventActivity.putExtra("Teacher",0);
+
+
+
 
                 startActivityForResult(eventActivity, 1);
 
@@ -366,6 +377,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
         closeButton = myDialog.findViewById(R.id.close);
         delete = myDialog.findViewById(R.id.delete);
+        update = myDialog.findViewById(R.id.update);
 
         messageTv.setText(event.getGrade() + "\n" + event.getTeacher() + "\n" + event.getStartEnd() + "\n" + event.mGetContent());
 
@@ -374,6 +386,131 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
             @Override
             public void onClick(View view) {
                 myDialog.dismiss();
+            }
+        });
+
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                selectedDate = Calendar.getInstance();
+                selectedDate.setFirstDayOfWeek(Calendar.MONDAY);
+
+                calendarStartTime=Calendar.getInstance();
+                calendarEndTime=Calendar.getInstance();
+                calendarStartTime.setFirstDayOfWeek(Calendar.MONDAY);
+                calendarEndTime.setFirstDayOfWeek(Calendar.MONDAY);
+
+                while (selectedDate.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
+                    selectedDate.add(Calendar.DATE, -1);
+                    calendarStartTime.add(Calendar.DATE, -1);
+                    calendarEndTime.add(Calendar.DATE, -1);
+
+                }
+
+                //final Intent eventActivity = new Intent(AlamKanakActivity.this, EventActvity.class);
+
+                databaseUpdate.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot lessonInfoSnapshot : dataSnapshot.getChildren() ){
+                            //Create Artist Class Object and Returning Value
+                            LessonInfo lessonInfo = lessonInfoSnapshot.getValue(LessonInfo.class);
+                            Calendar startTime=Calendar.getInstance();
+                            Calendar endTime=Calendar.getInstance();
+
+                            String[] calendarStartItem = lessonInfo.getBaslangic().split("%");
+                            String[] calendarEndItem = lessonInfo.getBitis().split("%");
+
+                            for (String t : calendarStartItem)
+                                System.out.println(t);
+
+
+                            startTime.set(Integer.parseInt(calendarStartItem[0]),Integer.parseInt(calendarStartItem[1]),Integer.parseInt(calendarStartItem[2]),Integer.parseInt(calendarStartItem[3]),Integer.parseInt(calendarStartItem[4]));
+                            endTime.set(Integer.parseInt(calendarEndItem[0]),Integer.parseInt(calendarEndItem[1]),Integer.parseInt(calendarEndItem[2]),Integer.parseInt(calendarEndItem[3]),Integer.parseInt(calendarEndItem[4]));
+
+
+                            WeekViewEvent myEvent = new WeekViewEvent(lessonInfo.getGrade(), lessonInfo.getTeacher(), lessonInfo.getIcerik(), startTime, endTime);
+
+                            if(event.getGrade()==myEvent.getGrade()){
+                                final Intent eventActivity = new Intent(AlamKanakActivity.this, EventActvity.class);
+                                eventActivity.putExtra("hour", startTime.get(Calendar.HOUR_OF_DAY));
+                                eventActivity.putExtra("minute", startTime.get(Calendar.MINUTE));
+                                eventActivity.putExtra("isFloatingButtonClicked", true);
+                                eventActivity.putExtra("isUpdate",true);
+                                eventActivity.putExtra("Key",lessonInfoSnapshot.getKey());
+
+
+                                eventActivity.putExtra("Content",myEvent.mGetContent());
+
+                                String[] some_array = getResources().getStringArray(R.array.teachers);
+
+                                for (int i = 0 ; i <some_array.length;i++){
+                                    if(some_array[i].equals(myEvent.getTeacher())){
+                                        eventActivity.putExtra("Teacher",i);
+                                        break;
+                                    }
+                                }
+
+
+
+                                if(startTime.get((Calendar.DAY_OF_WEEK))==Calendar.MONDAY){
+                                    eventActivity.putExtra("Day",0);
+                                }else if(startTime.get((Calendar.DAY_OF_WEEK))==Calendar.TUESDAY){
+                                    eventActivity.putExtra("Day",1);
+                                }else if(startTime.get((Calendar.DAY_OF_WEEK))==Calendar.WEDNESDAY){
+                                    eventActivity.putExtra("Day",2);
+                                }else if(startTime.get((Calendar.DAY_OF_WEEK))==Calendar.THURSDAY){
+                                    eventActivity.putExtra("Day",3);
+                                }else if(startTime.get((Calendar.DAY_OF_WEEK))==Calendar.FRIDAY){
+                                    eventActivity.putExtra("Day",4);
+                                }else if(startTime.get((Calendar.DAY_OF_WEEK))==Calendar.SATURDAY){
+                                    eventActivity.putExtra("Day",5);
+                                }else if(startTime.get((Calendar.DAY_OF_WEEK))==Calendar.SUNDAY){
+                                    eventActivity.putExtra("Day",6);
+                                }
+                                if(myEvent.getGrade().equals("A1")){
+                                    eventActivity.putExtra("Grade",0);
+                                }else if(myEvent.getGrade().equals("A1+")){
+                                    eventActivity.putExtra("Grade",1);
+                                }else if(myEvent.getGrade().equals("A2")){
+                                    eventActivity.putExtra("Grade",2);
+                                }else if(myEvent.getGrade().equals("B1")){
+                                    eventActivity.putExtra("Grade",3);
+                                }else if(myEvent.getGrade().equals("B2")){
+                                    eventActivity.putExtra("Grade",4);
+                                }else if(myEvent.getGrade().equals("C1")){
+                                    eventActivity.putExtra("Grade",5);
+                                }else if(myEvent.getGrade().equals("Advanced")){
+                                    eventActivity.putExtra("Grade",6);
+                                }
+                                startActivityForResult(eventActivity, 1);
+
+
+                                //lessonInfoSnapshot.getRef().removeValue();
+                            }
+
+                            myDialog.dismiss();
+
+                            // Refresh the week view. onMonthChange will be called again.
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        System.out.println("Student Verisi Çekilemedi.");
+
+                    }
+
+
+                });
+
+
+
+
+                //startActivityForResult(eventActivity, 1);
+
             }
         });
 
@@ -458,6 +595,12 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
         eventActivity.putExtra("hour", time.get(Calendar.HOUR_OF_DAY));
         eventActivity.putExtra("minute", time.get(Calendar.MINUTE));
         eventActivity.putExtra("isFloatingButtonClicked", false);
+        eventActivity.putExtra("isUpdate",false);
+        eventActivity.putExtra("Day",0);
+        eventActivity.putExtra("Grade",0);
+        eventActivity.putExtra("Teacher",0);
+
+
 
         calendarStartTime=time;
         calendarEndTime=time;
@@ -505,7 +648,6 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
                 endTime.add(Calendar.HOUR, 1);
 
                 System.out.println("Month = "+selectedDate.get(Calendar.MONTH));
-
                 // Create a new event.
                 //WeekViewEvent event = new WeekViewEvent(20, "New event", selectedDate, endTime);
 //                WeekViewEvent myEvent = new WeekViewEvent(grade, teacher, icerik, selectedDate, endTime);
@@ -526,7 +668,57 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
 
 
-            } else if (resultCode == 0) {
+            }else if(resultCode==2){
+                baslangic = data.getStringExtra("baslangic");
+                bitis = data.getStringExtra("bitis");
+                grade = data.getStringExtra("grade");
+                teacher = data.getStringExtra("teacher");
+                icerik = data.getStringExtra("icerik");
+                day = data.getIntExtra("day",2);
+                System.out.println("dayyyyyyyyyyyyyyyyyyyyyyyyyyy " + day);
+
+                String[] parse;
+                String[] parse2;
+
+                parse = baslangic.split(":");
+                parse2 = bitis.split(":");
+
+                System.out.println(baslangic);
+                System.out.println(bitis);
+                System.out.println(grade);
+                System.out.println(teacher);
+                System.out.println(icerik);
+
+                selectedDate  .add(Calendar.DATE,day);
+
+                calendarStartTime.add(Calendar.DATE,day);
+                calendarEndTime.add(Calendar.DATE,day);
+
+
+
+                Calendar endTime = (Calendar) selectedDate.clone();
+                endTime.add(Calendar.HOUR, 1);
+
+                System.out.println("Month = "+selectedDate.get(Calendar.MONTH));
+                // Create a new event.
+                //WeekViewEvent event = new WeekViewEvent(20, "New event", selectedDate, endTime);
+//                WeekViewEvent myEvent = new WeekViewEvent(grade, teacher, icerik, selectedDate, endTime);
+//                myEvent.setColor(R.color.event_color_02);
+//                mNewEvents.add(myEvent);
+
+                endHour = parse2[0];
+                startHour = parse[0];
+                calendarStartTime.set(Calendar.HOUR_OF_DAY,Integer.parseInt(parse[0]));
+                System.out.println(calendarStartTime.get(Calendar.HOUR_OF_DAY));
+                calendarEndTime.set(Calendar.HOUR_OF_DAY,Integer.parseInt(parse2[0]));
+                System.out.println(calendarEndTime.get(Calendar.HOUR_OF_DAY));
+
+                // Refresh the week view. onMonthChange will be called again.
+                //mWeekView.notifyDatasetChanged();
+                updateLessonInfo(data.getStringExtra("key"));
+            }
+
+            else if (resultCode == 0) {
                 System.out.println("RESULT CANCELLED");
             }
         }
@@ -546,6 +738,52 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
         return mWeekView;
     }
 
+
+    private void updateLessonInfo(final String key){
+
+        databaseUpdate.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot lessonInfoSnapshot : dataSnapshot.getChildren() ){
+                    //Create Artist Class Object and Returning Value
+//Create An Artist Object
+
+                    int startYear= calendarStartTime.get(Calendar.YEAR);
+                    int startMonth = calendarStartTime.get(Calendar.MONTH);
+                    int startDay = calendarStartTime.get(Calendar.DAY_OF_MONTH);
+                    //int startHour = calendarStartTime.get(Calendar.HOUR_OF_DAY);
+                    int startMinute = 30;
+                    //calendarEndTime.set(Calendar.HOUR_OF_DAY,(calendarStartTime.get(Calendar.HOUR_OF_DAY)+1));
+
+                    //int endHour = calendarEndTime.get(Calendar.HOUR_OF_DAY);
+                    int endMinute = 30;
+
+                    String startTime = startYear+"%" + startMonth +"%" + startDay + "%" + Integer.parseInt(startHour) + "%" + startMinute;
+                    String endTime = startYear+"%" + startMonth+"%" + startDay + "%" + Integer.parseInt(endHour) + "%" + endMinute;
+                    System.out.println("start time = " + startTime);
+                    System.out.println("end time = " + endTime);
+                    LessonInfo lessonInfo= new LessonInfo(startTime,endTime,grade,teacher,icerik);
+                    if(lessonInfoSnapshot.getKey().equals(key)){
+                        lessonInfoSnapshot.getRef().setValue(lessonInfo);
+
+                    }
+
+
+                    // Refresh the week view. onMonthChange will be called again.
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Student Verisi Çekilemedi.");
+
+            }
+
+
+        });
+
+    }
 
     private void addLessonInfo(){
 

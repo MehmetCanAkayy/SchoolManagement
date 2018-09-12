@@ -31,8 +31,11 @@ public class EventActvity extends AppCompatActivity {
     EditText bitisEdit = null;
     Spinner grades ;
     Spinner days ;
+    int grade=0,teacher = 0;
 
     Spinner spinnerTeachers;
+    boolean isUpdate;
+    String key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,9 +81,22 @@ public class EventActvity extends AppCompatActivity {
         baslangicEdit.setText(hour+":30");
         bitisEdit.setText((hour+1) + ":30");
         boolean control = intent.getExtras().getBoolean("isFloatingButtonClicked");
+        isUpdate = intent.getExtras().getBoolean("isUpdate");
+        int day = intent.getExtras().getInt("Day");
+        grade = intent.getExtras().getInt("Grade");
+        teacher = intent.getExtras().getInt("Teacher");
+
 
         if(control){
             days.setVisibility(View.VISIBLE);
+            if(isUpdate){
+                days.setSelection(day);
+                grades.setSelection(grade);
+                spinnerTeachers.setSelection(teacher);
+                icerik.setText(intent.getExtras().getString("Content"));
+                key = intent.getExtras().getString("Key");
+
+            }
         }
         else{
             days.setVisibility(View.GONE);
@@ -232,8 +248,16 @@ public class EventActvity extends AppCompatActivity {
 
                 intent.putExtra("bitis", bitisEdit.getText().toString());
                 intent.putExtra("icerik", icerik.getText().toString());
+                if(isUpdate){
 
-                setResult(Activity.RESULT_OK, intent);
+
+                    intent.putExtra("key", key);
+
+                    setResult(2, intent);
+                }else{
+
+                    setResult(Activity.RESULT_OK, intent);
+                }
                 finish();
                 return true;
             default:
