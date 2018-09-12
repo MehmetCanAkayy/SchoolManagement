@@ -24,6 +24,7 @@ public class WeekViewEvent {
     private String content;
     private Calendar startTime;
     private Calendar endTime;
+    private String ders;
 
     public WeekViewEvent(){
 
@@ -50,13 +51,14 @@ public class WeekViewEvent {
     }
 
 
-    public WeekViewEvent(String grade,String teacher,String content,Calendar startTime,Calendar endTime, boolean allDay) {
+    public WeekViewEvent(String grade,String teacher,String content,Calendar startTime,Calendar endTime,String ders, boolean allDay) {
         this.grade = grade;
         this.teacher = teacher;
         this.content = content;
         this.mStartTime = startTime;
         this.mEndTime = endTime;
         this.mAllDay = allDay;
+        this.ders = ders;
     }
 
     public String getmLocation() {
@@ -64,16 +66,22 @@ public class WeekViewEvent {
     }
 
 
-    public WeekViewEvent(String grade,String teacher,String content,Calendar startTime,Calendar endTime) {
-        this(grade, teacher, content, startTime, endTime, false);
+    public WeekViewEvent(String grade,String teacher,String content,Calendar startTime,Calendar endTime,String ders) {
+        this(grade, teacher, content, startTime, endTime,ders, false);
     }
 
 
-    public WeekViewEvent(String grade,String teacher,Calendar startTime,Calendar endTime) {
-        this(grade, teacher,null, startTime, endTime);
+    public WeekViewEvent(String grade,String teacher,Calendar startTime,Calendar endTime,String ders) {
+        this(grade, teacher,null, startTime, endTime,ders);
     }
 
+    public String getDers() {
+        return ders;
+    }
 
+    public void setDers(String ders) {
+        this.ders = ders;
+    }
 
     public Calendar getStartTime() {
         return mStartTime;
@@ -112,7 +120,7 @@ public class WeekViewEvent {
         return mStartTime.get(Calendar.HOUR_OF_DAY)+":"+mStartTime.get(Calendar.MINUTE)+" - "+mEndTime.get(Calendar.HOUR_OF_DAY)+":"+mEndTime.get(Calendar.MINUTE);
     }
     public String getContent() {
-        return grade+"\n"+teacher;
+        return ders+"\n"+grade+"\n"+teacher;
     }
     public String mGetContent() {
         return content;
@@ -144,7 +152,7 @@ public class WeekViewEvent {
             endTime = (Calendar) this.getStartTime().clone();
             endTime.set(Calendar.HOUR_OF_DAY, 23);
             endTime.set(Calendar.MINUTE, 59);
-            WeekViewEvent event1 = new WeekViewEvent(this.getGrade(), this.getTeacher(), this.getContent(), this.getStartTime(), endTime, this.isAllDay());
+            WeekViewEvent event1 = new WeekViewEvent(this.getGrade(), this.getTeacher(), this.getContent(), this.getStartTime(), endTime,this.ders, this.isAllDay());
             event1.setColor(this.getColor());
             events.add(event1);
 
@@ -158,7 +166,7 @@ public class WeekViewEvent {
                 Calendar endOfOverDay = (Calendar) overDay.clone();
                 endOfOverDay.set(Calendar.HOUR_OF_DAY, 23);
                 endOfOverDay.set(Calendar.MINUTE, 59);
-                WeekViewEvent eventMore = new WeekViewEvent(this.getGrade(), this.getTeacher(), null, overDay, endOfOverDay, this.isAllDay());
+                WeekViewEvent eventMore = new WeekViewEvent(this.getGrade(), this.getTeacher(), null, overDay, endOfOverDay,this.ders, this.isAllDay());
                 eventMore.setColor(this.getColor());
                 events.add(eventMore);
 
@@ -170,7 +178,7 @@ public class WeekViewEvent {
             Calendar startTime = (Calendar) this.getEndTime().clone();
             startTime.set(Calendar.HOUR_OF_DAY, 0);
             startTime.set(Calendar.MINUTE, 0);
-            WeekViewEvent event2 = new WeekViewEvent(this.getGrade(), this.getTeacher(), this.getContent(), startTime, this.getEndTime(), this.isAllDay());
+            WeekViewEvent event2 = new WeekViewEvent(this.getGrade(), this.getTeacher(), this.getContent(), startTime, this.getEndTime(),this.ders, this.isAllDay());
             event2.setColor(this.getColor());
             events.add(event2);
         }

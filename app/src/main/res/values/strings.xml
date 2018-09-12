@@ -45,6 +45,12 @@
         <item>C1</item>
         <item>Advanced</item>
     </string-array>
+    <string-array name="lesson">
+        <item>Activity</item>
+        <item>Social</item>
+        <item>Chat</item>
+        <item>Speaking</item>
+    </string-array>
     <string-array name="days">
         <item>Monday</item>
         <item>Tuesday</item>

@@ -68,6 +68,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
     String bitis;
     String grade;
+    String ders;
     String teacher;
     String icerik ;
     Calendar calendarStartTime;
@@ -187,7 +188,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
                     endTime.set(Integer.parseInt(calendarEndItem[0]),Integer.parseInt(calendarEndItem[1]),Integer.parseInt(calendarEndItem[2]),Integer.parseInt(calendarEndItem[3]),Integer.parseInt(calendarEndItem[4]));
 
 
-                    WeekViewEvent myEvent = new WeekViewEvent(lessonInfo.getGrade(), lessonInfo.getTeacher(), lessonInfo.getIcerik(), startTime, endTime);
+                    WeekViewEvent myEvent = new WeekViewEvent(lessonInfo.getGrade(), lessonInfo.getTeacher(), lessonInfo.getIcerik(), startTime, endTime,lessonInfo.getDers());
                     if(lessonInfo.getGrade().equals("A1")){
                         myEvent.setColor(getResources().getColor(R.color.a1LessonColor));
                     }else if(lessonInfo.getGrade().equals("A1+")){
@@ -379,7 +380,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
         delete = myDialog.findViewById(R.id.delete);
         update = myDialog.findViewById(R.id.update);
 
-        messageTv.setText(event.getGrade() + "\n" + event.getTeacher() + "\n" + event.getStartEnd() + "\n" + event.mGetContent());
+        messageTv.setText(event.getDers()+"\n"+event.getGrade() + "\n" + event.getTeacher() + "\n" + event.getStartEnd() + "\n" + event.mGetContent());
 
 
         closeButton.setOnClickListener(new View.OnClickListener() {
@@ -430,7 +431,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
                             endTime.set(Integer.parseInt(calendarEndItem[0]),Integer.parseInt(calendarEndItem[1]),Integer.parseInt(calendarEndItem[2]),Integer.parseInt(calendarEndItem[3]),Integer.parseInt(calendarEndItem[4]));
 
 
-                            WeekViewEvent myEvent = new WeekViewEvent(lessonInfo.getGrade(), lessonInfo.getTeacher(), lessonInfo.getIcerik(), startTime, endTime);
+                            WeekViewEvent myEvent = new WeekViewEvent(lessonInfo.getGrade(), lessonInfo.getTeacher(), lessonInfo.getIcerik(), startTime, endTime,lessonInfo.getDers());
 
                             if(event.getGrade()==myEvent.getGrade()){
                                 final Intent eventActivity = new Intent(AlamKanakActivity.this, EventActvity.class);
@@ -448,6 +449,14 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
                                 for (int i = 0 ; i <some_array.length;i++){
                                     if(some_array[i].equals(myEvent.getTeacher())){
                                         eventActivity.putExtra("Teacher",i);
+                                        break;
+                                    }
+                                }
+                                String[] some_array1 = getResources().getStringArray(R.array.lesson);
+
+                                for (int i = 0 ; i <some_array1.length;i++){
+                                    if(some_array1[i].equals(myEvent.getDers())){
+                                        eventActivity.putExtra("Ders",i);
                                         break;
                                     }
                                 }
@@ -537,7 +546,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
                             endTime.set(Integer.parseInt(calendarEndItem[0]),Integer.parseInt(calendarEndItem[1]),Integer.parseInt(calendarEndItem[2]),Integer.parseInt(calendarEndItem[3]),Integer.parseInt(calendarEndItem[4]));
 
 
-                            WeekViewEvent myEvent = new WeekViewEvent(lessonInfo.getGrade(), lessonInfo.getTeacher(), lessonInfo.getIcerik(), startTime, endTime);
+                            WeekViewEvent myEvent = new WeekViewEvent(lessonInfo.getGrade(), lessonInfo.getTeacher(), lessonInfo.getIcerik(), startTime, endTime,lessonInfo.getDers());
 
                             if(event.getGrade()==myEvent.getGrade()){
                                 lessonInfoSnapshot.getRef().removeValue();
@@ -620,6 +629,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
                 baslangic = data.getStringExtra("baslangic");
                 bitis = data.getStringExtra("bitis");
                 grade = data.getStringExtra("grade");
+                ders = data.getStringExtra("ders");
                 teacher = data.getStringExtra("teacher");
                 icerik = data.getStringExtra("icerik");
                 day = data.getIntExtra("day",2);
@@ -672,6 +682,8 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
                 baslangic = data.getStringExtra("baslangic");
                 bitis = data.getStringExtra("bitis");
                 grade = data.getStringExtra("grade");
+                ders = data.getStringExtra("ders");
+
                 teacher = data.getStringExtra("teacher");
                 icerik = data.getStringExtra("icerik");
                 day = data.getIntExtra("day",2);
@@ -762,7 +774,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
                     String endTime = startYear+"%" + startMonth+"%" + startDay + "%" + Integer.parseInt(endHour) + "%" + endMinute;
                     System.out.println("start time = " + startTime);
                     System.out.println("end time = " + endTime);
-                    LessonInfo lessonInfo= new LessonInfo(startTime,endTime,grade,teacher,icerik);
+                    LessonInfo lessonInfo= new LessonInfo(startTime,endTime,grade,teacher,icerik,ders);
                     if(lessonInfoSnapshot.getKey().equals(key)){
                         lessonInfoSnapshot.getRef().setValue(lessonInfo);
 
@@ -804,7 +816,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
             String endTime = startYear+"%" + startMonth+"%" + startDay + "%" + Integer.parseInt(endHour) + "%" + endMinute;
         System.out.println("start time = " + startTime);
         System.out.println("end time = " + endTime);
-            LessonInfo lessonInfo= new LessonInfo(startTime,endTime,grade,teacher,icerik);
+            LessonInfo lessonInfo= new LessonInfo(startTime,endTime,grade,teacher,icerik,ders);
 
             databaseLessonInfo.child(id).setValue(lessonInfo);
             Toast.makeText(this,"Succesfully Stored Data",Toast.LENGTH_LONG).show();

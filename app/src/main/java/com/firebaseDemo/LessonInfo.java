@@ -8,16 +8,22 @@ public class LessonInfo {
     String grade;
     String teacher;
     String icerik ;
+    String ders;
 
 
     public LessonInfo(){}
 
-    public LessonInfo(String baslangic, String bitis, String grade, String teacher, String icerik){
+    public LessonInfo(String baslangic, String bitis, String grade, String teacher, String icerik,String ders){
         this.baslangic=baslangic;
         this.bitis=bitis;
         this.grade=grade;
         this.teacher=teacher;
         this.icerik=icerik;
+        this.ders = ders;
+    }
+
+    public String getDers() {
+        return ders;
     }
 
     public String getBaslangic() {

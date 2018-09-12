@@ -34,6 +34,8 @@ public class EventActvity extends AppCompatActivity {
     int grade=0,teacher = 0;
 
     Spinner spinnerTeachers;
+    Spinner spinnerLesson;
+
     boolean isUpdate;
     String key;
 
@@ -60,7 +62,13 @@ public class EventActvity extends AppCompatActivity {
 
         grades.setAdapter(adapter);
 
+        spinnerLesson = (Spinner) findViewById(R.id.lesson);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
+                R.array.lesson, android.R.layout.simple_spinner_item);
 
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinnerLesson.setAdapter(adapter2);
         spinnerTeachers = (Spinner) findViewById(R.id.teachers);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
                 R.array.teachers, android.R.layout.simple_spinner_item);
@@ -90,6 +98,7 @@ public class EventActvity extends AppCompatActivity {
         if(control){
             days.setVisibility(View.VISIBLE);
             if(isUpdate){
+                spinnerLesson.setSelection(intent.getExtras().getInt("Ders"));
                 days.setSelection(day);
                 grades.setSelection(grade);
                 spinnerTeachers.setSelection(teacher);
@@ -248,6 +257,7 @@ public class EventActvity extends AppCompatActivity {
 
                 intent.putExtra("bitis", bitisEdit.getText().toString());
                 intent.putExtra("icerik", icerik.getText().toString());
+                intent.putExtra("ders", spinnerLesson.getSelectedItem().toString());
                 if(isUpdate){
 
 
