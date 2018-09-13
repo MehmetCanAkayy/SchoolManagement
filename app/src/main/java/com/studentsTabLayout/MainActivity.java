@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
 
     // Test iconlari
-    private int[] tabIcons = {android.R.drawable.ic_menu_camera,android.R.drawable.ic_menu_agenda,android.R.drawable.ic_menu_add};
+    private int[] tabIcons = {R.drawable.add_circle_white,R.drawable.done_white};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FragmentOne(),"One");
-        adapter.addFragment(new FragmentTwo(), "Two");
+        adapter.addFragment(new FragmentOne(),"EMPTY");
+        adapter.addFragment(new FragmentTwo(), "SELECTED");
         viewPager.setAdapter(adapter);
     }
 }

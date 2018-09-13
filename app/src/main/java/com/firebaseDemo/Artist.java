@@ -8,15 +8,17 @@ public class Artist {
     String artistName;
     String artistGrade;
     String phoneNumber;
+    String lessonKey;
 
     public Artist(){
 
     }
 
-    public Artist(String artistName, String artistGrade,String phoneNumber) {
+    public Artist(String artistName, String artistGrade,String phoneNumber,String lessonKey) {
         this.artistName = artistName;
         this.artistGrade = artistGrade;
         this.phoneNumber = phoneNumber;
+        this.lessonKey = lessonKey;
     }
 
     public String getPhoneNumber() {
@@ -31,5 +33,7 @@ public class Artist {
         return artistGrade;
     }
 
-
+    public String getLessonKey() {
+        return lessonKey;
+    }
 }

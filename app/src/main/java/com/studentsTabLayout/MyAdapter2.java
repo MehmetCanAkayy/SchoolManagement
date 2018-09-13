@@ -1,21 +1,29 @@
-package com.onur.easyspeakdemo;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+package com.studentsTabLayout;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.firebaseDemo.Artist;
 import com.firebaseDemo.LessonInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.onur.easyspeakdemo.R;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+import java.util.Calendar;
+import java.util.List;
+
+public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.ViewHolder> {
     private List<LessonInfo> values;
+    private String studentNumber;
+    private DatabaseReference databaseUpdate;
+
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -48,14 +56,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(List<LessonInfo> myDataset) {
+    public MyAdapter2(List<LessonInfo> myDataset, String studentNumber) {
         values = myDataset;
+        this.studentNumber = studentNumber;
+        databaseUpdate = FirebaseDatabase.getInstance().getReference("students");
+
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
+    public MyAdapter2.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                    int viewType) {
         // create a new view
         LayoutInflater inflater = LayoutInflater.from(
                 parent.getContext());
@@ -115,6 +126,72 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }else if(values.get(position).getDers().equals("Speaking")){
             holder.txtContent.setBackgroundColor(Color.parseColor("#f8b552"));
         }
+
+        holder.txtContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                databaseUpdate.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot studentInfoSnapshot : dataSnapshot.getChildren() ){
+
+
+                            Artist studentInfo = studentInfoSnapshot.getValue(Artist.class);
+                            Calendar startTime=Calendar.getInstance();
+                            Calendar endTime=Calendar.getInstance();
+
+
+
+                            if(studentInfo.getPhoneNumber().equals(studentNumber)){
+
+
+
+                                String LessonKeys = studentInfo.getLessonKey();
+
+                                String[] out = LessonKeys.split(" ");
+
+                                if(out.length==1){
+                                    LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
+
+                                }
+//                                else if (out.length == ou)
+                                else{
+                                    LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
+                                    LessonKeys = LessonKeys.replaceAll("  ", " ");
+
+                                }
+                                Artist newStudent = new Artist(studentInfo.getArtistName(),studentInfo.getArtistGrade(),studentInfo.getPhoneNumber(),LessonKeys);
+
+                                studentInfoSnapshot.getRef().setValue(newStudent);
+                                values.remove(position);
+                                notifyDataSetChanged();
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        System.out.println("Student Verisi Çekilemedi.");
+
+                    }
+
+
+                });
+
+
+
+
+//                values.remove(position);
+//                notifyDataSetChanged();
+
+            }
+
+        });
+
+
 
 
 

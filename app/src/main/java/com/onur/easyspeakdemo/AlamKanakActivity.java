@@ -774,10 +774,9 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
                     String endTime = startYear+"%" + startMonth+"%" + startDay + "%" + Integer.parseInt(endHour) + "%" + endMinute;
                     System.out.println("start time = " + startTime);
                     System.out.println("end time = " + endTime);
-                    LessonInfo lessonInfo= new LessonInfo(startTime,endTime,grade,teacher,icerik,ders);
+                    LessonInfo lessonInfo= new LessonInfo(startTime,endTime,grade,teacher,icerik,ders,key);
                     if(lessonInfoSnapshot.getKey().equals(key)){
                         lessonInfoSnapshot.getRef().setValue(lessonInfo);
-
                     }
 
 
@@ -816,7 +815,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
             String endTime = startYear+"%" + startMonth+"%" + startDay + "%" + Integer.parseInt(endHour) + "%" + endMinute;
         System.out.println("start time = " + startTime);
         System.out.println("end time = " + endTime);
-            LessonInfo lessonInfo= new LessonInfo(startTime,endTime,grade,teacher,icerik,ders);
+            LessonInfo lessonInfo= new LessonInfo(startTime,endTime,grade,teacher,icerik,ders,id);
 
             databaseLessonInfo.child(id).setValue(lessonInfo);
             Toast.makeText(this,"Succesfully Stored Data",Toast.LENGTH_LONG).show();

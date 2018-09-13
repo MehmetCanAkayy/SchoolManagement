@@ -20,7 +20,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".dersSecimi" />
-        <activity android:name=".ListWeek" />
         <activity android:name=".EventActvity" />
         <activity android:name=".AlamKanakActivity" />
         <activity android:name="com.firebaseDemo.StudentsActivity" />
