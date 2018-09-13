@@ -55,29 +55,31 @@
                 android:textColor="@color/white"
                 android:inputType="text"
                 android:maxLines="1"
-                 />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayoutphoneNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:hintTextAppearance="@style/TextLabel"
-            >
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/phoneNumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Phone Number"
-                android:textColor="@color/white"
-                android:inputType="number"
-                android:maxLines="1"
                 />
         </android.support.design.widget.TextInputLayout>
 
 
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayoutphoneNo"
+            android:layout_below="@+id/textInputLayoutName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:hintTextAppearance="@style/TextLabel"
+            >
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/phoneNo"
+                android:layout_below="@+id/userName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="phoneNo"
+                android:textColor="@color/white"
+                android:inputType="number"
+                android:maxLines="1"
+                />
+
+
+        </android.support.design.widget.TextInputLayout>
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/add"
             android:layout_width="wrap_content"

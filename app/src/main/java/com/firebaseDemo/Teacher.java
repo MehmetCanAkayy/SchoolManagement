@@ -7,14 +7,24 @@ public class Teacher {
     String seviye;
     String icerik;
     String sinif;
+    String type;
+    String name;
+    String phoneNumber;
 
     public Teacher(){}
 
-    public Teacher(String teacherTarih, String teacherSeviye, String teacherIcerik, String teacherSinif){
+    public Teacher(String teacherTarih, String teacherSeviye, String teacherIcerik, String teacherSinif,String teacherType){
         this.tarih=teacherTarih;
         this.seviye=teacherSeviye;
         this.icerik=teacherIcerik;
         this.sinif=teacherSinif;
+        this.type=teacherType;
+
+    }
+    public Teacher(String teacherName, String teacherSeviye,String teacherPhoneNumber){
+        this.name=teacherName;
+        this.seviye=teacherSeviye;
+        this.phoneNumber=teacherPhoneNumber;
 
     }
 
@@ -33,4 +43,13 @@ public class Teacher {
     public String getSinif() {
         return sinif;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getName(){return name;}
 }
+
+
+
