@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.firebaseDemo.Artist;
+import com.firebaseDemo.Teacher;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.jackandphantom.blurimage.BlurImage;
@@ -23,10 +23,12 @@ import com.onur.easyspeakdemo.R;
 public class TeacherRegister extends AppCompatActivity {
 
     private EditText editTextName;
+    private EditText phoneNo;
     private Spinner userGrade;
-    DatabaseReference databaseArtists;
+    DatabaseReference databaseTeachers;
     private Button add;
     private ImageView background;
+
 
 
     @Override
@@ -35,7 +37,8 @@ public class TeacherRegister extends AppCompatActivity {
         setContentView(R.layout.activity_user_register);
 
         editTextName= (EditText) findViewById(R.id.userName);
-        databaseArtists = FirebaseDatabase.getInstance().getReference("students");
+        phoneNo=findViewById(R.id.phoneNo);
+        databaseTeachers = FirebaseDatabase.getInstance().getReference("teachers");
         background=findViewById(R.id.background);
         add = findViewById(R.id.add);
 
@@ -48,7 +51,7 @@ public class TeacherRegister extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addArtist();
+                addTeacher();
             }
         });
         BlurImage.with(getApplicationContext()).load(R.drawable.backgorund).intensity(20).Async(true).into(background);
@@ -56,17 +59,17 @@ public class TeacherRegister extends AppCompatActivity {
 
     }
 
-    private void addArtist(){
+    private void addTeacher(){
         String name = editTextName.getText().toString().trim();
         String grade = userGrade.getSelectedItem().toString();
-
+        String phoneNumber=phoneNo.getText().toString().trim();
 
         if(!TextUtils.isEmpty(name)){
-            String id = databaseArtists.push().getKey();
+            String id = databaseTeachers.push().getKey();
 
             //Create An Artist Object
-            Artist artist = new Artist(name,grade,"5555555555");
-            databaseArtists.child(id).setValue(artist);
+            Teacher teacher = new Teacher(name,grade,phoneNumber);
+            databaseTeachers.child(id).setValue(teacher);
             Toast.makeText(this,"Succesfully Stored Data",Toast.LENGTH_LONG).show();
         }else {
             Toast.makeText(this,"You should enter a name",Toast.LENGTH_LONG).show();
@@ -81,3 +84,6 @@ public class TeacherRegister extends AppCompatActivity {
 
 
 }
+
+
+
