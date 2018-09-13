@@ -24,6 +24,7 @@
         <activity android:name=".EventActvity" />
         <activity android:name=".AlamKanakActivity" />
         <activity android:name="com.firebaseDemo.StudentsActivity" />
+        <activity android:name="com.studentsTabLayout.MainActivity"></activity>
         <activity android:name="com.user.StudentRegister" />
         <activity android:name="com.user.TeacherRegister"></activity>
         <activity android:name="com.firebaseDemo.TeacherActivity"></activity>

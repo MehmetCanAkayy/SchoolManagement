@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.firebaseDemo.StudentsActivity;
 import com.firebaseDemo.TeacherActivity;
+import com.studentsTabLayout.MainActivity;
 import com.user.StudentRegister;
 import com.user.TeacherRegister;
 
@@ -31,7 +32,7 @@ public class dersSecimi extends AppCompatActivity {
 
 
         //final Intent sayfagecis=new Intent(this, randevuAl.class);
-        final Intent studentListWeek=new Intent(this, ListWeek.class);
+        final Intent studentListWeek=new Intent(this, MainActivity.class);
         final Intent sayfagecis3=new Intent(this, AlamKanakActivity.class);
         //final Intent studentsActivity=new Intent(this, StudentsActivity.class);
         final Intent studentAdd=new Intent(this, StudentRegister.class);
