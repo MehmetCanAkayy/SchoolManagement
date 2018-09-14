@@ -12,30 +12,42 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".dersSecimi"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".EventActvity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".dersSecimi"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EventActvity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AlamKanakActivity" />
-        <activity android:name="com.firebaseDemo.StudentsActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="com.studentsTabLayout.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name="com.user.StudentRegister"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="com.user.TeacherRegister"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name="com.firebaseDemo.TeacherActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+        <activity
+            android:name="com.firebaseDemo.StudentsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.studentsTabLayout.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.user.StudentRegister"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.user.TeacherRegister"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.firebaseDemo.TeacherActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ShowTeacherMenu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ShowStudentMenu"
+            android:theme="@style/AppTheme.NoActionBar" ></activity>
     </application>
 
 </manifest>

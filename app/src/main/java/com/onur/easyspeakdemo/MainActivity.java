@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.firebaseDemo.Artist;
 import com.firebaseDemo.MyAdapter;
 import com.firebaseDemo.StudentsActivity;
+import com.firebaseDemo.Teacher;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,7 +34,11 @@ public class MainActivity extends AppCompatActivity {
     private ImageView background;
     // List<String> kullanicilar = new ArrayList<String>();
     DatabaseReference databaseArtists;
+    DatabaseReference databaseTeacher;
+
     List<Artist> artistList;
+    List<Teacher> teacherList;
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -58,6 +63,27 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        databaseTeacher.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                teacherList.clear();
+
+                for (DataSnapshot artistSnapshot : dataSnapshot.getChildren() ){
+                    //Create Artist Class Object and Returning Value
+                    Teacher teacher = artistSnapshot.getValue(Teacher.class);
+                    teacherList.add(teacher);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Student Verisi Çekilemedi.");
+
+            }
+        });
     }
 
 
@@ -70,7 +96,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         databaseArtists = FirebaseDatabase.getInstance().getReference("students");
+        databaseTeacher = FirebaseDatabase.getInstance().getReference("teachers");
+
         artistList = new ArrayList<>();
+        teacherList = new ArrayList<>();
+
         //Intent sayfagecis= new Intent(MainActivity.this, com.user.StudentRegister.class);
         //Intent sayfagecis= new Intent(MainActivity.this, dersSecimi.class);
         background=findViewById(R.id.background);
@@ -98,30 +128,45 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //vt.VeriListele();
-                Intent sayfagecis=new Intent(MainActivity.this, dersSecimi.class);
                 String adi=ad.getText().toString();
                 String sifresi=sifre.getText().toString();
                 String kullanici;
 
-                final Intent sayfaGecis = new Intent(MainActivity.this, dersSecimi.class);
-
+                final Intent showStudentMenu = new Intent(MainActivity.this, ShowStudentMenu.class);
+                final Intent showTeacherMenu = new Intent(MainActivity.this, ShowTeacherMenu.class);
 
 
                 for (int i = 0 ; i <artistList.size();i++){
-                    if(adi.equals(artistList.get(i).getPhoneNumber())&&sifresi.equals("easyspeakdemo")){
+                    if(adi.equals(artistList.get(i).getPhoneNumber())&&sifresi.equals("111")){
                         //Log.d("deneme", "basarili");
                         Toast.makeText(getApplicationContext(), "Başarılı!Yönlendiriliyorsunuz...", Toast.LENGTH_SHORT).show();
-                        sayfaGecis.putExtra("phoneNumber", adi);
-                        sayfaGecis.putExtra("grade", artistList.get(i).getArtistGrade());
+                        showStudentMenu.putExtra("phoneNumber", adi);
+                        showStudentMenu.putExtra("grade", artistList.get(i).getArtistGrade());
 
-                        startActivityForResult(sayfaGecis, 1);
+
+                        startActivityForResult(showStudentMenu, 1);
+                    }
+                    else {
+                        //Toast.makeText(getApplicationContext(), "Yanlış kullanici adi veya şifre", Toast.LENGTH_SHORT).show();
+                        //startActivity(sayfagecis);
+                    }
+
+                    }
+                for (int i = 0 ; i <teacherList.size();i++){
+                    if(adi.equals(teacherList.get(i).getPhoneNumber())&&sifresi.equals("111")){
+                        //Log.d("deneme", "basarili");
+                        Toast.makeText(getApplicationContext(), "Başarılı!Yönlendiriliyorsunuz...", Toast.LENGTH_SHORT).show();
+                        showTeacherMenu.putExtra("phoneNumber", adi);
+
+
+                        startActivityForResult(showTeacherMenu, 1);
                     }
                     else {
                         Toast.makeText(getApplicationContext(), "Yanlış kullanici adi veya şifre", Toast.LENGTH_SHORT).show();
                         //startActivity(sayfagecis);
                     }
 
-                    }
+                }
 
 
 
