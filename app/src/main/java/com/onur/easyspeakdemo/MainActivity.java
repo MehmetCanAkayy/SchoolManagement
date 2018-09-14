@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 for (int i = 0 ; i <artistList.size();i++){
-                    if(adi.equals(artistList.get(i).getPhoneNumber())&&sifresi.equals("easyspeakdemo")){
+                    if(adi.equals(artistList.get(i).getPhoneNumber())&&sifresi.equals("111")){
                         //Log.d("deneme", "basarili");
                         Toast.makeText(getApplicationContext(), "Başarılı!Yönlendiriliyorsunuz...", Toast.LENGTH_SHORT).show();
                         sayfaGecis.putExtra("phoneNumber", adi);

@@ -15,7 +15,17 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.firebaseDemo.FirebaseHelper;
+import com.firebaseDemo.Teacher;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
@@ -31,20 +41,29 @@ public class EventActvity extends AppCompatActivity {
     EditText bitisEdit = null;
     Spinner grades ;
     Spinner days ;
-    int grade=0,teacher = 0;
+    int grade=0,teacher=0;
+    DatabaseReference databaseTeacher;
+    private List<Teacher> teacherList;
+    List<String> teacherlist1 = new ArrayList<>();
 
     Spinner spinnerTeachers;
     Spinner spinnerLesson;
 
     boolean isUpdate;
     String key;
+    FirebaseHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_actvity);
 
+
+        databaseTeacher = FirebaseDatabase.getInstance().getReference("teachers");
+        teacherList = new ArrayList<>();
+        teacherlist1=new ArrayList<>();
         days = (Spinner) findViewById(R.id.day);
+        spinnerTeachers= findViewById(R.id.teachers);
 
 
         ArrayAdapter<CharSequence> adapterDays = ArrayAdapter.createFromResource(this,
@@ -54,6 +73,9 @@ public class EventActvity extends AppCompatActivity {
         days.setAdapter(adapterDays);
 
         grades = (Spinner) findViewById(R.id.grades);
+
+
+
 
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -67,15 +89,44 @@ public class EventActvity extends AppCompatActivity {
                 R.array.lesson, android.R.layout.simple_spinner_item);
 
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         spinnerLesson.setAdapter(adapter2);
-        spinnerTeachers = (Spinner) findViewById(R.id.teachers);
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
-                R.array.teachers, android.R.layout.simple_spinner_item);
 
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spinnerTeachers.setAdapter(adapter1);
+       databaseTeacher.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot teacherSnapshot : dataSnapshot.getChildren() ){
+                    //Create Artist Class Object and Returning Value
+                    Teacher teachers = teacherSnapshot.getValue(Teacher.class);
+                    teacherList.add(teachers);
+                    teacherlist1.add(teachers.getName());
+
+
+                }
+
+                ArrayAdapter<String> adapter1 = new ArrayAdapter<String> (EventActvity.this, android.R.layout.simple_spinner_item,teacherlist1);
+                adapter1.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
+                spinnerTeachers.setAdapter(adapter1);
+                spinnerTeachers.setSelection(0);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+       /* teacherlist1.add("deneme1");
+        teacherlist1.add("deneme2");*/
+
+
+
+        //adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
+
+
 
         baslangic = findViewById(R.id.text_start_time_1);
         bitis = findViewById(R.id.text_end_time_1);

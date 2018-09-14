@@ -1,10 +1,12 @@
 package com.firebaseDemo;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.alamkanak.weekview.WeekViewEvent;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -14,12 +16,15 @@ import com.onur.easyspeakdemo.R;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 public class TeacherActivity extends AppCompatActivity {
 
     DatabaseReference databaseTeachers;
-    List<LessonInfo> teacherList;
+    List<Teacher> teacherList;
+    private ArrayList<WeekViewEvent> mNewEvents;
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -31,8 +36,9 @@ public class TeacherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_teacherecycler);
 
 
-        databaseTeachers = FirebaseDatabase.getInstance().getReference("lessonInfo");
-        teacherList = new ArrayList<>();
+        databaseTeachers = FirebaseDatabase.getInstance().getReference("teachers");
+        teacherList=new ArrayList<>();
+
 
     }
 
@@ -43,27 +49,24 @@ public class TeacherActivity extends AppCompatActivity {
         databaseTeachers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                teacherList.clear();
+               teacherList.clear();
 
                 for (DataSnapshot teacherSnapshot : dataSnapshot.getChildren() ){
                     //Create Artist Class Object and Returning Value
-                    LessonInfo teachers = teacherSnapshot.getValue(LessonInfo.class);
+                    Teacher teachers = teacherSnapshot.getValue(Teacher.class);
                     teacherList.add(teachers);
+
+
                 }
                 recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view_teacher);
-                // use this setting to
-                // improve performance if you know that changes
-                // in content do not change the layout size
-                // of the RecyclerVieww
                 recyclerView.setHasFixedSize(true);
                 // use a linear layout manager
                 layoutManager = new LinearLayoutManager(TeacherActivity.this);
                 recyclerView.setLayoutManager(layoutManager);
-                List<String> input = new ArrayList<>();
 
-                mAdapter = new TeacherAdapter(teacherList);
+
+                mAdapter=new TeacherAdapter(teacherList);
                 recyclerView.setAdapter(mAdapter);
-
             }
 
             @Override

@@ -33,6 +33,7 @@ import com.firebaseDemo.Artist;
 import com.firebaseDemo.LessonInfo;
 import com.firebaseDemo.MyAdapter;
 import com.firebaseDemo.StudentsActivity;
+import com.firebaseDemo.Teacher;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -96,6 +97,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
         databaseLessonInfo = FirebaseDatabase.getInstance().getReference("lessonInfo");
         databaseUpdate = FirebaseDatabase.getInstance().getReference("lessonInfo");
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -444,7 +446,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
                                 eventActivity.putExtra("Content",myEvent.mGetContent());
 
-                                String[] some_array = getResources().getStringArray(R.array.teachers);
+                               String[] some_array = getResources().getStringArray(R.array.teachers);
 
                                 for (int i = 0 ; i <some_array.length;i++){
                                     if(some_array[i].equals(myEvent.getTeacher())){
@@ -514,6 +516,8 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
 
                 });
+
+                //
 
 
 

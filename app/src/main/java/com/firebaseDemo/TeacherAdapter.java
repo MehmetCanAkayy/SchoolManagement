@@ -20,10 +20,11 @@ import android.widget.ImageView;
 
 import com.onur.easyspeakdemo.R;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.ViewHolder>{
-    private List<LessonInfo> values;
+    private List<Teacher> values;
     private AdapterView.OnItemClickListener listener;
 
     // Provide a reference to the views for each data item
@@ -36,7 +37,7 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.ViewHold
         this.listener=listener;
     }*/
     public Dialog myDialog;
-    public TextView titleTv,messageTv;
+    public TextView messageTv;
     public ImageView closeButton;
     public CardView card;
 
@@ -45,12 +46,11 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView txtDay;
-        public TextView txtClass;
+        public TextView txtName;
         public TextView txtGrade;
-        public TextView txtContent;
+        public TextView txtphoneNo;
         public View layout;
-        public RelativeLayout relativeLayout;
+
 
 
 
@@ -58,17 +58,16 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.ViewHold
         public ViewHolder(View v) {
             super(v);
             layout = v;
-            txtDay = v.findViewById(R.id.firstLine);
-            txtGrade = v.findViewById(R.id.seviye);
-            txtClass=v.findViewById(R.id.sinif);
-            relativeLayout=v.findViewById(R.id.relativeLayout);
+            txtName = v.findViewById(R.id.isim);
+            txtGrade = v.findViewById(R.id.grade);
+            txtphoneNo=v.findViewById(R.id.phoneNumber);
 
 
 
         }
     }
 
-    public void add(int position, LessonInfo item) {
+    public void add(int position, Teacher item) {
         values.add(position, item);
         notifyItemInserted(position);
     }
@@ -85,7 +84,7 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.ViewHold
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public TeacherAdapter(List<LessonInfo> teacherList) {
+    public TeacherAdapter(List<Teacher> teacherList) {
         values = teacherList;
     }
 
@@ -94,14 +93,9 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.ViewHold
     public TeacherAdapter.ViewHolder onCreateViewHolder(final ViewGroup parent,
                                                         int viewType) {
         // create a new view
-        final LayoutInflater inflater = LayoutInflater.from(
-                parent.getContext());
+        final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         myDialog= new Dialog(parent.getContext());
-        //        AlertDialog.Builder builder = new AlertDialog.Builder(AlamKanakActivity.this);
-//        builder.setTitle("Lesson Content");
-//        builder.setMessage(event.getGrade() + "\n" + event.getTeacher() + "\n" + event.getStartEnd() + "\n" + event.mGetContent());
-
-                View v =
+                      View v =
                 inflater.inflate(R.layout.activity_teacher, parent, false);
         // set the view's size, margins, paddings and layout parameters
         TeacherAdapter.ViewHolder vh = new TeacherAdapter.ViewHolder(v);
@@ -111,19 +105,16 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.ViewHold
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(TeacherAdapter.ViewHolder holder, final int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        final String sinif = values.get(position).getTeacher();
-        final String seviye = values.get(position).getGrade();
-        final String tarih = values.get(position).getBaslangic();
-        final String icerik=values.get(position).getIcerik();
+
+        final String isim = values.get(position).getName();
+        final String seviye = values.get(position).getSeviye();
+        final String telNo= values.get(position).getPhoneNumber();
 
 
-        holder.txtClass.setText(sinif);
-        holder.txtGrade.setText(seviye);
-        holder.txtDay.setText(tarih);
-
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+        holder.txtGrade.setText("Grade: " +seviye);
+        holder.txtName.setText("Name: "+isim);
+        holder.txtphoneNo.setText("Phone Number: " +telNo);
+        /*holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 myDialog.setContentView(R.layout.custom_dialog_teacher);
@@ -151,7 +142,7 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.ViewHold
             // Return the size of your dataset (invoked by the layout manager)
 
 
-        });
+        });*/
     }
     @Override
     public int getItemCount() {

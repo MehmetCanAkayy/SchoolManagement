@@ -26,6 +26,11 @@ public class Teacher {
         this.seviye=teacherSeviye;
         this.phoneNumber=teacherPhoneNumber;
 
+            }
+
+
+    public Teacher(String teacherName){
+        this.name=teacherName;
     }
 
     public String getTarih() {
@@ -49,6 +54,10 @@ public class Teacher {
     }
 
     public String getName(){return name;}
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 }
 
 
