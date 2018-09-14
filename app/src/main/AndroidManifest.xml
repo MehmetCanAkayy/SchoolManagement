@@ -26,8 +26,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EventActvity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AlamKanakActivity" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name="com.firebaseDemo.StudentsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -46,7 +45,10 @@
         <activity
             android:name=".ShowTeacherMenu"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ShowStudentMenu"
+        <activity
+            android:name=".ShowStudentMenu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.alam_kanak.AlamKanakView"
             android:theme="@style/AppTheme.NoActionBar" ></activity>
     </application>
 

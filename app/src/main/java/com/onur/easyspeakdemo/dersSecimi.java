@@ -56,7 +56,7 @@ public class dersSecimi extends AppCompatActivity {
 
                         final Intent studentActivity = new Intent(dersSecimi.this, StudentsActivity.class);
 
-                        final Intent sayfagecis3=new Intent(dersSecimi.this, AlamKanakActivity.class);
+                        //final Intent sayfagecis3=new Intent(dersSecimi.this, AlamKanakActivity.class);
 
                         final Intent studentListWeek=new Intent(dersSecimi.this, MainActivity.class);
                         AlertDialog.Builder mBuilder = new AlertDialog.Builder(dersSecimi.this);
@@ -101,7 +101,7 @@ public class dersSecimi extends AppCompatActivity {
                         social.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                startActivity(sayfagecis3);
+                                //startActivity(sayfagecis3);
                             }
                         });
                         chat.setOnClickListener(new View.OnClickListener() {

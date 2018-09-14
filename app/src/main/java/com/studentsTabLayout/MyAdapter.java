@@ -1,10 +1,8 @@
 package com.studentsTabLayout;
 
-import java.sql.SQLOutput;
 import java.util.Calendar;
 import java.util.List;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.alamkanak.weekview.WeekViewEvent;
 import com.firebaseDemo.Artist;
 import com.firebaseDemo.LessonInfo;
 import com.google.firebase.database.DataSnapshot;
@@ -20,8 +17,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.onur.easyspeakdemo.AlamKanakActivity;
-import com.onur.easyspeakdemo.EventActvity;
 import com.onur.easyspeakdemo.R;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {

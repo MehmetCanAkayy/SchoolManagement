@@ -11,6 +11,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.GridLayout;
 
+import com.alam_kanak.AlamKanakView;
 import com.firebaseDemo.StudentsActivity;
 import com.firebaseDemo.TeacherActivity;
 import com.studentsTabLayout.MainActivity;
@@ -54,7 +55,7 @@ public class ShowTeacherMenu extends AppCompatActivity {
                         final Intent teacherList= new Intent(ShowTeacherMenu.this, TeacherActivity.class);
                         startActivity(teacherList);
                     }else if(finalI == 1 ){
-                        final Intent alamKanak=new Intent(ShowTeacherMenu.this, AlamKanakActivity.class);
+                        final Intent alamKanak=new Intent(ShowTeacherMenu.this, AlamKanakView.class);
 
                         startActivity(alamKanak);
 
