@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.firebaseDemo.Admin;
 import com.firebaseDemo.Artist;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -20,12 +21,11 @@ import com.onur.easyspeakdemo.R;
 
 
 
-public class StudentRegister extends AppCompatActivity {
+public class AdminRegister extends AppCompatActivity {
 
     private EditText editTextName;
     private EditText editTextPhoneNumber;
 
-    private Spinner userGrade;
     DatabaseReference databaseArtists;
     private Button add;
     private ImageView background;
@@ -34,24 +34,16 @@ public class StudentRegister extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_register);
-        
-        editTextName= (EditText) findViewById(R.id.userName);
-        editTextPhoneNumber= findViewById(R.id.phoneNo);
+        setContentView(R.layout.activity_admin_register);
 
-        databaseArtists = FirebaseDatabase.getInstance().getReference("students");
+        editTextName= (EditText) findViewById(R.id.adminName);
+        editTextPhoneNumber= findViewById(R.id.adminPhoneNo);
+
+        databaseArtists = FirebaseDatabase.getInstance().getReference("admin");
 
         background=findViewById(R.id.background);
         add = findViewById(R.id.add);
 
-        userGrade = (Spinner) findViewById(R.id.user_grade);
-// Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.grades, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        userGrade.setAdapter(adapter);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,14 +60,12 @@ public class StudentRegister extends AppCompatActivity {
         String name = editTextName.getText().toString().trim();
         String phoneNumber = editTextPhoneNumber.getText().toString().trim();
 
-        String grade = userGrade.getSelectedItem().toString();
-
 
         if(!TextUtils.isEmpty(name)){
             String id = databaseArtists.push().getKey();
 
             //Create An Artist Object
-            Artist artist = new Artist(name,grade,phoneNumber,"");
+            Admin artist = new Admin(name,phoneNumber);
             databaseArtists.child(id).setValue(artist);
             Toast.makeText(this,"Succesfully Stored Data",Toast.LENGTH_LONG).show();
         }else {
