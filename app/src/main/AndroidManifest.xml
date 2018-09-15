@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".dersSecimi"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -48,11 +49,16 @@
         <activity
             android:name=".ShowStudentMenu"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.alam_kanak.AlamKanakView"
-            android:theme="@style/AppTheme.NoActionBar" ></activity>
-        <activity android:name="com.teacherTabLayout.Main3Activity"
-            android:theme="@style/AppTheme.NoActionBar" ></activity>
 
+        <activity
+            android:name="com.alam_kanak.AlamKanakView"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.user.AdminRegister"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="com.onur.easyspeakdemo.ShowAdminMenu"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="com.teacherTabLayout.Main3Activity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

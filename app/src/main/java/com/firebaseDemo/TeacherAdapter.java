@@ -95,8 +95,7 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.ViewHold
         // create a new view
         final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         myDialog= new Dialog(parent.getContext());
-        View v =
-                inflater.inflate(R.layout.activity_teacher, parent, false);
+        View v =inflater.inflate(R.layout.activity_teacher, parent, false);
         // set the view's size, margins, paddings and layout parameters
         TeacherAdapter.ViewHolder vh = new TeacherAdapter.ViewHolder(v);
         return vh;

@@ -27,10 +27,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
-import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
-
-
 
 public class EventActvity extends AppCompatActivity {
 
@@ -91,7 +87,7 @@ public class EventActvity extends AppCompatActivity {
         spinnerLesson.setAdapter(adapter2);
 
 
-        databaseTeacher.addValueEventListener(new ValueEventListener() {
+       databaseTeacher.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

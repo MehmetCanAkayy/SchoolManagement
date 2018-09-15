@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebaseDemo.Admin;
 import com.firebaseDemo.Artist;
 import com.firebaseDemo.MyAdapter;
 import com.firebaseDemo.StudentsActivity;
@@ -35,9 +36,13 @@ public class MainActivity extends AppCompatActivity {
     // List<String> kullanicilar = new ArrayList<String>();
     DatabaseReference databaseArtists;
     DatabaseReference databaseTeacher;
+    DatabaseReference databaseAdmin;
+
 
     List<Artist> artistList;
     List<Teacher> teacherList;
+    List<Admin> adminList;
+
 
     @Override
     protected void onStart() {
@@ -84,6 +89,28 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        databaseAdmin.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                adminList.clear();
+
+                for (DataSnapshot artistSnapshot : dataSnapshot.getChildren() ){
+                    //Create Artist Class Object and Returning Value
+                    Admin admin = artistSnapshot.getValue(Admin.class);
+                    adminList.add(admin);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Student Verisi Çekilemedi.");
+
+            }
+        });
+
+
     }
 
 
@@ -97,14 +124,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         databaseArtists = FirebaseDatabase.getInstance().getReference("students");
         databaseTeacher = FirebaseDatabase.getInstance().getReference("teachers");
+        databaseAdmin = FirebaseDatabase.getInstance().getReference("admin");
+
 
         artistList = new ArrayList<>();
         teacherList = new ArrayList<>();
+        adminList = new ArrayList<>();
+
 
         //Intent sayfagecis= new Intent(MainActivity.this, com.user.StudentRegister.class);
         //Intent sayfagecis= new Intent(MainActivity.this, dersSecimi.class);
         background=findViewById(R.id.background);
-
 
         //startActivity(sayfagecis);
         ad=(TextView)findViewById(R.id.kul_ad);
@@ -134,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
 
                 final Intent showStudentMenu = new Intent(MainActivity.this, ShowStudentMenu.class);
                 final Intent showTeacherMenu = new Intent(MainActivity.this, ShowTeacherMenu.class);
+                final Intent showAdminMenu = new Intent(MainActivity.this, ShowAdminMenu.class);
 
 
 
@@ -162,6 +193,21 @@ public class MainActivity extends AppCompatActivity {
 
 
                         startActivityForResult(showTeacherMenu, 1);
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "Yanlış kullanici adi veya şifre", Toast.LENGTH_SHORT).show();
+                        //startActivity(sayfagecis);
+                    }
+
+                }
+                for (int i = 0 ; i <adminList.size();i++){
+                    if(adi.equals(adminList.get(i).getPhoneNumber())&&sifresi.equals("111")){
+                        //Log.d("deneme", "basarili");
+                        Toast.makeText(getApplicationContext(), "Başarılı!Yönlendiriliyorsunuz...", Toast.LENGTH_SHORT).show();
+                        showAdminMenu.putExtra("phoneNumber", adi);
+
+
+                        startActivityForResult(showAdminMenu, 1);
                     }
                     else {
                         Toast.makeText(getApplicationContext(), "Yanlış kullanici adi veya şifre", Toast.LENGTH_SHORT).show();

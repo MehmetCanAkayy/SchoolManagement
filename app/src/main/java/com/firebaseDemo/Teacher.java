@@ -24,7 +24,9 @@ public class Teacher {
         this.seviye=teacherSeviye;
         this.phoneNumber=teacherPhoneNumber;
 
-    }
+            }
+
+
 
 
 

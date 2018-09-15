@@ -31,6 +31,7 @@ import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
 import com.firebaseDemo.Artist;
 import com.firebaseDemo.LessonInfo;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -130,6 +131,7 @@ public class FragmentOne extends Fragment implements WeekView.EventClickListener
 
         databaseLessonInfo = FirebaseDatabase.getInstance().getReference("lessonInfo");
         databaseUpdate = FirebaseDatabase.getInstance().getReference("lessonInfo");
+
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -426,7 +428,7 @@ public class FragmentOne extends Fragment implements WeekView.EventClickListener
 
                                 eventActivity.putExtra("Content",myEvent.mGetContent());
 
-                                String[] some_array = getResources().getStringArray(R.array.teachers);
+                               String[] some_array = getResources().getStringArray(R.array.teachers);
 
                                 for (int i = 0 ; i <some_array.length;i++){
                                     if(some_array[i].equals(myEvent.getTeacher())){
@@ -496,6 +498,8 @@ public class FragmentOne extends Fragment implements WeekView.EventClickListener
 
 
                 });
+
+                //
 
 
 

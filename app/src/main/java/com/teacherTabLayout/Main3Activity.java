@@ -7,12 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.onur.easyspeakdemo.R;
 
+
 public class Main3Activity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
 
     // Test iconlari
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class Main3Activity extends AppCompatActivity {
         adapter.addFragment(new FragmentTeacherChat(), "Chat");
         adapter.addFragment(new FragmentTeacherSpeaking(), "Speaking");
         adapter.addFragment(new FragmentTeacherSocial(), "Social");
+
         viewPager.setAdapter(adapter);
     }
 }
