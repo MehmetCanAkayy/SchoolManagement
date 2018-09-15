@@ -2,6 +2,7 @@ package com.studentsTabLayout;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -139,34 +140,80 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.ViewHolder> {
 
 
                             Artist studentInfo = studentInfoSnapshot.getValue(Artist.class);
-                            Calendar startTime=Calendar.getInstance();
-                            Calendar endTime=Calendar.getInstance();
+
+
+                            String[] control= studentInfo.getControlLesson().split(" ");
+
 
 
 
                             if(studentInfo.getPhoneNumber().equals(studentNumber)){
 
-
-
-                                String LessonKeys = studentInfo.getLessonKey();
-
-                                String[] out = LessonKeys.split(" ");
-
-                                if(out.length==1){
-                                    LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
-
+                                if(values.get(position).getDers().equals("Activity")&&control[0].equals("false")){
+                                    String LessonKeys = studentInfo.getLessonKey();
+                                    String[] out = LessonKeys.split(" ");
+                                    if(out.length==1){
+                                        LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
+                                    }
+                                    else{
+                                        LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
+                                        LessonKeys = LessonKeys.replaceAll("  ", " ");
+                                    }
+                                    control[0] = "true";
+                                    String result = TextUtils.join(" ", control);
+                                    Artist newStudent = new Artist(studentInfo.getArtistName(),studentInfo.getArtistGrade(),studentInfo.getPhoneNumber(),LessonKeys,result);
+                                    studentInfoSnapshot.getRef().setValue(newStudent);
+                                    values.remove(position);
+                                    notifyDataSetChanged();
+                                }else if(values.get(position).getDers().equals("Chat")&&control[1].equals("false")){
+                                    String LessonKeys = studentInfo.getLessonKey();
+                                    String[] out = LessonKeys.split(" ");
+                                    if(out.length==1){
+                                        LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
+                                    }
+                                    else{
+                                        LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
+                                        LessonKeys = LessonKeys.replaceAll("  ", " ");
+                                    }
+                                    control[1] = "true";
+                                    String result = TextUtils.join(" ", control);
+                                    Artist newStudent = new Artist(studentInfo.getArtistName(),studentInfo.getArtistGrade(),studentInfo.getPhoneNumber(),LessonKeys,result);
+                                    studentInfoSnapshot.getRef().setValue(newStudent);
+                                    values.remove(position);
+                                    notifyDataSetChanged();
+                                }else if(values.get(position).getDers().equals("Social")&&control[2].equals("false")){
+                                    String LessonKeys = studentInfo.getLessonKey();
+                                    String[] out = LessonKeys.split(" ");
+                                    if(out.length==1){
+                                        LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
+                                    }
+                                    else{
+                                        LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
+                                        LessonKeys = LessonKeys.replaceAll("  ", " ");
+                                    }
+                                    control[2] = "true";
+                                    String result = TextUtils.join(" ", control);
+                                    Artist newStudent = new Artist(studentInfo.getArtistName(),studentInfo.getArtistGrade(),studentInfo.getPhoneNumber(),LessonKeys,result);
+                                    studentInfoSnapshot.getRef().setValue(newStudent);
+                                    values.remove(position);
+                                    notifyDataSetChanged();
+                                }else if(values.get(position).getDers().equals("Speaking")&&control[3].equals("false")){
+                                    String LessonKeys = studentInfo.getLessonKey();
+                                    String[] out = LessonKeys.split(" ");
+                                    if(out.length==1){
+                                        LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
+                                    }
+                                    else{
+                                        LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
+                                        LessonKeys = LessonKeys.replaceAll("  ", " ");
+                                    }
+                                    control[3] = "true";
+                                    String result = TextUtils.join(" ", control);
+                                    Artist newStudent = new Artist(studentInfo.getArtistName(),studentInfo.getArtistGrade(),studentInfo.getPhoneNumber(),LessonKeys,result);
+                                    studentInfoSnapshot.getRef().setValue(newStudent);
+                                    values.remove(position);
+                                    notifyDataSetChanged();
                                 }
-//                                else if (out.length == ou)
-                                else{
-                                    LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
-                                    LessonKeys = LessonKeys.replaceAll("  ", " ");
-
-                                }
-                                Artist newStudent = new Artist(studentInfo.getArtistName(),studentInfo.getArtistGrade(),studentInfo.getPhoneNumber(),LessonKeys);
-
-                                studentInfoSnapshot.getRef().setValue(newStudent);
-                                values.remove(position);
-                                notifyDataSetChanged();
 
                             }
                         }

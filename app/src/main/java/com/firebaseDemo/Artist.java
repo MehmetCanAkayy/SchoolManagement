@@ -9,16 +9,22 @@ public class Artist {
     String artistGrade;
     String phoneNumber;
     String lessonKey;
+    String controlLesson;
 
     public Artist(){
 
     }
 
-    public Artist(String artistName, String artistGrade,String phoneNumber,String lessonKey) {
+    public Artist(String artistName, String artistGrade,String phoneNumber,String lessonKey,String controlLesson) {
         this.artistName = artistName;
         this.artistGrade = artistGrade;
         this.phoneNumber = phoneNumber;
         this.lessonKey = lessonKey;
+        this.controlLesson = controlLesson;
+    }
+
+    public String getControlLesson() {
+        return controlLesson;
     }
 
     public String getPhoneNumber() {
