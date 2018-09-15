@@ -43,6 +43,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     CardView card;
     Button delete,update;
     int color;
+    int maxValue = 2;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -156,10 +157,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
 
-
                 databaseUpdate.addListenerForSingleValueEvent(new ValueEventListener() {
+                    int sayac = 0;
+
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        for (DataSnapshot studentInfoSnapshot : dataSnapshot.getChildren() ) {
+                            Artist studentInfo = studentInfoSnapshot.getValue(Artist.class);
+                            String LessonKeys = studentInfo.getLessonKey();
+
+                            Boolean found = Arrays.asList(LessonKeys.split(" ")).contains(values.get(position).getLessonKey());
+                            if(found){
+                                System.out.println("Dersi alan ogrenci = " + studentInfo.getArtistName());
+                                sayac++;
+                            }
+                        }
                         for (DataSnapshot studentInfoSnapshot : dataSnapshot.getChildren() ){
 
 
@@ -168,9 +181,40 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                             String[] control= studentInfo.getControlLesson().split(" ");
 
 
+
+
                             if(studentInfo.getPhoneNumber().equals(studentNumber)){
 
-                                if(values.get(position).getDers().equals("Activity")&&control[0].equals("true")){
+                                if(sayac>=maxValue){
+                                    myDialog.setContentView(R.layout.custom_dialog_box);
+                                    messageTv = myDialog.findViewById(R.id.content);
+                                    card = myDialog.findViewById(R.id.mycard);
+
+                                    card.setBackgroundColor(color);
+
+                                    closeButton = myDialog.findViewById(R.id.close);
+                                    delete = myDialog.findViewById(R.id.delete);
+                                    update = myDialog.findViewById(R.id.update);
+                                    update.setVisibility(View.GONE);
+                                    delete.setVisibility(View.GONE);
+
+
+                                    messageTv.setText("Secmis oldugunuz dersi max kapasiteye ulasmistir. Lutfen baska bir saatte uygun dersi seciniz.");
+
+
+                                    closeButton.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            myDialog.dismiss();
+                                        }
+                                    });
+
+
+                                    myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                    myDialog.show();
+
+                                }
+                                else if(values.get(position).getDers().equals("Activity")&&control[0].equals("true")){
                                     String LessonKeys = studentInfo.getLessonKey();
                                     if(LessonKeys.equals("")){
                                         LessonKeys =values.get(position).getLessonKey();

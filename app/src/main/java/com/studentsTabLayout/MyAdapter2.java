@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.onur.easyspeakdemo.R;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -136,6 +137,9 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.ViewHolder> {
                 databaseUpdate.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+
                         for (DataSnapshot studentInfoSnapshot : dataSnapshot.getChildren() ){
 
 
@@ -158,6 +162,10 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.ViewHolder> {
                                     else{
                                         LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
                                         LessonKeys = LessonKeys.replaceAll("  ", " ");
+                                        if(LessonKeys.startsWith(" ")){
+                                            System.out.println("girdi");
+                                            LessonKeys=LessonKeys.substring(1);
+                                        }
                                         if(LessonKeys.equals(" ")){
                                             LessonKeys = "";
                                         }
@@ -177,6 +185,10 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.ViewHolder> {
                                     else{
                                         LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
                                         LessonKeys = LessonKeys.replaceAll("  ", " ");
+                                        if(LessonKeys.startsWith(" ")){
+                                            System.out.println("girdi");
+                                            LessonKeys=LessonKeys.substring(1);
+                                        }
                                         if(LessonKeys.equals(" ")){
                                             LessonKeys = "";
                                         }
@@ -196,6 +208,10 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.ViewHolder> {
                                     else{
                                         LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
                                         LessonKeys = LessonKeys.replaceAll("  ", " ");
+                                        if(LessonKeys.startsWith(" ")){
+                                            System.out.println("girdi");
+                                            LessonKeys=LessonKeys.substring(1);
+                                        }
                                         if(LessonKeys.equals(" ")){
                                             LessonKeys = "";
                                         }
@@ -215,6 +231,10 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.ViewHolder> {
                                     else{
                                         LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
                                         LessonKeys = LessonKeys.replaceAll("  ", " ");
+                                        if(LessonKeys.startsWith(" ")){
+                                            System.out.println("girdi");
+                                            LessonKeys=LessonKeys.substring(1);
+                                        }
                                         if(LessonKeys.equals(" ")){
                                             LessonKeys = "";
                                         }
