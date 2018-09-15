@@ -10,6 +10,7 @@ public class LessonInfo {
     String icerik ;
     String ders;
     int color;
+    String lessonKey;
 
     public int getColor() {
         return color;
@@ -21,17 +22,22 @@ public class LessonInfo {
 
     public LessonInfo(){}
 
-    public LessonInfo(String baslangic, String bitis, String grade, String teacher, String icerik,String ders){
+    public LessonInfo(String baslangic, String bitis, String grade, String teacher, String icerik,String ders,String lessonKey){
         this.baslangic=baslangic;
         this.bitis=bitis;
         this.grade=grade;
         this.teacher=teacher;
         this.icerik=icerik;
         this.ders = ders;
+        this.lessonKey = lessonKey;
     }
 
     public String getDers() {
         return ders;
+    }
+
+    public String getLessonKey() {
+        return lessonKey;
     }
 
     public String getBaslangic() {

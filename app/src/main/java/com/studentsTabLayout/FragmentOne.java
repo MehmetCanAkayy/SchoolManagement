@@ -2,8 +2,8 @@ package com.studentsTabLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,13 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alamkanak.weekview.WeekViewEvent;
+import com.firebaseDemo.Artist;
 import com.firebaseDemo.LessonInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.onur.easyspeakdemo.MyAdapter;
 import com.onur.easyspeakdemo.R;
 
 import java.util.ArrayList;
@@ -33,6 +33,10 @@ public class FragmentOne extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private DatabaseReference databaseLessonInfo;
     private ArrayList<WeekViewEvent> mNewEvents;
+    private DatabaseReference databaseUpdate;
+    String[] studentLessons;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +44,7 @@ public class FragmentOne extends Fragment {
 
         databaseLessonInfo = FirebaseDatabase.getInstance().getReference("lessonInfo");
         mNewEvents = new ArrayList<WeekViewEvent>();
+        databaseUpdate = FirebaseDatabase.getInstance().getReference("students");
 
 
         Intent intent = getActivity().getIntent();
@@ -58,9 +63,53 @@ public class FragmentOne extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         final List<LessonInfo> input = new ArrayList<LessonInfo>();
+        final List<String> studentLessons = new ArrayList<String>();
 
 
-        databaseLessonInfo.addValueEventListener(new ValueEventListener() {
+        databaseUpdate.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot studentInfoSnapshot : dataSnapshot.getChildren() ){
+
+
+                    Artist studentInfo = studentInfoSnapshot.getValue(Artist.class);
+
+                    if(studentInfo.getPhoneNumber().equals(phoneNumber)){
+
+
+                        String[] out = studentInfo.getLessonKey().split(" ");
+
+                        for(int i = 0 ; i < out.length;i++){
+                            studentLessons.add(out[i]);
+                            System.out.println(studentLessons.get(studentLessons.size()-1));
+                        }
+
+
+
+                    }
+
+
+
+
+
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Student Verisi Çekilemedi.");
+
+            }
+
+
+        });
+
+
+
+
+        databaseLessonInfo.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 input.clear();
@@ -68,10 +117,15 @@ public class FragmentOne extends Fragment {
 
 
                 for (DataSnapshot lessonInfoSnapshot : dataSnapshot.getChildren() ){
+                    boolean control = true;
                     //Create Artist Class Object and Returning Value
                     LessonInfo lessonInfo = lessonInfoSnapshot.getValue(LessonInfo.class);
-
-                    if(lessonInfo.getGrade().equals(grade)){
+                    for(int i = 0 ; i < studentLessons.size();i++){
+                        if(studentLessons.get(i).equals(lessonInfo.getLessonKey())){
+                            control=false;
+                        }
+                    }
+                    if(lessonInfo.getGrade().equals(grade)&&control){
 
                         Calendar startTime=Calendar.getInstance();
                         Calendar endTime=Calendar.getInstance();
@@ -120,7 +174,7 @@ public class FragmentOne extends Fragment {
                 Collections.sort(input, (p1, p2) -> p1.getDay() - p2.getDay());
 
                 System.out.println(input.size());
-                mAdapter = new MyAdapter(input);
+                mAdapter = new MyAdapter(input,phoneNumber);
                 recyclerView.setAdapter(mAdapter);
             }
 
@@ -138,4 +192,14 @@ public class FragmentOne extends Fragment {
         return view;
     }
 
-}
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            System.out.println("Fragment 1 refresh");
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.detach(FragmentOne.this).attach(FragmentOne.this).commit();
+        }
+
+    }
+    }

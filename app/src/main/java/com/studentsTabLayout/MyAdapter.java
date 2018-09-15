@@ -1,6 +1,5 @@
-package com.onur.easyspeakdemo;
+package com.studentsTabLayout;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -8,14 +7,23 @@ import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.firebaseDemo.Artist;
 import com.firebaseDemo.LessonInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.onur.easyspeakdemo.R;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<LessonInfo> values;
+    private String studentNumber;
+    private DatabaseReference databaseUpdate;
+
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -48,8 +56,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(List<LessonInfo> myDataset) {
+    public MyAdapter(List<LessonInfo> myDataset,String studentNumber) {
         values = myDataset;
+        this.studentNumber = studentNumber;
+        databaseUpdate = FirebaseDatabase.getInstance().getReference("students");
+
     }
 
     // Create new views (invoked by the layout manager)
@@ -115,6 +126,73 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }else if(values.get(position).getDers().equals("Speaking")){
             holder.txtContent.setBackgroundColor(Color.parseColor("#f8b552"));
         }
+
+        holder.txtContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                databaseUpdate.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot studentInfoSnapshot : dataSnapshot.getChildren() ){
+
+
+                            Artist studentInfo = studentInfoSnapshot.getValue(Artist.class);
+                            Calendar startTime=Calendar.getInstance();
+                            Calendar endTime=Calendar.getInstance();
+
+
+
+                            if(studentInfo.getPhoneNumber().equals(studentNumber)){
+
+
+
+                                String LessonKeys = studentInfo.getLessonKey();
+                                if(LessonKeys.equals("")){
+                                    LessonKeys =values.get(position).getLessonKey();
+
+                                }else{
+                                    LessonKeys += " " +values.get(position).getLessonKey();
+
+                                }
+                                Artist newStudent = new Artist(studentInfo.getArtistName(),studentInfo.getArtistGrade(),studentInfo.getPhoneNumber(),LessonKeys);
+
+                                studentInfoSnapshot.getRef().setValue(newStudent);
+                                values.remove(position);
+                                notifyDataSetChanged();
+
+                            }
+
+
+
+
+
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        System.out.println("Student Verisi Çekilemedi.");
+
+                    }
+
+
+                });
+
+
+
+
+//                values.remove(position);
+//                notifyDataSetChanged();
+
+            }
+
+        });
+
+
 
 
 

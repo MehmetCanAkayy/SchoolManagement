@@ -37,6 +37,10 @@ public class Teacher {
         return tarih;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
     public String getSeviye() {
         return seviye;
     }

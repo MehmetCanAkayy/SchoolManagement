@@ -12,13 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".dersSecimi" />
         <activity android:name=".ListWeek" />
         <activity android:name=".EventActvity" />
@@ -30,6 +33,42 @@
         <activity android:name="com.firebaseDemo.TeacherActivity" />
         <activity android:name="com.teacherTabLayout.Main3Activity" />
         <activity android:name="com.teacherTabLayout.TeacherLessonList"></activity>
+=======
+        <activity
+            android:name=".dersSecimi"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EventActvity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.firebaseDemo.StudentsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.studentsTabLayout.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.user.StudentRegister"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.user.TeacherRegister"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.firebaseDemo.TeacherActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ShowTeacherMenu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ShowStudentMenu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.alam_kanak.AlamKanakView"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.user.AdminRegister"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="com.onur.easyspeakdemo.ShowAdminMenu"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+>>>>>>> 7a27c9571927fe5430f5a7da3c4f5c6b79a61d36
     </application>
 
 </manifest>

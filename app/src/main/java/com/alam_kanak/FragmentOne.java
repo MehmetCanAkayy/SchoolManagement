@@ -1,29 +1,29 @@
-package com.onur.easyspeakdemo;
+package com.alam_kanak;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.alamkanak.weekview.DateTimeInterpreter;
 import com.alamkanak.weekview.MonthLoader;
@@ -31,28 +31,32 @@ import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
 import com.firebaseDemo.Artist;
 import com.firebaseDemo.LessonInfo;
+<<<<<<< HEAD:app/src/main/java/com/onur/easyspeakdemo/AlamKanakActivity.java
 import com.firebaseDemo.MyAdapter;
 import com.firebaseDemo.StudentsActivity;
 import com.firebaseDemo.Teacher;
+=======
+>>>>>>> 7a27c9571927fe5430f5a7da3c4f5c6b79a61d36:app/src/main/java/com/alam_kanak/FragmentOne.java
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.onur.easyspeakdemo.EventActvity;
+import com.onur.easyspeakdemo.R;
+import com.studentsTabLayout.MyAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * This is a base activity which contains week view and all the codes necessary to initialize the
- * week view.
- * Created by Raquib-ul-Alam Kanak on 1/3/2014.
- * Website: http://alamkanak.github.io
- */
-public class AlamKanakActivity extends AppCompatActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener,WeekView.EmptyViewClickListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
+public class FragmentOne extends Fragment implements WeekView.EventClickListener, MonthLoader.MonthChangeListener,WeekView.EmptyViewClickListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
+
+
+
     private static final int TYPE_DAY_VIEW = 1;
     private static final int TYPE_THREE_DAY_VIEW = 2;
     private static final int TYPE_WEEK_VIEW = 3;
@@ -82,24 +86,56 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     ImageView closeButton;
     CardView card;
     Button delete,update;
+    public static FragmentOne newInstance( int mWeekViewType) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("mWeekViewType", mWeekViewType);
 
+        FragmentOne fragment = new FragmentOne();
+        fragment.setArguments(bundle);
 
+        return fragment;
+    }
 
+    private void readBundle(Bundle bundle) {
+        if (bundle != null) {
+            mWeekViewType = bundle.getInt("mWeekViewType");
+            if (mWeekViewType == 3) {
+                mWeekViewType = TYPE_THREE_DAY_VIEW;
+                mWeekView.setNumberOfVisibleDays(3);
 
+                // Lets change some dimensions to best fit the view.
+                mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()));
+                mWeekView.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
+                mWeekView.setEventTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
+            }
+            else{
+                mWeekViewType = TYPE_WEEK_VIEW;
+                mWeekView.setNumberOfVisibleDays(7);
 
+                // Lets change some dimensions to best fit the view.
+                mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()));
+                mWeekView.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics()));
+                mWeekView.setEventTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics()));
+            }
+
+        }
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sample);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_sample, container, false);
 
-        myDialog = new Dialog(this);
+        myDialog = new Dialog(view.getContext());
 
         databaseLessonInfo = FirebaseDatabase.getInstance().getReference("lessonInfo");
         databaseUpdate = FirebaseDatabase.getInstance().getReference("lessonInfo");
 
+<<<<<<< HEAD:app/src/main/java/com/onur/easyspeakdemo/AlamKanakActivity.java
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+=======
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+>>>>>>> 7a27c9571927fe5430f5a7da3c4f5c6b79a61d36:app/src/main/java/com/alam_kanak/FragmentOne.java
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,7 +156,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
                 }
 
-                Intent eventActivity = new Intent(AlamKanakActivity.this, EventActvity.class);
+                Intent eventActivity = new Intent(getActivity(), EventActvity.class);
                 eventActivity.putExtra("hour", 10);
                 eventActivity.putExtra("minute", 30);
                 eventActivity.putExtra("isFloatingButtonClicked", true);
@@ -140,7 +176,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
 
         // Get a reference for the week view in the layout.
-        mWeekView = (WeekView) findViewById(R.id.weekView);
+        mWeekView = (WeekView) view.findViewById(R.id.weekView);
 
         // Show a toast message about the touched event.
         mWeekView.setOnEventClickListener(this);
@@ -162,10 +198,15 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
         // Set up a date time interpreter to interpret how the date and time will be formatted in
         // the week view. This is optional.
         setupDateTimeInterpreter(false);
+        readBundle(getArguments());
+
+
+        return view;
     }
 
+
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         //Retriving data From Firebase
 
@@ -273,64 +314,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        setupDateTimeInterpreter(id == R.id.action_week_view);
-        switch (id) {
-            case R.id.action_day_view:
-                if (mWeekViewType != TYPE_DAY_VIEW) {
-                    item.setChecked(!item.isChecked());
-                    mWeekViewType = TYPE_DAY_VIEW;
-                    mWeekView.setNumberOfVisibleDays(1);
-
-                    // Lets change some dimensions to best fit the view.
-                    mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()));
-                    mWeekView.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
-                    mWeekView.setEventTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
-                }
-                return true;
-            case R.id.action_three_day_view:
-                if (mWeekViewType != TYPE_THREE_DAY_VIEW) {
-                    item.setChecked(!item.isChecked());
-                    mWeekViewType = TYPE_THREE_DAY_VIEW;
-                    mWeekView.setNumberOfVisibleDays(3);
-
-                    // Lets change some dimensions to best fit the view.
-                    mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()));
-                    mWeekView.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
-                    mWeekView.setEventTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
-                }
-                return true;
-            case R.id.action_week_view:
-                if (mWeekViewType != TYPE_WEEK_VIEW) {
-                    item.setChecked(!item.isChecked());
-                    mWeekViewType = TYPE_WEEK_VIEW;
-                    mWeekView.setNumberOfVisibleDays(7);
-
-                    // Lets change some dimensions to best fit the view.
-                    mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()));
-                    mWeekView.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics()));
-                    mWeekView.setEventTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics()));
-                }
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * Set up a date time interpreter which will show short date values when in week view and long
-     * date values otherwise.
-     *
-     * @param shortDate True if the date values should be short.
-     */
     private void setupDateTimeInterpreter(final boolean shortDate) {
         mWeekView.setDateTimeInterpreter(new DateTimeInterpreter() {
             @Override
@@ -365,7 +349,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
     @Override
     public void onEventClick(final WeekViewEvent event, final RectF eventRect) {
 
-        Toast.makeText(this, "Clicked " + event.getContent(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Clicked " + event.getContent(), Toast.LENGTH_SHORT).show();
 
         //        AlertDialog.Builder builder = new AlertDialog.Builder(AlamKanakActivity.this);
 //        builder.setTitle("Lesson Content");
@@ -436,7 +420,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
                             WeekViewEvent myEvent = new WeekViewEvent(lessonInfo.getGrade(), lessonInfo.getTeacher(), lessonInfo.getIcerik(), startTime, endTime,lessonInfo.getDers());
 
                             if(event.getGrade()==myEvent.getGrade()){
-                                final Intent eventActivity = new Intent(AlamKanakActivity.this, EventActvity.class);
+                                final Intent eventActivity = new Intent(getContext(), EventActvity.class);
                                 eventActivity.putExtra("hour", startTime.get(Calendar.HOUR_OF_DAY));
                                 eventActivity.putExtra("minute", startTime.get(Calendar.MINUTE));
                                 eventActivity.putExtra("isFloatingButtonClicked", true);
@@ -582,7 +566,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
 
 
-                        }
+    }
 
     //    @Override
 //    public void onEmptyViewClicked(Calendar time) {
@@ -604,7 +588,7 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
 
         selectedDate = time;
-        final Intent eventActivity = new Intent(this, EventActvity.class);
+        final Intent eventActivity = new Intent(getContext(), EventActvity.class);
         eventActivity.putExtra("hour", time.get(Calendar.HOUR_OF_DAY));
         eventActivity.putExtra("minute", time.get(Calendar.MINUTE));
         eventActivity.putExtra("isFloatingButtonClicked", false);
@@ -620,12 +604,12 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
 
         startActivityForResult(eventActivity, 1);
-        Toast.makeText(this, "Empty view clicked: " + getEventTitle(time), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Empty view clicked: " + getEventTitle(time), Toast.LENGTH_SHORT).show();
 
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
@@ -742,12 +726,12 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
     @Override
     public void onEventLongPress(WeekViewEvent event, RectF eventRect) {
-        Toast.makeText(this, "Long pressed event: " + event.getContent(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Long pressed event: " + event.getContent(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onEmptyViewLongPress(Calendar time) {
-        Toast.makeText(this, "Empty view long pressed: " + getEventTitle(time), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Empty view long pressed: " + getEventTitle(time), Toast.LENGTH_SHORT).show();
     }
 
     public WeekView getWeekView() {
@@ -778,10 +762,9 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
                     String endTime = startYear+"%" + startMonth+"%" + startDay + "%" + Integer.parseInt(endHour) + "%" + endMinute;
                     System.out.println("start time = " + startTime);
                     System.out.println("end time = " + endTime);
-                    LessonInfo lessonInfo= new LessonInfo(startTime,endTime,grade,teacher,icerik,ders);
+                    LessonInfo lessonInfo= new LessonInfo(startTime,endTime,grade,teacher,icerik,ders,key);
                     if(lessonInfoSnapshot.getKey().equals(key)){
                         lessonInfoSnapshot.getRef().setValue(lessonInfo);
-
                     }
 
 
@@ -803,31 +786,27 @@ public class AlamKanakActivity extends AppCompatActivity implements WeekView.Eve
 
     private void addLessonInfo(){
 
-            String id = databaseLessonInfo.push().getKey();
-            //Create An Artist Object
+        String id = databaseLessonInfo.push().getKey();
+        //Create An Artist Object
 
-            int startYear= calendarStartTime.get(Calendar.YEAR);
-            int startMonth = calendarStartTime.get(Calendar.MONTH);
-            int startDay = calendarStartTime.get(Calendar.DAY_OF_MONTH);
-            //int startHour = calendarStartTime.get(Calendar.HOUR_OF_DAY);
-            int startMinute = 30;
-            //calendarEndTime.set(Calendar.HOUR_OF_DAY,(calendarStartTime.get(Calendar.HOUR_OF_DAY)+1));
+        int startYear= calendarStartTime.get(Calendar.YEAR);
+        int startMonth = calendarStartTime.get(Calendar.MONTH);
+        int startDay = calendarStartTime.get(Calendar.DAY_OF_MONTH);
+        //int startHour = calendarStartTime.get(Calendar.HOUR_OF_DAY);
+        int startMinute = 30;
+        //calendarEndTime.set(Calendar.HOUR_OF_DAY,(calendarStartTime.get(Calendar.HOUR_OF_DAY)+1));
 
         //int endHour = calendarEndTime.get(Calendar.HOUR_OF_DAY);
-            int endMinute = 30;
+        int endMinute = 30;
 
-            String startTime = startYear+"%" + startMonth +"%" + startDay + "%" + Integer.parseInt(startHour) + "%" + startMinute;
-            String endTime = startYear+"%" + startMonth+"%" + startDay + "%" + Integer.parseInt(endHour) + "%" + endMinute;
+        String startTime = startYear+"%" + startMonth +"%" + startDay + "%" + Integer.parseInt(startHour) + "%" + startMinute;
+        String endTime = startYear+"%" + startMonth+"%" + startDay + "%" + Integer.parseInt(endHour) + "%" + endMinute;
         System.out.println("start time = " + startTime);
         System.out.println("end time = " + endTime);
-            LessonInfo lessonInfo= new LessonInfo(startTime,endTime,grade,teacher,icerik,ders);
+        LessonInfo lessonInfo= new LessonInfo(startTime,endTime,grade,teacher,icerik,ders,id);
 
-            databaseLessonInfo.child(id).setValue(lessonInfo);
-            Toast.makeText(this,"Succesfully Stored Data",Toast.LENGTH_LONG).show();
+        databaseLessonInfo.child(id).setValue(lessonInfo);
+        Toast.makeText(getActivity(),"Succesfully Stored Data",Toast.LENGTH_LONG).show();
     }
-
-
-
-
 
 }

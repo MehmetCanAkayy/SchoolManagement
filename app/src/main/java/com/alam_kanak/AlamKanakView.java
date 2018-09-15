@@ -1,4 +1,4 @@
-package com.studentsTabLayout;
+package com.alam_kanak;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.onur.easyspeakdemo.R;
 
-public class MainActivity extends AppCompatActivity {
+public class AlamKanakView extends AppCompatActivity {
 
 
     private ViewPager viewPager;
@@ -34,9 +34,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
 
+        FragmentOne fragment1 = FragmentOne.newInstance( 3);
+
+        FragmentOne fragment2 = FragmentOne.newInstance(7);
+
+
+
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FragmentOne(),"EMPTY");
-        adapter.addFragment(new FragmentTwo(), "SELECTED");
+        adapter.addFragment(fragment1,"3 DAY");
+        adapter.addFragment(fragment2, "7 DAY");
         viewPager.setAdapter(adapter);
     }
 }
