@@ -176,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
                         showStudentMenu.putExtra("grade", artistList.get(i).getArtistGrade());
 
 
+
                         startActivityForResult(showStudentMenu, 1);
                     }
                     else {
@@ -190,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Başarılı!Yönlendiriliyorsunuz...", Toast.LENGTH_SHORT).show();
                         showTeacherMenu.putExtra("phoneNumber", adi);
                         showTeacherMenu.putExtra("name",teacherList.get(i).getName());
+
 
 
                         startActivityForResult(showTeacherMenu, 1);

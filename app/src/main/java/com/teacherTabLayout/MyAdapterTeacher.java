@@ -1,10 +1,17 @@
 package com.teacherTabLayout;
 
+import android.app.Dialog;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.firebaseDemo.Artist;
@@ -16,12 +23,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.onur.easyspeakdemo.R;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
 public class MyAdapterTeacher extends RecyclerView.Adapter<MyAdapterTeacher.ViewHolder> {
     private List<LessonInfo> values;
-    private DatabaseReference databaseUpdate;
+    private AdapterView.OnItemClickListener listener;
+    public Dialog myDialog;
+    public ImageView closeButton;
+    public CardView card;
+    public TextView messageTv;
+    String lessonKey;
+    Button close;
+    private DatabaseReference databaseReference;
 
 
     // Provide a reference to the views for each data item
@@ -32,12 +48,14 @@ public class MyAdapterTeacher extends RecyclerView.Adapter<MyAdapterTeacher.View
         public TextView txtHeader;
         public TextView txtContent;
         public View layout;
+        public RelativeLayout relativeLayout;
 
         public ViewHolder(View v) {
             super(v);
             layout = v;
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
             txtContent = (TextView) v.findViewById(R.id.secondLine);
+            relativeLayout=v.findViewById(R.id.relativeLayout);
 
         }
     }
@@ -52,12 +70,17 @@ public class MyAdapterTeacher extends RecyclerView.Adapter<MyAdapterTeacher.View
         notifyItemRemoved(position);
     }
 
+    /*public MyAdapterTeacher(List<LessonInfo> myDataset,String lessonKey) {
+        values = myDataset;
+        this.lessonKey = lessonKey;
+        databaseUpdate = FirebaseDatabase.getInstance().getReference("students");
 
+    }*/
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public MyAdapterTeacher(List<LessonInfo> myDataset) {
         values = myDataset;
-        databaseUpdate = FirebaseDatabase.getInstance().getReference("lessonInfo");
+        databaseReference = FirebaseDatabase.getInstance().getReference("students");
 
     }
 
@@ -70,6 +93,7 @@ public class MyAdapterTeacher extends RecyclerView.Adapter<MyAdapterTeacher.View
                 parent.getContext());
         View v =
                 inflater.inflate(R.layout.row_teacher_layout, parent, false);
+        myDialog= new Dialog(v.getContext());
         // set the view's size, margins, paddings and layout parameters
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -125,8 +149,70 @@ public class MyAdapterTeacher extends RecyclerView.Adapter<MyAdapterTeacher.View
             holder.txtContent.setBackgroundColor(Color.parseColor("#f8b552"));
         }
 
+        holder.txtContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
 
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        ArrayList<String> ogrenci = new ArrayList<>();
+                        for (DataSnapshot studentInfoSnapshot : dataSnapshot.getChildren() ){
+
+                            Artist studentInfo = studentInfoSnapshot.getValue(Artist.class);
+                            String LessonKey =studentInfo.getLessonKey();
+                            Boolean found= Arrays.asList(LessonKey.split(" ")).contains(values.get(position).getLessonKey());
+                            if(found){
+
+                                ogrenci.add(studentInfo.getArtistName());
+
+
+                            }
+
+
+                        }
+
+                        myDialog.setContentView(R.layout.custom_dialog_box);
+                        messageTv = myDialog.findViewById(R.id.content);
+                        card = myDialog.findViewById(R.id.mycard);
+                        close = myDialog.findViewById(R.id.closee);
+                        String txt ="";
+                        for(int i=0 ; i<ogrenci.size(); i++){
+
+
+                            txt+=ogrenci.get(i);
+
+                        }
+
+                        messageTv.setText(txt);
+
+
+                        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        myDialog.show();
+
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        System.out.println("Student Verisi Çekilemedi.");
+
+                    }
+
+
+                });
+
+
+
+
+//                values.remove(position);
+//                notifyDataSetChanged();
+
+            }
+
+        });
 
     }
 

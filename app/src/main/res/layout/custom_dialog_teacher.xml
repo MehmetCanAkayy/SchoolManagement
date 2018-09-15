@@ -86,17 +86,33 @@
 
                     />
 
-                <Button
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="YESSSSSSSS"
-                    android:textColor="@color/white"
-                    android:background="@drawable/button_rectangle"
-                    android:layout_gravity="center_horizontal"
 
-                    />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingBottom="5dp"
+                    android:id="@+id/relativeLayout">
+
+                    <Button
+                        android:id="@+id/closee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="20dp"
+                        android:text="DELETE"
+                        android:textColor="@color/white"
+                        android:background="@drawable/button_rectangle2"
+                        android:layout_gravity="center_horizontal"
+
+                        />
+
+
+                </RelativeLayout>
+
+
+
 
             </LinearLayout>
 

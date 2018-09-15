@@ -46,6 +46,7 @@ public class FragmentTeacherActivity extends Fragment {
 
 
         Intent intent = getActivity().getIntent();
+        final String lessonKey=intent.getExtras().getString("lessonKey");//onur.MainActivity
         final String phoneNumber = intent.getExtras().getString("phoneNumber");
         final String name= intent.getExtras().getString("name");
 
