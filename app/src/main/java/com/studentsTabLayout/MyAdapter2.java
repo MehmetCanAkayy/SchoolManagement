@@ -158,6 +158,9 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.ViewHolder> {
                                     else{
                                         LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
                                         LessonKeys = LessonKeys.replaceAll("  ", " ");
+                                        if(LessonKeys.equals(" ")){
+                                            LessonKeys = "";
+                                        }
                                     }
                                     control[0] = "true";
                                     String result = TextUtils.join(" ", control);
@@ -174,6 +177,9 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.ViewHolder> {
                                     else{
                                         LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
                                         LessonKeys = LessonKeys.replaceAll("  ", " ");
+                                        if(LessonKeys.equals(" ")){
+                                            LessonKeys = "";
+                                        }
                                     }
                                     control[1] = "true";
                                     String result = TextUtils.join(" ", control);
@@ -190,6 +196,9 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.ViewHolder> {
                                     else{
                                         LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
                                         LessonKeys = LessonKeys.replaceAll("  ", " ");
+                                        if(LessonKeys.equals(" ")){
+                                            LessonKeys = "";
+                                        }
                                     }
                                     control[2] = "true";
                                     String result = TextUtils.join(" ", control);
@@ -206,6 +215,9 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.ViewHolder> {
                                     else{
                                         LessonKeys = LessonKeys.replaceAll(values.get(position).getLessonKey(), "");
                                         LessonKeys = LessonKeys.replaceAll("  ", " ");
+                                        if(LessonKeys.equals(" ")){
+                                            LessonKeys = "";
+                                        }
                                     }
                                     control[3] = "true";
                                     String result = TextUtils.join(" ", control);
