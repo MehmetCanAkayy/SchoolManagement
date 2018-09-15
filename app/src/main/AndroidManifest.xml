@@ -50,6 +50,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.alam_kanak.AlamKanakView"
             android:theme="@style/AppTheme.NoActionBar" ></activity>
+        <activity android:name="com.teacherTabLayout.Main3Activity"
+            android:theme="@style/AppTheme.NoActionBar" ></activity>
+
     </application>
 
 </manifest>

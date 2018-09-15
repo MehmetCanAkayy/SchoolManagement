@@ -15,6 +15,7 @@ import com.alam_kanak.AlamKanakView;
 import com.firebaseDemo.StudentsActivity;
 import com.firebaseDemo.TeacherActivity;
 import com.studentsTabLayout.MainActivity;
+import com.teacherTabLayout.Main3Activity;
 import com.user.StudentRegister;
 import com.user.TeacherRegister;
 
@@ -24,6 +25,7 @@ public class ShowTeacherMenu extends AppCompatActivity {
 
     GridLayout mainGrid;
     String phoneNumber ;
+    String name;
     String grade;
 
     @Override
@@ -38,6 +40,7 @@ public class ShowTeacherMenu extends AppCompatActivity {
 
         Intent intent = getIntent();
         phoneNumber = intent.getExtras().getString("phoneNumber");
+        name=intent.getExtras().getString("name");
     }
 
 
@@ -51,13 +54,16 @@ public class ShowTeacherMenu extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-                    if(finalI==0){
-                        final Intent teacherList= new Intent(ShowTeacherMenu.this, TeacherActivity.class);
+                    if(finalI==1){
+                        final Intent teacherList= new Intent(ShowTeacherMenu.this, AlamKanakView.class);
                         startActivity(teacherList);
-                    }else if(finalI == 1 ){
-                        final Intent alamKanak=new Intent(ShowTeacherMenu.this, AlamKanakView.class);
+                    }else if(finalI == 0 ){
+                        final Intent fragmentTeacher=new Intent(ShowTeacherMenu.this, Main3Activity.class);
+                        fragmentTeacher.putExtra("phoneNumber",phoneNumber);
+                        fragmentTeacher.putExtra("name",name);
 
-                        startActivity(alamKanak);
+                        startActivityForResult(fragmentTeacher, 1);
+
 
                     }
 

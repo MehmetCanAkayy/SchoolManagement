@@ -74,7 +74,7 @@ public class FragmentOne extends Fragment implements WeekView.EventClickListener
     Calendar calendarEndTime;
     String endHour;
     String startHour;
-
+    int a1,a1Plus,a2,b1,b2,c1,advanced;
     Dialog myDialog;
     TextView titleTv,messageTv;
     ImageView closeButton;
@@ -118,6 +118,13 @@ public class FragmentOne extends Fragment implements WeekView.EventClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_sample, container, false);
+            a1=view.getResources().getColor(R.color.a1LessonColor);
+            a1Plus=view.getResources().getColor(R.color.a1PlusLessonColor);
+        a2=view.getResources().getColor(R.color.a2LessonColor);
+        b1=view.getResources().getColor(R.color.b1LessonColor);
+        b2=view.getResources().getColor(R.color.b2LessonColor);
+        c1=view.getResources().getColor(R.color.c1LessonColor);
+        advanced=view.getResources().getColor(R.color.advencedLessonColor);
 
         myDialog = new Dialog(view.getContext());
 
@@ -222,19 +229,19 @@ public class FragmentOne extends Fragment implements WeekView.EventClickListener
 
                     WeekViewEvent myEvent = new WeekViewEvent(lessonInfo.getGrade(), lessonInfo.getTeacher(), lessonInfo.getIcerik(), startTime, endTime,lessonInfo.getDers());
                     if(lessonInfo.getGrade().equals("A1")){
-                        myEvent.setColor(getResources().getColor(R.color.a1LessonColor));
+                        myEvent.setColor(a1);
                     }else if(lessonInfo.getGrade().equals("A1+")){
-                        myEvent.setColor(getResources().getColor(R.color.a1PlusLessonColor));
+                        myEvent.setColor(a1Plus);
                     }else if(lessonInfo.getGrade().equals("A2")){
-                        myEvent.setColor(getResources().getColor(R.color.a2LessonColor));
+                        myEvent.setColor(a2);
                     }else if(lessonInfo.getGrade().equals("B1")){
-                        myEvent.setColor(getResources().getColor(R.color.b1LessonColor));
+                        myEvent.setColor(b1);
                     }else if(lessonInfo.getGrade().equals("B2")){
-                        myEvent.setColor(getResources().getColor(R.color.b2LessonColor));
+                        myEvent.setColor(b2);
                     }else if(lessonInfo.getGrade().equals("C1")){
-                        myEvent.setColor(getResources().getColor(R.color.c1LessonColor));
+                        myEvent.setColor(c1);
                     }else if(lessonInfo.getGrade().equals("Advanced")){
-                        myEvent.setColor(getResources().getColor(R.color.advencedLessonColor));
+                        myEvent.setColor(advanced);
                     }
 
 

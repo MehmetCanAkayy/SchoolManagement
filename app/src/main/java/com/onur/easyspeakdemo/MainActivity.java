@@ -136,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 final Intent showTeacherMenu = new Intent(MainActivity.this, ShowTeacherMenu.class);
 
 
+
                 for (int i = 0 ; i <artistList.size();i++){
                     if(adi.equals(artistList.get(i).getPhoneNumber())&&sifresi.equals("111")){
                         //Log.d("deneme", "basarili");
@@ -157,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
                         //Log.d("deneme", "basarili");
                         Toast.makeText(getApplicationContext(), "Başarılı!Yönlendiriliyorsunuz...", Toast.LENGTH_SHORT).show();
                         showTeacherMenu.putExtra("phoneNumber", adi);
+                        showTeacherMenu.putExtra("name",teacherList.get(i).getName());
 
 
                         startActivityForResult(showTeacherMenu, 1);

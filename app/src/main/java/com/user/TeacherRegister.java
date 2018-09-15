@@ -68,7 +68,6 @@ public class TeacherRegister extends AppCompatActivity {
             String id = databaseTeachers.push().getKey();
 
             //Create An Artist Object
-
             Teacher teacher = new Teacher(name,grade,phoneNumber);
             databaseTeachers.child(id).setValue(teacher);
             Toast.makeText(this,"Succesfully Stored Data",Toast.LENGTH_LONG).show();

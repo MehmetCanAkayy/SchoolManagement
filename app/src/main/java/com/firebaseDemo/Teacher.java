@@ -7,18 +7,16 @@ public class Teacher {
     String seviye;
     String icerik;
     String sinif;
-    String type;
     String name;
     String phoneNumber;
 
     public Teacher(){}
 
-    public Teacher(String teacherTarih, String teacherSeviye, String teacherIcerik, String teacherSinif,String teacherType){
+    public Teacher(String teacherTarih, String teacherSeviye, String teacherIcerik, String teacherSinif){
         this.tarih=teacherTarih;
         this.seviye=teacherSeviye;
         this.icerik=teacherIcerik;
         this.sinif=teacherSinif;
-        this.type=teacherType;
 
     }
     public Teacher(String teacherName, String teacherSeviye,String teacherPhoneNumber){
@@ -28,12 +26,13 @@ public class Teacher {
 
     }
 
+
+
+    public Teacher(String teacherPhoneNo){
+        this.phoneNumber=teacherPhoneNo;}
+
     public String getTarih() {
         return tarih;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
     }
 
     public String getSeviye() {
@@ -48,11 +47,13 @@ public class Teacher {
         return sinif;
     }
 
-    public String getType() {
-        return type;
-    }
+
 
     public String getName(){return name;}
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 }
 
 

@@ -25,6 +25,7 @@ public class dersSecimi extends AppCompatActivity {
     String phoneNumber ;
     String grade;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +39,7 @@ public class dersSecimi extends AppCompatActivity {
         Intent intent = getIntent();
         phoneNumber = intent.getExtras().getString("phoneNumber");
         grade = intent.getExtras().getString("grade");
+
     }
 
 
