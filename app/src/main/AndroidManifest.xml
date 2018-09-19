@@ -30,7 +30,7 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name="com.firebaseDemo.StudentsActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            />
         <activity
             android:name="com.studentsTabLayout.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
