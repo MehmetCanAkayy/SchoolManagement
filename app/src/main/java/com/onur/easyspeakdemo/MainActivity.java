@@ -174,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Başarılı!Yönlendiriliyorsunuz...", Toast.LENGTH_SHORT).show();
                         showStudentMenu.putExtra("phoneNumber", adi);
                         showStudentMenu.putExtra("grade", artistList.get(i).getArtistGrade());
+                        showStudentMenu.putExtra("name", artistList.get(i).getArtistName());
 
 
 

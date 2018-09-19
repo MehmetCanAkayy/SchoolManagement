@@ -45,6 +45,40 @@
         <item>C1</item>
         <item>Advanced</item>
     </string-array>
+    <string-array name="surveyStartTimes">
+        <item>SECINIZ...</item>
+        <item>HER SAAT</item>
+        <item>10:30</item>
+        <item>11:30</item>
+        <item>12:30</item>
+        <item>13:30</item>
+        <item>14:30</item>
+        <item>15:30</item>
+        <item>16:30</item>
+        <item>17:30</item>
+        <item>18:30</item>
+        <item>19:30</item>
+        <item>20:30</item>
+        <item>21:30</item>
+        <item>22:30</item>
+    </string-array>
+    <string-array name="surveyEndTimes">
+        <item>SECINIZ...</item>
+        <item>10:30</item>
+        <item>11:30</item>
+        <item>12:30</item>
+        <item>13:30</item>
+        <item>14:30</item>
+        <item>15:30</item>
+        <item>16:30</item>
+        <item>17:30</item>
+        <item>18:30</item>
+        <item>19:30</item>
+        <item>20:30</item>
+        <item>21:30</item>
+        <item>22:30</item>
+        <item>23:30</item>
+    </string-array>
     <string-array name="lesson">
         <item>Activity</item>
         <item>Social</item>

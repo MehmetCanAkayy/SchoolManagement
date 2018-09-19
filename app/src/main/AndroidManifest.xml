@@ -21,16 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".dersSecimi"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EventActvity"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name="com.firebaseDemo.StudentsActivity"
-            />
+        <activity android:name="com.firebaseDemo.StudentsActivity" />
         <activity
             android:name="com.studentsTabLayout.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -49,16 +46,19 @@
         <activity
             android:name=".ShowStudentMenu"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name="com.alam_kanak.AlamKanakView"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.user.AdminRegister"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name="com.onur.easyspeakdemo.ShowAdminMenu"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name="com.teacherTabLayout.Main3Activity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="com.user.AdminRegister"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ShowAdminMenu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.teacherTabLayout.Main3Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.StudentMenu.StudentSurveyActivity"></activity>
     </application>
 
 </manifest>

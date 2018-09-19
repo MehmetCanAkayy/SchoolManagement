@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 
+import com.StudentMenu.StudentSurveyActivity;
 import com.firebaseDemo.StudentsActivity;
 import com.firebaseDemo.TeacherActivity;
 import com.studentsTabLayout.MainActivity;
@@ -28,6 +29,8 @@ public class ShowStudentMenu extends AppCompatActivity {
     GridLayout mainGrid;
     String phoneNumber ;
     String grade;
+    String name;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,8 @@ public class ShowStudentMenu extends AppCompatActivity {
         Intent intent = getIntent();
         phoneNumber = intent.getExtras().getString("phoneNumber");
         grade = intent.getExtras().getString("grade");
+        name = intent.getExtras().getString("name");
+
     }
 
 
@@ -67,24 +72,15 @@ public class ShowStudentMenu extends AppCompatActivity {
                                 startActivityForResult(studentListWeek, 1);
 
                     }else if(finalI == 1 ){
+                        final Intent studentSurvey=new Intent(ShowStudentMenu.this, StudentSurveyActivity.class);
 
-                        Dialog myDialog;
-                        ImageView closeButton;
-
-                        myDialog = new Dialog(ShowStudentMenu.this);
-
-                        myDialog.setContentView(R.layout.custom_dialog_exam_selection);
+                        studentSurvey.putExtra("phoneNumber",phoneNumber);
+                        studentSurvey.putExtra("grade",grade);
+                        studentSurvey.putExtra("name",name);
 
 
-                        closeButton = myDialog.findViewById(R.id.close);
-                        closeButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                myDialog.dismiss();
-                            }
-                        });
-                        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        myDialog.show();
+
+                        startActivityForResult(studentSurvey, 1);
 
                     }
 
