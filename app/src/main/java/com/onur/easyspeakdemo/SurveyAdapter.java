@@ -1,6 +1,9 @@
 package com.onur.easyspeakdemo;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.CardView;
@@ -8,19 +11,30 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.StudentMenu.StudentSurveyActivity;
 import com.StudentMenu.SurveyInfo;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder>  implements Filterable {
     private List<SurveyInfo> values;
     private List<SurveyInfo> filteredUserList;
+    Context mContext;
+
 
 
 
@@ -82,6 +96,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
         // create a new view
         LayoutInflater inflater = LayoutInflater.from(
                 parent.getContext());
+        mContext = parent.getContext();
         View v =
                 inflater.inflate(R.layout.survey_request_card, parent, false);
 
@@ -102,12 +117,17 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
         holder.txtName.setText("Name: " + name);
         holder.txtGrade.setText("Grade: " + grade);
         holder.txtPhoneNumber.setText("Phone Number: " + phone);
+
+
         holder.viewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+
+
                 Dialog myDialog;
                 ImageView closeButton;
+                Button update;
                 myDialog = new Dialog(view.getContext());
 
                 TextView time1,time2,time3;
@@ -126,6 +146,37 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
                 time3.setText(filteredUserList.get(position).getDay3() + " " + filteredUserList.get(position).getStartTime3() + " " + filteredUserList.get(position).getEndTime3());
 
                 closeButton = myDialog.findViewById(R.id.close);
+                update = myDialog.findViewById(R.id.update);
+
+
+                update.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        final Intent studentSurvey=new Intent((Activity)mContext, SurveyRequest.class);
+
+                        studentSurvey.putExtra("phoneNumber",filteredUserList.get(position).getPhoneNumber());
+                        studentSurvey.putExtra("grade",filteredUserList.get(position).getArtistGrade());
+                        studentSurvey.putExtra("name",filteredUserList.get(position).getArtistName());
+                        studentSurvey.putExtra("studentKey",filteredUserList.get(position).getStudentKey());
+                        studentSurvey.putExtra("day1",filteredUserList.get(position).getDay());
+                        studentSurvey.putExtra("day2",filteredUserList.get(position).getDay2());
+                        studentSurvey.putExtra("day3",filteredUserList.get(position).getDay3());
+                        studentSurvey.putExtra("start1",filteredUserList.get(position).getStartTime());
+                        studentSurvey.putExtra("start2",filteredUserList.get(position).getStartTime2());
+                        studentSurvey.putExtra("start3",filteredUserList.get(position).getStartTime3());
+                        studentSurvey.putExtra("end1",filteredUserList.get(position).getEndTime());
+                        studentSurvey.putExtra("end2",filteredUserList.get(position).getEndTime2());
+                        studentSurvey.putExtra("end3",filteredUserList.get(position).getEndTime3());
+
+
+
+
+
+                        ((Activity)mContext).startActivityForResult(studentSurvey, 1);
+
+                    }
+                });
                 closeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -139,6 +190,33 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
 
             }
         });
+    }
+
+    public class CustomAdapter extends ArrayAdapter<String> {
+
+        private int hidingItemIndex;
+
+        public CustomAdapter(Context context, int textViewResourceId, List<String> objects, int hidingItemIndex) {
+            super(context, textViewResourceId, objects);
+            this.hidingItemIndex = hidingItemIndex;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            View v = null;
+
+            for(int i = 0 ; i < hidingItemIndex; i++){
+                if (position < hidingItemIndex) {
+                    TextView tv = new TextView(getContext());
+                    tv.setVisibility(View.GONE);
+                    v = tv;
+                } else {
+                    v = super.getDropDownView(position, null, parent);
+                }
+            }
+
+            return v;
+        }
     }
 
     @Override

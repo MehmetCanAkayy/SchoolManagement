@@ -83,6 +83,10 @@ public class SurveyInfo {
 
     }
 
+    public void setSurveyKey(String surveyKey) {
+        this.surveyKey = surveyKey;
+    }
+
     public String getStudentKey() {
         return studentKey;
     }

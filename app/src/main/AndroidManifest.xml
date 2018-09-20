@@ -60,6 +60,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.StudentMenu.StudentSurveyActivity" />
         <activity android:name=".ShowSurveyRequest"></activity>
+        <activity android:name=".SurveyRequest"></activity>
     </application>
 
 </manifest>
