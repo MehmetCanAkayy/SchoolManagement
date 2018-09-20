@@ -58,7 +58,8 @@
         <activity
             android:name="com.teacherTabLayout.Main3Activity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.StudentMenu.StudentSurveyActivity"></activity>
+        <activity android:name="com.StudentMenu.StudentSurveyActivity" />
+        <activity android:name=".ShowSurveyRequest"></activity>
     </application>
 
 </manifest>

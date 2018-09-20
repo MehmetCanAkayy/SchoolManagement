@@ -97,6 +97,11 @@ public class ShowAdminMenu extends AppCompatActivity {
 
 
                     }
+                    else if(finalI == 6 ){
+                        final Intent showSurveyRequest=new Intent(ShowAdminMenu.this, ShowSurveyRequest.class);
+                        startActivityForResult(showSurveyRequest, 1);
+
+                    }
 
                 }
             });
