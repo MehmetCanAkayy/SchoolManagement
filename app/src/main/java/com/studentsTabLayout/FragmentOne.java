@@ -106,7 +106,7 @@ public class FragmentOne extends Fragment {
 
             });
 
-       
+
                 databaseLessonInfo.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

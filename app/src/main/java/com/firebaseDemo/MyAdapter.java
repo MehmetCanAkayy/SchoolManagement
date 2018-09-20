@@ -4,15 +4,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.onur.easyspeakdemo.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>  implements Filterable {
     private List<Artist> values;
+    private List<Artist> filteredUserList;
+
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -39,16 +44,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     public void add(int position, Artist item) {
         values.add(position, item);
+        filteredUserList.add(position,item);
+
         notifyItemInserted(position);
     }
 
     public void remove(int position) {
         values.remove(position);
+        filteredUserList.remove(position);
         notifyItemRemoved(position);
     }
 
     public void clear() {
         int size = values.size();
+        filteredUserList.clear();
         values.clear();
         notifyItemRangeRemoved(0, size);
     }
@@ -56,6 +65,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // Provide a suitable constructor (depends on the kind of dataset)
     public MyAdapter(List<Artist> artistList) {
         values = artistList;
+        filteredUserList = artistList;
     }
 
     // Create new views (invoked by the layout manager)
@@ -77,9 +87,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        final String name = values.get(position).getArtistName();
-        final String grade = values.get(position).getArtistGrade();
-        final String phone = values.get(position).getPhoneNumber();
+        final String name = filteredUserList.get(position).getArtistName();
+        final String grade = filteredUserList.get(position).getArtistGrade();
+        final String phone = filteredUserList.get(position).getPhoneNumber();
 
         holder.txtName.setText("Name: " + name);
         holder.txtGrade.setText("Grade: " + grade);
@@ -88,10 +98,52 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     }
 
+    @Override
+    public Filter getFilter() {
+
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+
+                String searchString = charSequence.toString();
+
+                if (searchString.isEmpty()) {
+
+                    filteredUserList = values;
+
+                } else {
+
+                    List<Artist> tempFilteredList = new ArrayList<>();
+
+                    for (Artist user : values) {
+
+                        // search for user name
+                        if (user.getArtistName().toLowerCase().contains(searchString)||user.getPhoneNumber().toLowerCase().contains(searchString)||user.getArtistGrade().toLowerCase().contains(searchString)) {
+
+                            tempFilteredList.add(user);
+                        }
+                    }
+
+                    filteredUserList = tempFilteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredUserList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                filteredUserList = (List<Artist>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return values.size();
+        return filteredUserList.size();
     }
 
 }
