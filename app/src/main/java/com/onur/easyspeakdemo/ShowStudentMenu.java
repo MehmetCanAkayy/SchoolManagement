@@ -30,6 +30,8 @@ public class ShowStudentMenu extends AppCompatActivity {
     String phoneNumber ;
     String grade;
     String name;
+    String studentKey;
+
 
 
     @Override
@@ -46,6 +48,8 @@ public class ShowStudentMenu extends AppCompatActivity {
         phoneNumber = intent.getExtras().getString("phoneNumber");
         grade = intent.getExtras().getString("grade");
         name = intent.getExtras().getString("name");
+        studentKey = intent.getExtras().getString("studentKey");
+
 
     }
 
@@ -77,6 +81,8 @@ public class ShowStudentMenu extends AppCompatActivity {
                         studentSurvey.putExtra("phoneNumber",phoneNumber);
                         studentSurvey.putExtra("grade",grade);
                         studentSurvey.putExtra("name",name);
+                        studentSurvey.putExtra("studentKey",studentKey);
+
 
 
 

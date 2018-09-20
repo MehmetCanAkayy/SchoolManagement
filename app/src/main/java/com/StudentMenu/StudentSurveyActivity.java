@@ -16,9 +16,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebaseDemo.Artist;
 import com.firebaseDemo.LessonInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.onur.easyspeakdemo.R;
 
 import java.text.SimpleDateFormat;
@@ -36,6 +40,8 @@ public class StudentSurveyActivity extends AppCompatActivity {
     String phoneNumber;
     String grade;
     String name;
+    String studentKey;
+
     Spinner spinnerDay;
     Spinner spinnerDay2;
     Spinner spinnerDay3;
@@ -43,8 +49,37 @@ public class StudentSurveyActivity extends AppCompatActivity {
     Spinner spinnerBaslangic2;
     Spinner spinnerBaslangic3;
     private DatabaseReference databaseSurveyInfo;
+    List<SurveyInfo> surveyList;
+    boolean update = false;
 
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //Retriving data From Firebase
+        databaseSurveyInfo.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                surveyList.clear();
+
+                for (DataSnapshot surveySnapshot : dataSnapshot.getChildren()) {
+                    //Create Artist Class Object and Returning Value
+                    SurveyInfo surveyInfo = surveySnapshot.getValue(SurveyInfo.class);
+                    if(surveyInfo.getStudentKey().equals(studentKey)){
+                        update = true;
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Student Verisi Çekilemedi.");
+
+            }
+        });
+    }
 
 
 
@@ -55,11 +90,14 @@ public class StudentSurveyActivity extends AppCompatActivity {
 
         databaseSurveyInfo = FirebaseDatabase.getInstance().getReference("surveyInfo");
 
+        surveyList = new ArrayList<>();
 
         Intent intent = getIntent();
         phoneNumber = intent.getExtras().getString("phoneNumber");
         grade = intent.getExtras().getString("grade");
         name = intent.getExtras().getString("name");
+        studentKey = intent.getExtras().getString("studentKey");
+
 
 
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -257,6 +295,9 @@ public class StudentSurveyActivity extends AppCompatActivity {
             case R.id.kaydet:
                 Toast.makeText(getApplicationContext(),"Kaydet Selected",Toast.LENGTH_LONG).show();
 
+
+
+
                 String key = databaseSurveyInfo.push().getKey();
 
 
@@ -322,10 +363,36 @@ public class StudentSurveyActivity extends AppCompatActivity {
                 System.out.println(day);
                 System.out.println(startTime);
                 System.out.println(endTime);
-                SurveyInfo surveyInfo= new SurveyInfo(name,grade,phoneNumber,day,day2,day3,startTime,endTime,startTime2,endTime2,startTime3,endTime3,key);
+                final SurveyInfo surveyInfo2= new SurveyInfo(studentKey,name,grade,phoneNumber,day,day2,day3,startTime,endTime,startTime2,endTime2,startTime3,endTime3,key);
 
-                databaseSurveyInfo.child(key).setValue(surveyInfo);
+                if(update){
+                    databaseSurveyInfo.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
 
+                            for (DataSnapshot surveySnapshot : dataSnapshot.getChildren() ){
+                                //Create Artist Class Object and Returning Value
+                                SurveyInfo surveyInfo =  surveySnapshot.getValue(SurveyInfo.class);
+                                surveyInfo2.surveyKey=surveyInfo.getSurveyKey();
+
+                                if(surveyInfo.getStudentKey().equals(studentKey)){
+
+                                    surveySnapshot.getRef().setValue(surveyInfo2);
+                                }
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            System.out.println("Student Verisi Çekilemedi.");
+
+                        }
+                    });
+                }else{
+                    databaseSurveyInfo.child(key).setValue(surveyInfo2);
+
+                }
 
 
                 Intent intent = new Intent();

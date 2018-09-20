@@ -18,6 +18,7 @@ public class SurveyInfo {
     String day;
     String day2;
     String day3;
+    String studentKey;
 
     public SurveyInfo(){
 
@@ -63,7 +64,7 @@ public class SurveyInfo {
         return day3;
     }
 
-    public SurveyInfo(String artistName, String artistGrade, String phoneNumber, String day, String day2, String day3, String startTime, String endTime, String startTime2, String endTime2, String startTime3, String endTime3, String surveyKey) {
+    public SurveyInfo(String studentKey,String artistName, String artistGrade, String phoneNumber, String day, String day2, String day3, String startTime, String endTime, String startTime2, String endTime2, String startTime3, String endTime3, String surveyKey) {
         this.artistName = artistName;
         this.artistGrade = artistGrade;
         this.phoneNumber = phoneNumber;
@@ -77,10 +78,14 @@ public class SurveyInfo {
         this.day = day;
         this.day2 = day2;
         this.day3 = day3;
+        this.studentKey = studentKey;
 
 
     }
 
+    public String getStudentKey() {
+        return studentKey;
+    }
 
     public String getPhoneNumber() {
         return phoneNumber;

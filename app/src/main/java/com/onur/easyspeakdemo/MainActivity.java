@@ -175,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
                         showStudentMenu.putExtra("phoneNumber", adi);
                         showStudentMenu.putExtra("grade", artistList.get(i).getArtistGrade());
                         showStudentMenu.putExtra("name", artistList.get(i).getArtistName());
+                        showStudentMenu.putExtra("studentKey", artistList.get(i).getArtistKey());
 
 
 

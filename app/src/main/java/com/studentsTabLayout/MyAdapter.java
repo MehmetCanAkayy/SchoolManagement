@@ -226,7 +226,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                                     control[0] = "false";
                                     String result = TextUtils.join(" ", control);
 
-                                    Artist newStudent = new Artist(studentInfo.getArtistName(),studentInfo.getArtistGrade(),studentInfo.getPhoneNumber(),LessonKeys,result);
+                                    Artist newStudent = new Artist(studentInfo.getArtistKey(),studentInfo.getArtistName(),studentInfo.getArtistGrade(),studentInfo.getPhoneNumber(),LessonKeys,result);
 
                                     studentInfoSnapshot.getRef().setValue(newStudent);
                                     values.remove(position);
@@ -243,7 +243,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                                     control[1] = "false";
                                     String result = TextUtils.join(" ", control);
 
-                                    Artist newStudent = new Artist(studentInfo.getArtistName(),studentInfo.getArtistGrade(),studentInfo.getPhoneNumber(),LessonKeys,result);
+                                    Artist newStudent = new Artist(studentInfo.getArtistKey(),studentInfo.getArtistName(),studentInfo.getArtistGrade(),studentInfo.getPhoneNumber(),LessonKeys,result);
                                     studentInfoSnapshot.getRef().setValue(newStudent);
                                     values.remove(position);
                                     notifyDataSetChanged();
@@ -259,7 +259,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                                     control[2] = "false";
                                     String result = TextUtils.join(" ", control);
 
-                                    Artist newStudent = new Artist(studentInfo.getArtistName(),studentInfo.getArtistGrade(),studentInfo.getPhoneNumber(),LessonKeys,result);
+                                    Artist newStudent = new Artist(studentInfo.getArtistKey(),studentInfo.getArtistName(),studentInfo.getArtistGrade(),studentInfo.getPhoneNumber(),LessonKeys,result);
                                     studentInfoSnapshot.getRef().setValue(newStudent);
                                     values.remove(position);
                                     notifyDataSetChanged();
@@ -275,7 +275,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                                     control[3] = "false";
                                     String result = TextUtils.join(" ", control);
 
-                                    Artist newStudent = new Artist(studentInfo.getArtistName(),studentInfo.getArtistGrade(),studentInfo.getPhoneNumber(),LessonKeys,result);
+                                    Artist newStudent = new Artist(studentInfo.getArtistKey(),studentInfo.getArtistName(),studentInfo.getArtistGrade(),studentInfo.getPhoneNumber(),LessonKeys,result);
                                     studentInfoSnapshot.getRef().setValue(newStudent);
                                     values.remove(position);
                                     notifyDataSetChanged();
