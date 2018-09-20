@@ -83,13 +83,67 @@ public class SurveyInfo {
 
     }
 
+    public String getStudentKey() {
+        return studentKey;
+    }
+
+    public void setStudentKey(String studentKey) {
+        this.studentKey = studentKey;
+    }
+
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
+    }
+
+    public void setArtistGrade(String artistGrade) {
+        this.artistGrade = artistGrade;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setStartTime2(String startTime2) {
+        this.startTime2 = startTime2;
+    }
+
+    public void setEndTime2(String endTime2) {
+        this.endTime2 = endTime2;
+    }
+
+    public void setStartTime3(String startTime3) {
+        this.startTime3 = startTime3;
+    }
+
+    public void setEndTime3(String endTime3) {
+        this.endTime3 = endTime3;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public void setDay2(String day2) {
+        this.day2 = day2;
+    }
+
+    public void setDay3(String day3) {
+        this.day3 = day3;
+    }
+
     public void setSurveyKey(String surveyKey) {
         this.surveyKey = surveyKey;
     }
 
-    public String getStudentKey() {
-        return studentKey;
-    }
+
 
     public String getPhoneNumber() {
         return phoneNumber;

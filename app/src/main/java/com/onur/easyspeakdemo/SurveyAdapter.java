@@ -21,7 +21,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.StudentMenu.StudentSurveyActivity;
+import com.StudentMenu.Survey;
 import com.StudentMenu.SurveyInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,6 +40,8 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
     private List<SurveyInfo> values;
     private List<SurveyInfo> filteredUserList;
     Context mContext;
+    private DatabaseReference databaseSurvey;
+
 
 
 
@@ -87,6 +95,8 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
     public SurveyAdapter(List<SurveyInfo> artistList) {
         values = artistList;
         filteredUserList = artistList;
+        databaseSurvey = FirebaseDatabase.getInstance().getReference("surveys");
+
     }
 
     // Create new views (invoked by the layout manager)
@@ -96,6 +106,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
         // create a new view
         LayoutInflater inflater = LayoutInflater.from(
                 parent.getContext());
+
         mContext = parent.getContext();
         View v =
                 inflater.inflate(R.layout.survey_request_card, parent, false);
@@ -130,13 +141,14 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
                 Button update;
                 myDialog = new Dialog(view.getContext());
 
-                TextView time1,time2,time3;
+                TextView time1,time2,time3,time4;
                 CardView card;
 
                 myDialog.setContentView(R.layout.custom_dialog_survey_request);
                 time1 = myDialog.findViewById(R.id.time1);
                 time2 = myDialog.findViewById(R.id.time2);
                 time3 = myDialog.findViewById(R.id.time3);
+                time4 = myDialog.findViewById(R.id.time4);
 
                 card = myDialog.findViewById(R.id.mycard);
                 String txt1 = filteredUserList.get(position).getDay() + " " + filteredUserList.get(position).getStartTime() + " " + filteredUserList.get(position).getEndTime();
@@ -144,6 +156,34 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
                 time1.setText(txt1);
                 time2.setText(filteredUserList.get(position).getDay2() + " " + filteredUserList.get(position).getStartTime2() + " " + filteredUserList.get(position).getEndTime2());
                 time3.setText(filteredUserList.get(position).getDay3() + " " + filteredUserList.get(position).getStartTime3() + " " + filteredUserList.get(position).getEndTime3());
+
+                databaseSurvey.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        for (DataSnapshot surveySnapshot : dataSnapshot.getChildren() ){
+                            //Create Artist Class Object and Returning Value
+                            Survey surveyInfo =  surveySnapshot.getValue(Survey.class);
+                            System.out.println(surveyInfo.getStudentsKey());
+
+                            System.out.println(surveyInfo.getStudentsKey());
+                            System.out.println(filteredUserList.get(position).getStudentKey());
+                            if(surveyInfo.getStudentsKey().equals(filteredUserList.get(position).getStudentKey())){
+                                time4.setText("Ogrenci icin secmis oldugunuz survey saati" + "\n" +surveyInfo.getDay() + " " + surveyInfo.getStartTime() +" "+ surveyInfo.getEndTime());
+                            }
+
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        System.out.println("Student Verisi Çekilemedi.");
+
+                    }
+                });
+
 
                 closeButton = myDialog.findViewById(R.id.close);
                 update = myDialog.findViewById(R.id.update);
@@ -168,6 +208,8 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
                         studentSurvey.putExtra("end1",filteredUserList.get(position).getEndTime());
                         studentSurvey.putExtra("end2",filteredUserList.get(position).getEndTime2());
                         studentSurvey.putExtra("end3",filteredUserList.get(position).getEndTime3());
+                        studentSurvey.putExtra("survey",time4.getText().toString());
+
 
 
 

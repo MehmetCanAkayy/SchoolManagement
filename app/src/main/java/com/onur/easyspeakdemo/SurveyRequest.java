@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.StudentMenu.Survey;
 import com.StudentMenu.SurveyInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,7 +47,7 @@ public class SurveyRequest extends AppCompatActivity {
     start3 ,
     end1 ,
     end2 ,
-    end3 ;
+    end3,survey ;
 
     Spinner spinnerDay;
     Spinner spinnerDay2;
@@ -55,24 +56,23 @@ public class SurveyRequest extends AppCompatActivity {
     Spinner spinnerBaslangic2;
     Spinner spinnerBaslangic3;
     private DatabaseReference databaseSurveyInfo;
-    List<SurveyInfo> surveyList;
-    boolean update = false;
+    private DatabaseReference databaseSurvey;
 
+    boolean update = false;
 
 
     @Override
     protected void onStart() {
         super.onStart();
         //Retriving data From Firebase
-        databaseSurveyInfo.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseSurvey.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                surveyList.clear();
 
                 for (DataSnapshot surveySnapshot : dataSnapshot.getChildren()) {
                     //Create Artist Class Object and Returning Value
-                    SurveyInfo surveyInfo = surveySnapshot.getValue(SurveyInfo.class);
-                    if(surveyInfo.getStudentKey().equals(studentKey)){
+                    Survey surveyInfo = surveySnapshot.getValue(Survey.class);
+                    if(surveyInfo.getStudentsKey().equals(studentKey)){
                         update = true;
                     }
                 }
@@ -87,16 +87,14 @@ public class SurveyRequest extends AppCompatActivity {
         });
     }
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_survey);
 
         databaseSurveyInfo = FirebaseDatabase.getInstance().getReference("surveyInfo");
+        databaseSurvey = FirebaseDatabase.getInstance().getReference("surveys");
 
-        surveyList = new ArrayList<>();
 
         Intent intent = getIntent();
         phoneNumber = intent.getExtras().getString("phoneNumber");
@@ -112,14 +110,19 @@ public class SurveyRequest extends AppCompatActivity {
         end1 = intent.getExtras().getString("end1");
         end2 = intent.getExtras().getString("end2");
         end3 = intent.getExtras().getString("end3");
+        survey = intent.getExtras().getString("survey");
+
 
         TextView tv1 = findViewById(R.id.text1);
         TextView tv2 = findViewById(R.id.text2);
         TextView tv3 = findViewById(R.id.text3);
+        TextView tv4 = findViewById(R.id.text4);
+
 
         tv1.setText(day1 + " " + start1 + " " + end1);
         tv2.setText(day2 + " " + start2 + " " + end2);
         tv3.setText(day3 + " " + start3 + " " + end3);
+        tv4.setText(survey);
 
 
 
@@ -218,10 +221,76 @@ public class SurveyRequest extends AppCompatActivity {
         int id = item.getItemId();
         switch (id){
             case R.id.kaydet:
-                Toast.makeText(getApplicationContext(),"Kaydet Selected",Toast.LENGTH_LONG).show();
 
 
-                
+
+
+                String key = databaseSurvey.push().getKey();
+
+
+                String day = spinnerDay.getItemAtPosition(spinnerDay.getSelectedItemPosition()).toString();
+                String startTime= "";
+                String endTime="";
+                if(day.equals("SECINIZ...")){
+
+                    day="";
+                    Toast.makeText(getApplicationContext(),"Survey eklenemedi! Gecerli gun ve tarih seciniz...",Toast.LENGTH_LONG).show();
+
+                }else{
+                    startTime = spinnerBaslangic.getItemAtPosition(spinnerBaslangic.getSelectedItemPosition()).toString();
+                    endTime="";
+                    if(spinnerBaslangic.getSelectedItemPosition()==1){
+                        startTime = "10:30";
+                        endTime = "23:30";
+
+                    }else{
+                        endTime = spinnerBitis.getItemAtPosition(spinnerBitis.getSelectedItemPosition()).toString();
+                    }
+                    System.out.println(day);
+                    System.out.println(startTime);
+                    System.out.println(endTime);
+                    //final SurveyInfo surveyInfo2= new SurveyInfo(studentKey,name,grade,phoneNumber,day,day2,day3,startTime,endTime,startTime2,endTime2,startTime3,endTime3,key);
+                    Survey survey2 = new Survey(studentKey,day,startTime,endTime,key);
+
+                    if(update){
+                        databaseSurvey.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                for (DataSnapshot surveySnapshot : dataSnapshot.getChildren() ){
+                                    //Create Artist Class Object and Returning Value
+                                    Survey surveyInfo =  surveySnapshot.getValue(Survey.class);
+                                    survey2.setSurveyKey(surveyInfo.getSurveyKey());
+
+                                    if(surveyInfo.getStudentsKey().equals(studentKey)){
+
+                                        surveySnapshot.getRef().setValue(survey2);
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                System.out.println("Student Verisi Çekilemedi.");
+
+                            }
+                        });
+                    }else{
+                        databaseSurvey.child(key).setValue(survey2);
+
+                    }
+
+                }
+
+
+
+
+
+
+
+
+
 
                 Intent intent = new Intent();
                 setResult(Activity.RESULT_OK, intent);
