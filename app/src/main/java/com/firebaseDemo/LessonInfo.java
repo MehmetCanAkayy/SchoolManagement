@@ -11,6 +11,7 @@ public class LessonInfo {
     String ders;
     int color;
     String lessonKey;
+    boolean isSelected;
 
     public int getColor() {
         return color;
@@ -73,5 +74,12 @@ public class LessonInfo {
 
     public String getIcerik() {
         return icerik;
+    }
+    public boolean getSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

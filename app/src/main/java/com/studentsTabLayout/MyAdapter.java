@@ -1,11 +1,11 @@
 package com.studentsTabLayout;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.CardView;
@@ -15,10 +15,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.alamkanak.weekview.WeekViewEvent;
 import com.firebaseDemo.Artist;
 import com.firebaseDemo.LessonInfo;
 import com.google.firebase.database.DataSnapshot;
@@ -26,11 +26,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.onur.easyspeakdemo.EventActvity;
 import com.onur.easyspeakdemo.R;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private List<LessonInfo> values;
+    List<LessonInfo> values;
+    List<LessonInfo> tempValues;
+
     private String studentNumber;
     private DatabaseReference databaseUpdate;
     boolean activity = true;
@@ -45,6 +46,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     int color;
     int maxValue = 2;
 
+
+
+
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -53,23 +57,30 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public TextView txtHeader;
         public TextView txtContent;
         public View layout;
+        public CheckBox checkBox;
+        private boolean[] mCheckState;
 
         public ViewHolder(View v) {
             super(v);
             layout = v;
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
             txtContent = (TextView) v.findViewById(R.id.secondLine);
+            checkBox= v.findViewById(R.id.checkBox);
+
 
         }
     }
 
     public void add(int position, LessonInfo item) {
         values.add(position, item);
+        tempValues.add(position, item);
         notifyItemInserted(position);
     }
 
     public void remove(int position) {
         values.remove(position);
+
+        tempValues.remove(position);
         notifyItemRemoved(position);
     }
 
@@ -78,12 +89,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // Provide a suitable constructor (depends on the kind of dataset)
     public MyAdapter(List<LessonInfo> myDataset,String studentNumber) {
         values = myDataset;
+        tempValues=myDataset;
         this.studentNumber = studentNumber;
         databaseUpdate = FirebaseDatabase.getInstance().getReference("students");
 
 
 
     }
+    /*public ArrayList<Boolean> SelectionLesson(List<LessonInfo> datasetBool, int position){
+        datasetBool=values;
+        ArrayList<Boolean> list = new ArrayList<Boolean>(100);
+        //List<Boolean> liste=new ArrayList<Boolean>(values.get(position).getSelected()(new Boolean[100]));
+        list=datasetBool.get(position).getSelected();
+
+
+        return list;
+    }*/
 
     // Create new views (invoked by the layout manager)
     @Override
@@ -115,6 +136,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         String[] calendarStartItem = values.get(position).getBaslangic().split("%");
         String[] calendarEndItem = values.get(position).getBitis().split("%");
+        holder.checkBox.setChecked(false);
+        holder.checkBox.setChecked(values.get(position).getSelected());
+
+
+
 
         for (String t : calendarStartItem)
             System.out.println(t);
@@ -152,162 +178,176 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }else if(values.get(position).getDers().equals("Speaking")){
             holder.txtContent.setBackgroundColor(Color.parseColor("#f8b552"));
         }
+        holder.checkBox.setChecked(values.get(position).getSelected());
 
-        holder.txtContent.setOnClickListener(new View.OnClickListener() {
+        holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 databaseUpdate.addListenerForSingleValueEvent(new ValueEventListener() {
-                    int sayac = 0;
+            int sayac = 0;
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+             for (DataSnapshot studentInfoSnapshot : dataSnapshot.getChildren() ) {
+              Artist studentInfo = studentInfoSnapshot.getValue(Artist.class);
+                   String LessonKeys = studentInfo.getLessonKey();
 
-                        for (DataSnapshot studentInfoSnapshot : dataSnapshot.getChildren() ) {
-                            Artist studentInfo = studentInfoSnapshot.getValue(Artist.class);
-                            String LessonKeys = studentInfo.getLessonKey();
-
-                            Boolean found = Arrays.asList(LessonKeys.split(" ")).contains(values.get(position).getLessonKey());
-                            if(found){
-                                System.out.println("Dersi alan ogrenci = " + studentInfo.getArtistName());
-                                sayac++;
-                            }
-                        }
-                        for (DataSnapshot studentInfoSnapshot : dataSnapshot.getChildren() ){
+                   Boolean found = Arrays.asList(LessonKeys.split(" ")).contains(values.get(position).getLessonKey());
+                   if(found){
+                       System.out.println("Dersi alan ogrenci = " + studentInfo.getArtistName());
+                       sayac++;
+                   }
+               }
+               for (DataSnapshot studentInfoSnapshot : dataSnapshot.getChildren() ){
 
 
-                            Artist studentInfo = studentInfoSnapshot.getValue(Artist.class);
+                   Artist studentInfo = studentInfoSnapshot.getValue(Artist.class);
 
-                            String[] control= studentInfo.getControlLesson().split(" ");
-
+                   String[] control= studentInfo.getControlLesson().split(" ");
 
 
 
-                            if(studentInfo.getPhoneNumber().equals(studentNumber)){
 
-                                if(sayac>=maxValue){
-                                    myDialog.setContentView(R.layout.custom_dialog_box);
-                                    messageTv = myDialog.findViewById(R.id.content);
-                                    card = myDialog.findViewById(R.id.mycard);
+                   if(studentInfo.getPhoneNumber().equals(studentNumber)) {
 
-                                    card.setBackgroundColor(color);
+                           if (sayac >= maxValue) {
+                               myDialog.setContentView(R.layout.custom_dialog_box);
+                               messageTv = myDialog.findViewById(R.id.content);
+                               card = myDialog.findViewById(R.id.mycard);
 
-                                    closeButton = myDialog.findViewById(R.id.close);
-                                    delete = myDialog.findViewById(R.id.delete);
-                                    update = myDialog.findViewById(R.id.update);
-                                    update.setVisibility(View.GONE);
-                                    delete.setVisibility(View.GONE);
+                               card.setBackgroundColor(color);
 
-
-                                    messageTv.setText("Secmis oldugunuz dersi max kapasiteye ulasmistir. Lutfen baska bir saatte uygun dersi seciniz.");
+                               closeButton = myDialog.findViewById(R.id.close);
+                               delete = myDialog.findViewById(R.id.delete);
+                               update = myDialog.findViewById(R.id.update);
+                               update.setVisibility(View.GONE);
+                               delete.setVisibility(View.GONE);
 
 
-                                    closeButton.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            myDialog.dismiss();
-                                        }
-                                    });
+                               messageTv.setText("Secmis oldugunuz dersi max kapasiteye ulasmistir. Lutfen baska bir saatte uygun dersi seciniz.");
 
 
-                                    myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                                    myDialog.show();
-
-                                }
-                                else if(values.get(position).getDers().equals("Activity")&&control[0].equals("true")){
-                                    String LessonKeys = studentInfo.getLessonKey();
-                                    if(LessonKeys.equals("")){
-                                        LessonKeys =values.get(position).getLessonKey();
-
-                                    }else{
-                                        LessonKeys += " " +values.get(position).getLessonKey();
-
-                                    }
-                                    control[0] = "false";
-                                    String result = TextUtils.join(" ", control);
-
-                                    Artist newStudent = new Artist(studentInfo.getArtistName(),studentInfo.getArtistGrade(),studentInfo.getPhoneNumber(),LessonKeys,result);
-
-                                    studentInfoSnapshot.getRef().setValue(newStudent);
-                                    values.remove(position);
-                                    notifyDataSetChanged();
-                                }else if(values.get(position).getDers().equals("Chat")&&control[1].equals("true")){
-                                    String LessonKeys = studentInfo.getLessonKey();
-                                    if(LessonKeys.equals("")){
-                                        LessonKeys =values.get(position).getLessonKey();
-
-                                    }else{
-                                        LessonKeys += " " +values.get(position).getLessonKey();
-
-                                    }
-                                    control[1] = "false";
-                                    String result = TextUtils.join(" ", control);
-
-                                    Artist newStudent = new Artist(studentInfo.getArtistName(),studentInfo.getArtistGrade(),studentInfo.getPhoneNumber(),LessonKeys,result);
-                                    studentInfoSnapshot.getRef().setValue(newStudent);
-                                    values.remove(position);
-                                    notifyDataSetChanged();
-                                }else if(values.get(position).getDers().equals("Social")&&control[2].equals("true")){
-                                    String LessonKeys = studentInfo.getLessonKey();
-                                    if(LessonKeys.equals("")){
-                                        LessonKeys =values.get(position).getLessonKey();
-
-                                    }else{
-                                        LessonKeys += " " +values.get(position).getLessonKey();
-
-                                    }
-                                    control[2] = "false";
-                                    String result = TextUtils.join(" ", control);
-
-                                    Artist newStudent = new Artist(studentInfo.getArtistName(),studentInfo.getArtistGrade(),studentInfo.getPhoneNumber(),LessonKeys,result);
-                                    studentInfoSnapshot.getRef().setValue(newStudent);
-                                    values.remove(position);
-                                    notifyDataSetChanged();
-                                }else if(values.get(position).getDers().equals("Speaking")&&control[3].equals("true")){
-                                    String LessonKeys = studentInfo.getLessonKey();
-                                    if(LessonKeys.equals("")){
-                                        LessonKeys =values.get(position).getLessonKey();
-
-                                    }else{
-                                        LessonKeys += " " +values.get(position).getLessonKey();
-
-                                    }
-                                    control[3] = "false";
-                                    String result = TextUtils.join(" ", control);
-
-                                    Artist newStudent = new Artist(studentInfo.getArtistName(),studentInfo.getArtistGrade(),studentInfo.getPhoneNumber(),LessonKeys,result);
-                                    studentInfoSnapshot.getRef().setValue(newStudent);
-                                    values.remove(position);
-                                    notifyDataSetChanged();
-                                }else{
-                                    myDialog.setContentView(R.layout.custom_dialog_box);
-                                    messageTv = myDialog.findViewById(R.id.content);
-                                    card = myDialog.findViewById(R.id.mycard);
-
-                                    card.setBackgroundColor(color);
-
-                                    closeButton = myDialog.findViewById(R.id.close);
-                                    delete = myDialog.findViewById(R.id.delete);
-                                    update = myDialog.findViewById(R.id.update);
-                                    update.setVisibility(View.GONE);
-                                    delete.setVisibility(View.GONE);
+                               closeButton.setOnClickListener(new View.OnClickListener() {
+                                   @Override
+                                   public void onClick(View view) {
+                                       myDialog.dismiss();
+                                   }
+                               });
 
 
-                                    messageTv.setText("Bu katogoride baska bir dersiniz daha bulunmaktadir. Islem yapmak icin sectiginiz dersi kaldirmaniz gerekmektedir.");
+                               myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                               myDialog.show();
+
+                           } else if (values.get(position).getDers().equals("Activity") && control[0].equals("true")) {
+                               String LessonKeys = studentInfo.getLessonKey();
+                               if (LessonKeys.equals("") && values.get(position).getSelected()) {
+                                   LessonKeys = values.get(position).getLessonKey();
+                                   values.get(position).setSelected(false);
+
+                               } else {
+                                   LessonKeys += " " + values.get(position).getLessonKey();
+                                   values.get(position).setSelected(true);
+
+                               }
+                               control[0] = "false";
+                               String result = TextUtils.join(" ", control);
+
+                               Artist newStudent = new Artist(studentInfo.getArtistName(), studentInfo.getArtistGrade(), studentInfo.getPhoneNumber(), LessonKeys, result);
+
+                               studentInfoSnapshot.getRef().setValue(newStudent);
+
+                              // values.remove(position);
+                              // notifyDataSetChanged();
+                           } else if (values.get(position).getDers().equals("Chat") && control[1].equals("true")) {
+                               String LessonKeys = studentInfo.getLessonKey();
+                               if (LessonKeys.equals("") &&values.get(position).getSelected()) {
+                                   LessonKeys = values.get(position).getLessonKey();
+                                   values.get(position).setSelected(false);
+
+                               } else {
+                                   LessonKeys += " " + values.get(position).getLessonKey();
+                                   values.get(position).setSelected(true);
+
+                               }
+                               control[1] = "false";
+                               String result = TextUtils.join(" ", control);
+
+                               Artist newStudent = new Artist(studentInfo.getArtistName(), studentInfo.getArtistGrade(), studentInfo.getPhoneNumber(), LessonKeys, result);
+                               studentInfoSnapshot.getRef().setValue(newStudent);
+
+                               //values.remove(position);
+                               //notifyDataSetChanged();
+                           } else if (values.get(position).getDers().equals("Social") && control[2].equals("true")) {
+                               String LessonKeys = studentInfo.getLessonKey();
+                               if (LessonKeys.equals("")&&values.get(position).getSelected()) {
+                                   LessonKeys = values.get(position).getLessonKey();
+                                   values.get(position).setSelected(false);
+
+                               } else {
+                                   LessonKeys += " " + values.get(position).getLessonKey();
+                                   values.get(position).setSelected(true);
+
+                               }
+                               control[2] = "false";
+                               String result = TextUtils.join(" ", control);
+
+                               Artist newStudent = new Artist(studentInfo.getArtistName(), studentInfo.getArtistGrade(), studentInfo.getPhoneNumber(), LessonKeys, result);
+                               studentInfoSnapshot.getRef().setValue(newStudent);
 
 
-                                    closeButton.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            myDialog.dismiss();
-                                        }
-                                    });
+                               //values.remove(position);
+                               //notifyDataSetChanged();
+                           } else if (values.get(position).getDers().equals("Speaking") && control[3].equals("true") ) {
+                               String LessonKeys = studentInfo.getLessonKey();
+                               if (LessonKeys.equals("")&&values.get(position).getSelected()) {
+                                   LessonKeys = values.get(position).getLessonKey();
+                                   values.get(position).setSelected(false);
 
 
-                                    myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                                    myDialog.show();
+                               } else {
+                                   LessonKeys += " " + values.get(position).getLessonKey();
+                                   values.get(position).setSelected(true);
 
-                                }
+
+                               }
+                               control[3] = "false";
+                               String result = TextUtils.join(" ", control);
+
+                               Artist newStudent = new Artist(studentInfo.getArtistName(), studentInfo.getArtistGrade(), studentInfo.getPhoneNumber(), LessonKeys, result);
+                               studentInfoSnapshot.getRef().setValue(newStudent);
+
+                               //values.remove(position);
+                              // notifyDataSetChanged();
+                           } else {
+                               myDialog.setContentView(R.layout.custom_dialog_box);
+                               messageTv = myDialog.findViewById(R.id.content);
+                               card = myDialog.findViewById(R.id.mycard);
+
+                               card.setBackgroundColor(color);
+
+                               closeButton = myDialog.findViewById(R.id.close);
+                               delete = myDialog.findViewById(R.id.delete);
+                               update = myDialog.findViewById(R.id.update);
+                               update.setVisibility(View.GONE);
+                               delete.setVisibility(View.GONE);
+                               holder.checkBox.setChecked(false);
+
+                               messageTv.setText("Bu katogoride baska bir dersiniz daha bulunmaktadir. Islem yapmak icin sectiginiz dersi kaldirmaniz gerekmektedir.");
+
+
+                               closeButton.setOnClickListener(new View.OnClickListener() {
+                                   @Override
+                                   public void onClick(View view) {
+                                       myDialog.dismiss();
+                                   }
+                               });
+
+
+                               myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                               myDialog.show();
+
+                           }
 
 //                                String LessonKeys = studentInfo.getLessonKey();
 //                                if(LessonKeys.equals("")){
@@ -323,41 +363,38 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 //                                values.remove(position);
 //                                notifyDataSetChanged();
 
-                            }
+                       }
 
 
+                   }
 
 
+               }
 
 
+           @Override
+           public void onCancelled(DatabaseError databaseError) {
+               System.out.println("Student Verisi Çekilemedi.");
 
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        System.out.println("Student Verisi Çekilemedi.");
-
-                    }
+           }
 
 
-                });
-
-
+       });
 
 
 //                values.remove(position);
 //                notifyDataSetChanged();
 
-            }
 
-        });
+
+        }});
 
 
 
 
 
     }
+
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
