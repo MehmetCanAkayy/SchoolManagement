@@ -61,7 +61,8 @@
         <activity android:name="com.StudentMenu.StudentSurveyActivity" />
         <activity android:name=".ShowSurveyRequest" />
         <activity android:name=".SurveyRequest" />
-        <activity android:name="com.StudentMenu.StudentSurveyApprovedActivity"></activity>
+        <activity android:name="com.StudentMenu.StudentSurveyApprovedActivity" />
+        <activity android:name="com.tureng.TurengTranslate"></activity>
     </application>
 
 </manifest>

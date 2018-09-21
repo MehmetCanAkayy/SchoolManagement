@@ -1,5 +1,7 @@
 package com.onur.easyspeakdemo;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +26,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.jackandphantom.blurimage.BlurImage;
+import com.tureng.Result;
+import com.tureng.Results;
+import com.tureng.Tureng;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -125,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
         databaseArtists = FirebaseDatabase.getInstance().getReference("students");
         databaseTeacher = FirebaseDatabase.getInstance().getReference("teachers");
         databaseAdmin = FirebaseDatabase.getInstance().getReference("admin");
-
 
         artistList = new ArrayList<>();
         teacherList = new ArrayList<>();

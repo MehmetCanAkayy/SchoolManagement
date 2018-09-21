@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.studentsTabLayout.MainActivity;
+import com.tureng.TurengTranslate;
 import com.user.StudentRegister;
 import com.user.TeacherRegister;
 
@@ -196,6 +197,11 @@ public class ShowStudentMenu extends AppCompatActivity {
 
 
 
+                    }
+                    else if(finalI==2){
+
+                        final Intent tureng=new Intent(ShowStudentMenu.this, TurengTranslate.class);
+                        startActivity(tureng);
                     }
 
                 }
