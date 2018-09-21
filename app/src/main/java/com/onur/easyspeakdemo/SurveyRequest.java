@@ -251,35 +251,57 @@ public class SurveyRequest extends AppCompatActivity {
                     System.out.println(endTime);
                     //final SurveyInfo surveyInfo2= new SurveyInfo(studentKey,name,grade,phoneNumber,day,day2,day3,startTime,endTime,startTime2,endTime2,startTime3,endTime3,key);
                     Survey survey2 = new Survey(studentKey,day,startTime,endTime,key);
+                    String[] parse1 = startTime.split(":");
+                    String[] parse2 = endTime.split(":");
+                    String[] parsestart1 = start1.split(":");
+                    String[] parsestart2 = start2.split(":");
+                    String[] parsestart3 = start3.split(":");
+                    String[] parseEnd1 = end1.split(":");
+                    String[] parseEnd2 = end2.split(":");
+                    String[] parseEnd3 = end3.split(":");
+                    if((day.equals(day1)&&Integer.parseInt(parse1[0])>=Integer.parseInt(parsestart1[0])&&Integer.parseInt(parse2[0])<=Integer.parseInt(parseEnd1[0]))
+                            ||(day.equals(day2)&&Integer.parseInt(parse1[0])>=Integer.parseInt(parsestart2[0])&&Integer.parseInt(parse2[0])<=Integer.parseInt(parseEnd2[0]))||
+                            (day.equals(day3)&&Integer.parseInt(parse1[0])>=Integer.parseInt(parsestart3[0])&&Integer.parseInt(parse2[0])<=Integer.parseInt(parseEnd3[0]))){
 
-                    if(update){
-                        databaseSurvey.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(update){
+                            databaseSurvey.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                for (DataSnapshot surveySnapshot : dataSnapshot.getChildren() ){
-                                    //Create Artist Class Object and Returning Value
-                                    Survey surveyInfo =  surveySnapshot.getValue(Survey.class);
-                                    survey2.setSurveyKey(surveyInfo.getSurveyKey());
+                                    for (DataSnapshot surveySnapshot : dataSnapshot.getChildren() ){
+                                        //Create Artist Class Object and Returning Value
+                                        Survey surveyInfo =  surveySnapshot.getValue(Survey.class);
+                                        survey2.setSurveyKey(surveyInfo.getSurveyKey());
 
-                                    if(surveyInfo.getStudentsKey().equals(studentKey)){
+                                        if(surveyInfo.getStudentsKey().equals(studentKey)){
 
-                                        surveySnapshot.getRef().setValue(survey2);
+                                            surveySnapshot.getRef().setValue(survey2);
+                                        }
                                     }
+
                                 }
 
-                            }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                    System.out.println("Student Verisi Çekilemedi.");
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                System.out.println("Student Verisi Çekilemedi.");
+                                }
+                            });
+                        }else{
+                            databaseSurvey.child(key).setValue(survey2);
 
-                            }
-                        });
+                        }
+                        Intent intent = new Intent();
+                        setResult(Activity.RESULT_OK, intent);
+
+                        finish();
+
                     }else{
-                        databaseSurvey.child(key).setValue(survey2);
+                        Toast.makeText(getApplicationContext(),"Survey eklenemedi! Kullanicinin istegine gore bir tarih seciniz...",Toast.LENGTH_LONG).show();
 
                     }
+
+
 
                 }
 
@@ -292,10 +314,7 @@ public class SurveyRequest extends AppCompatActivity {
 
 
 
-                Intent intent = new Intent();
-                setResult(Activity.RESULT_OK, intent);
 
-                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
