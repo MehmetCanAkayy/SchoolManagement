@@ -1,9 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.StudentMenu.StudentSurveyApprovedActivity">
+    android:orientation="vertical"
+    android:background="@color/colorGray">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:contentPadding="10dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:textAlignment="center"
+                android:textSize="20dp"
+                android:textStyle="bold"
+
+                android:text="Sizin icin ayarlanmis survey gun ve saati asagidaki gibidir."
+
+                />
+            <TextView
+                android:id="@+id/day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/text"
+
+                android:textAlignment="center"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:text="1"
+
+                />
+            <TextView
+                android:id="@+id/baslangicSurvey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/day"
+
+                android:textAlignment="center"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:text="1"
+
+                />
+            <TextView
+                android:id="@+id/bitisSurvey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/baslangicSurvey"
+
+                android:textAlignment="center"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:text="1"
+
+                />
+
+
+
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

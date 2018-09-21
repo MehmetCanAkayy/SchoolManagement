@@ -59,6 +59,7 @@ public class SurveyRequest extends AppCompatActivity {
     private DatabaseReference databaseSurvey;
 
     boolean update = false;
+    String surveyInfoKey="";
 
 
     @Override
@@ -73,6 +74,7 @@ public class SurveyRequest extends AppCompatActivity {
                     //Create Artist Class Object and Returning Value
                     Survey surveyInfo = surveySnapshot.getValue(Survey.class);
                     if(surveyInfo.getStudentsKey().equals(studentKey)){
+                        surveyInfoKey = surveyInfo.getSurveyKey();
                         update = true;
                     }
                 }
@@ -276,6 +278,30 @@ public class SurveyRequest extends AppCompatActivity {
                                         if(surveyInfo.getStudentsKey().equals(studentKey)){
 
                                             surveySnapshot.getRef().setValue(survey2);
+                                            databaseSurveyInfo.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                                    for (DataSnapshot surveySnapshot : dataSnapshot.getChildren() ){
+                                                        //Create Artist Class Object and Returning Value
+                                                        SurveyInfo surveyInfo =  surveySnapshot.getValue(SurveyInfo.class);
+
+                                                        if(surveyInfo.getStudentKey().equals(studentKey)){
+                                                            surveyInfo.setApproved(true);
+
+                                                            surveySnapshot.getRef().setValue(surveyInfo);
+
+                                                        }
+                                                    }
+
+                                                }
+
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+                                                    System.out.println("Student Verisi Çekilemedi.");
+
+                                                }
+                                            });
                                         }
                                     }
 
@@ -289,6 +315,30 @@ public class SurveyRequest extends AppCompatActivity {
                             });
                         }else{
                             databaseSurvey.child(key).setValue(survey2);
+                            databaseSurveyInfo.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                    for (DataSnapshot surveySnapshot : dataSnapshot.getChildren() ){
+                                        //Create Artist Class Object and Returning Value
+                                        SurveyInfo surveyInfo =  surveySnapshot.getValue(SurveyInfo.class);
+
+                                        if(surveyInfo.getStudentKey().equals(studentKey)){
+                                            surveyInfo.setApproved(true);
+
+                                            surveySnapshot.getRef().setValue(surveyInfo);
+
+                                        }
+                                    }
+
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                    System.out.println("Student Verisi Çekilemedi.");
+
+                                }
+                            });
 
                         }
                         Intent intent = new Intent();
@@ -300,8 +350,6 @@ public class SurveyRequest extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Survey eklenemedi! Kullanicinin istegine gore bir tarih seciniz...",Toast.LENGTH_LONG).show();
 
                     }
-
-
 
                 }
 

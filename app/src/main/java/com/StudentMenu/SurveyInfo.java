@@ -19,6 +19,7 @@ public class SurveyInfo {
     String day2;
     String day3;
     String studentKey;
+    boolean approved;
 
     public SurveyInfo(){
 
@@ -136,7 +137,15 @@ public class SurveyInfo {
         this.studentKey = studentKey;
     }
 
-    public SurveyInfo(String studentKey, String artistName, String artistGrade, String phoneNumber, String day, String day2, String day3, String startTime, String endTime, String startTime2, String endTime2, String startTime3, String endTime3, String surveyKey) {
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+
+    public SurveyInfo(boolean approved, String studentKey, String artistName, String artistGrade, String phoneNumber, String day, String day2, String day3, String startTime, String endTime, String startTime2, String endTime2, String startTime3, String endTime3, String surveyKey) {
         this.artistName = artistName;
         this.artistGrade = artistGrade;
         this.phoneNumber = phoneNumber;
@@ -151,6 +160,8 @@ public class SurveyInfo {
         this.day2 = day2;
         this.day3 = day3;
         this.studentKey = studentKey;
+
+        this.approved = approved;
 
 
     }
