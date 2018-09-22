@@ -58,7 +58,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public TextView txtContent;
         public View layout;
         public CheckBox checkBox;
-        private boolean[] mCheckState;
+
+
 
         public ViewHolder(View v) {
             super(v);
@@ -130,7 +131,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // - replace the contents of the view with that element
 
 
-
         Calendar startTime=Calendar.getInstance();
         Calendar endTime=Calendar.getInstance();
 
@@ -190,7 +190,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
              for (DataSnapshot studentInfoSnapshot : dataSnapshot.getChildren() ) {
-              Artist studentInfo = studentInfoSnapshot.getValue(Artist.class);
+              Artist studentInfo = studentInfoSnapshot.getValue(Artist.class);//?
                    String LessonKeys = studentInfo.getLessonKey();
 
                    Boolean found = Arrays.asList(LessonKeys.split(" ")).contains(values.get(position).getLessonKey());

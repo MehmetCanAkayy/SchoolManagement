@@ -74,11 +74,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Course Selection"
+                        android:text="Yönetici"
                         android:textAlignment="center"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:text="Yönetici" />
 
                 </LinearLayout>
 
@@ -111,13 +112,13 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Survey Selection"
+                        android:text="Öğretmen"
                         android:textAlignment="center"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
@@ -155,11 +156,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Placement Test"
+                        android:text="Öğrenci"
                         android:textAlignment="center"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
+
 
                 </LinearLayout>
 
@@ -194,7 +196,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Campaign"
+                        android:text="Misafir"
                         android:textAlignment="center"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"

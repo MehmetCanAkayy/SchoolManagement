@@ -1,10 +1,12 @@
 package com.firebaseDemo;
 
+import android.os.Parcelable;
+
 /**
  * Created by bulbul on 2/1/2018.
  */
 
-public class Artist {
+public class Artist  {
     String artistName;
     String artistGrade;
     String phoneNumber;

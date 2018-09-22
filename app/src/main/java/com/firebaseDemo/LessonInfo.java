@@ -1,8 +1,9 @@
 package com.firebaseDemo;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class LessonInfo {
+public class LessonInfo implements Serializable {
     String baslangic;
     String bitis;
     String grade;

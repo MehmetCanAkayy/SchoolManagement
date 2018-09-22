@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
         adminList = new ArrayList<>();
 
 
+
         //Intent sayfagecis= new Intent(MainActivity.this, com.user.StudentRegister.class);
         //Intent sayfagecis= new Intent(MainActivity.this, dersSecimi.class);
         background=findViewById(R.id.background);
@@ -161,15 +162,18 @@ public class MainActivity extends AppCompatActivity {
                 String adi=ad.getText().toString();
                 String sifresi=sifre.getText().toString();
                 String kullanici;
+                Intent intent=getIntent();
+
 
                 final Intent showStudentMenu = new Intent(MainActivity.this, ShowStudentMenu.class);
                 final Intent showTeacherMenu = new Intent(MainActivity.this, ShowTeacherMenu.class);
                 final Intent showAdminMenu = new Intent(MainActivity.this, ShowAdminMenu.class);
 
 
-
-                for (int i = 0 ; i <artistList.size();i++){
-                    if(adi.equals(artistList.get(i).getPhoneNumber())&&sifresi.equals("111")){
+                    String selection=intent.getStringExtra("admin");
+                    if(selection.equals("ogrenci")){
+                for (int i = 0 ; i <artistList.size();i++) {
+                    if (adi.equals(artistList.get(i).getPhoneNumber()) && sifresi.equals("111")) {
                         //Log.d("deneme", "basarili");
                         Toast.makeText(getApplicationContext(), "Başarılı!Yönlendiriliyorsunuz...", Toast.LENGTH_SHORT).show();
                         showStudentMenu.putExtra("phoneNumber", adi);
@@ -178,48 +182,48 @@ public class MainActivity extends AppCompatActivity {
                         showStudentMenu.putExtra("studentKey", artistList.get(i).getArtistKey());
 
 
-
                         startActivityForResult(showStudentMenu, 1);
-                    }
-                    else {
+                    } else {
                         //Toast.makeText(getApplicationContext(), "Yanlış kullanici adi veya şifre", Toast.LENGTH_SHORT).show();
                         //startActivity(sayfagecis);
                     }
+                }}
 
-                    }
-                for (int i = 0 ; i <teacherList.size();i++){
-                    if(adi.equals(teacherList.get(i).getPhoneNumber())&&sifresi.equals("111")){
+                String selection1=intent.getStringExtra("admin");
+                if(selection1.equals("ogretmen")){
+                for (int i = 0 ; i <teacherList.size();i++) {
+                    if (adi.equals(teacherList.get(i).getPhoneNumber()) && sifresi.equals("111")) {
                         //Log.d("deneme", "basarili");
                         Toast.makeText(getApplicationContext(), "Başarılı!Yönlendiriliyorsunuz...", Toast.LENGTH_SHORT).show();
                         showTeacherMenu.putExtra("phoneNumber", adi);
-                        showTeacherMenu.putExtra("name",teacherList.get(i).getName());
-
+                        showTeacherMenu.putExtra("name", teacherList.get(i).getName());
 
 
                         startActivityForResult(showTeacherMenu, 1);
-                    }
-                    else {
+                    } else {
                         Toast.makeText(getApplicationContext(), "Yanlış kullanici adi veya şifre", Toast.LENGTH_SHORT).show();
                         //startActivity(sayfagecis);
                     }
-
                 }
-                for (int i = 0 ; i <adminList.size();i++){
-                    if(adi.equals(adminList.get(i).getPhoneNumber())&&sifresi.equals("111")){
-                        //Log.d("deneme", "basarili");
-                        Toast.makeText(getApplicationContext(), "Başarılı!Yönlendiriliyorsunuz...", Toast.LENGTH_SHORT).show();
-                        showAdminMenu.putExtra("phoneNumber", adi);
-
-
-                        startActivityForResult(showAdminMenu, 1);
-                    }
-                    else {
-                        Toast.makeText(getApplicationContext(), "Yanlış kullanici adi veya şifre", Toast.LENGTH_SHORT).show();
-                        //startActivity(sayfagecis);
-                    }
-
                 }
 
+                String selection2=intent.getStringExtra("admin");
+                if(selection2.equals("admin")) {
+                    for (int i = 0; i < adminList.size(); i++) {
+                        if (adi.equals(adminList.get(i).getPhoneNumber()) && sifresi.equals("111")) {
+                            //Log.d("deneme", "basarili");
+                            Toast.makeText(getApplicationContext(), "Başarılı!Yönlendiriliyorsunuz...", Toast.LENGTH_SHORT).show();
+                            showAdminMenu.putExtra("phoneNumber", adi);
+
+
+                            startActivityForResult(showAdminMenu, 1);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Yanlış kullanici adi veya şifre", Toast.LENGTH_SHORT).show();
+                            //startActivity(sayfagecis);
+                        }
+
+                    }
+                }
 
 
                 }

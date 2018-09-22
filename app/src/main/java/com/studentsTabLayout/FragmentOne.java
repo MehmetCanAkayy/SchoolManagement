@@ -44,11 +44,6 @@ public class FragmentOne extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_list_week, container, false);
 
-       /* for (int i = 0; i < input.size(); i++) {
-            if (input.get(i).getSelected()) {
-                //tv.setText(tv.getText() + " " + MyAdapter.values.get(i).getAnimal());
-
-            }}*/
 
             databaseLessonInfo = FirebaseDatabase.getInstance().getReference("lessonInfo");
             mNewEvents = new ArrayList<WeekViewEvent>();
@@ -67,6 +62,9 @@ public class FragmentOne extends Fragment {
             recyclerView.setLayoutManager(layoutManager);
 
             final List<String> studentLessons = new ArrayList<String>();
+
+
+
 
 
 
@@ -209,7 +207,16 @@ public class FragmentOne extends Fragment {
 
                 return view;
             }
-       // });
+
+
+
+
+
+
+
+
+
+
 
         @Override
         public void setUserVisibleHint ( boolean isVisibleToUser){

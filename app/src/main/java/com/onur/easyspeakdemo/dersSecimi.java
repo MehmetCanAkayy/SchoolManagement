@@ -34,7 +34,7 @@ public class dersSecimi extends AppCompatActivity {
         mainGrid = (GridLayout) findViewById(R.id.mainGrid);
 
         //Set Event
-        setSingleEvent(mainGrid);
+            setSingleEvent(mainGrid);
 
         Intent intent = getIntent();
         phoneNumber = intent.getExtras().getString("phoneNumber");

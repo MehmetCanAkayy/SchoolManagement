@@ -11,6 +11,10 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.Window;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -39,7 +43,8 @@ public class ShowStudentMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_student_menu);
 
-        mainGrid = (GridLayout) findViewById(R.id.studentGrid);
+
+        mainGrid = (GridLayout) findViewById(R.id.mainGrid);
 
         //Set Event
         setSingleEvent(mainGrid);
@@ -89,11 +94,19 @@ public class ShowStudentMenu extends AppCompatActivity {
                         startActivityForResult(studentSurvey, 1);
 
                     }
+                    else if(finalI==2){
+                     Intent intent=new Intent(ShowStudentMenu.this,webView_activity.class);
+                     startActivity(intent);
+
+
+
+                    }
 
                 }
             });
         }
     }
+
 
 
 }
