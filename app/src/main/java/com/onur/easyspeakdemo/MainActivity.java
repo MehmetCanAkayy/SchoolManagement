@@ -1,5 +1,6 @@
 package com.onur.easyspeakdemo;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
     private Button giris;
     private TextView ad,sifre;
     private ImageView background;
+    private ImageView facebookIcon;
+    private ImageView instagramIcon;
+    private ImageView youtubeIcon;
+
+
     // List<String> kullanicilar = new ArrayList<String>();
     DatabaseReference databaseArtists;
     DatabaseReference databaseTeacher;
@@ -143,7 +149,41 @@ public class MainActivity extends AppCompatActivity {
         k_sifreleri[2]="333";
 
 
+        facebookIcon = findViewById(R.id.facebook);
+        facebookIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                Uri uri = Uri.parse("https://www.facebook.com/easyspeaktr/");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+
+            }
+        });
+
+        instagramIcon = findViewById(R.id.instagram);
+        instagramIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Uri uri = Uri.parse("https://www.instagram.com/easyspeaktr/");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+
+            }
+        });
+
+        youtubeIcon = findViewById(R.id.youtube);
+        youtubeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Uri uri = Uri.parse("https://www.youtube.com/channel/UCM2Q_libBGlUMPYX63v5rKA?view_as=subscriber");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+
+            }
+        });
 
 
         BlurImage.with(getApplicationContext()).load(R.drawable.backgorund).intensity(20).Async(true).into(background);
