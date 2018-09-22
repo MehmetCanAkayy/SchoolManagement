@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -202,6 +203,11 @@ public class ShowStudentMenu extends AppCompatActivity {
 
                         final Intent tureng=new Intent(ShowStudentMenu.this, TurengTranslate.class);
                         startActivity(tureng);
+                    }
+                    else if(finalI==3){
+                        Uri uri = Uri.parse("https://sso.rumba.pearsoncmg.com/sso/login?service=https%3A%2F%2Fmyenglishlab.pearson-intl.com%2Frumba%2Flogin&profile=iokingmel&allowLangChange=true");
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
                     }
 
                 }
