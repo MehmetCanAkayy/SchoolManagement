@@ -214,13 +214,16 @@ public class ShowStudentMenu extends AppCompatActivity {
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
                     }
-                    else if(finalI==2){
-                     Intent intent=new Intent(ShowStudentMenu.this,webView_activity.class);
-                     startActivity(intent);
-
-
+                    else if(finalI==4){
 
                     }
+                    else if(finalI==5){
+
+                        final Intent webView=new Intent(ShowStudentMenu.this, webView_activity.class);
+                        startActivity(webView);
+
+                    }
+
 
                 }
             });

@@ -227,9 +227,16 @@ public class FragmentShowLessonsOne extends Fragment {
                     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
                     Calendar date = Calendar.getInstance();
+                    System.out.println("firstDayOfWeek" +date.getFirstDayOfWeek());
+
+                    if(date.get(Calendar.DAY_OF_WEEK)==1){
+                        date.add(Calendar.DATE,-1);
+                    }
                     while (date.get(Calendar.DAY_OF_WEEK) > date.getFirstDayOfWeek()) {
                         date.add(Calendar.DATE, -1); // Substract 1 day until first day of week.
                     }
+
+
 
                     date.add(Calendar.DATE, -1);
 
