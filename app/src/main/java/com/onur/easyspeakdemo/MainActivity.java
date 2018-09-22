@@ -1,24 +1,15 @@
 package com.onur.easyspeakdemo;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebaseDemo.Admin;
 import com.firebaseDemo.Artist;
-import com.firebaseDemo.MyAdapter;
-import com.firebaseDemo.StudentsActivity;
 import com.firebaseDemo.Teacher;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,15 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.jackandphantom.blurimage.BlurImage;
-import com.tureng.Result;
-import com.tureng.Results;
-import com.tureng.Tureng;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -139,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
         adminList = new ArrayList<>();
 
 
+
         //Intent sayfagecis= new Intent(MainActivity.this, com.user.StudentRegister.class);
         //Intent sayfagecis= new Intent(MainActivity.this, dersSecimi.class);
         background=findViewById(R.id.background);
@@ -156,6 +141,8 @@ public class MainActivity extends AppCompatActivity {
         k_sifreleri[0]="111";
         k_sifreleri[1]="222";
         k_sifreleri[2]="333";
+
+
 
 
 
