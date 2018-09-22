@@ -42,6 +42,8 @@ dependencies {
     implementation 'com.github.HITGIF:TextFieldBoxes:1.4.4'
     compile 'com.jackandphantom.android:blurimage:1.2.0'
     implementation 'org.jsoup:jsoup:1.8.3'
+    implementation 'com.quinny898.library.persistentsearch:library:1.1.0-SNAPSHOT'
+
 
     //implementation 'com.github.alamkanak:android-week-view:1.2.6'
 
