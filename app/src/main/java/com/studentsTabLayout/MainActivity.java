@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FragmentOne(),"EMPTY");
+        adapter.addFragment(new FragmentShowLessonsOne(),"EMPTY");
         adapter.addFragment(new FragmentTwo(), "SELECTED");
         viewPager.setAdapter(adapter);
     }

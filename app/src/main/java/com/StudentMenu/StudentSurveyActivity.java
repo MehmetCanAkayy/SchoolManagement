@@ -141,7 +141,7 @@ public class StudentSurveyActivity extends AppCompatActivity {
         List<String> list = Arrays.asList(getResources().getStringArray(R.array.surveyEndTimes));
 
 
-        CustomAdapter dataAdapter = new CustomAdapter(this, android.R.layout.simple_spinner_item, list, -1);
+        CustomAdapter dataAdapter = new CustomAdapter(this, android.R.layout.simple_spinner_item, list, 0);
 
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -195,7 +195,7 @@ public class StudentSurveyActivity extends AppCompatActivity {
 
 
 
-        CustomAdapter dataAdapter2 = new CustomAdapter(this, android.R.layout.simple_spinner_item, list, -1);
+        CustomAdapter dataAdapter2 = new CustomAdapter(this, android.R.layout.simple_spinner_item, list, 0);
 
         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -249,7 +249,7 @@ public class StudentSurveyActivity extends AppCompatActivity {
 
 
 
-        CustomAdapter dataAdapter3 = new CustomAdapter(this, android.R.layout.simple_spinner_item, list, -1);
+        CustomAdapter dataAdapter3 = new CustomAdapter(this, android.R.layout.simple_spinner_item, list, 0);
 
         dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -363,7 +363,7 @@ public class StudentSurveyActivity extends AppCompatActivity {
                 System.out.println(day);
                 System.out.println(startTime);
                 System.out.println(endTime);
-                final SurveyInfo surveyInfo2= new SurveyInfo(studentKey,name,grade,phoneNumber,day,day2,day3,startTime,endTime,startTime2,endTime2,startTime3,endTime3,key);
+                final SurveyInfo surveyInfo2= new SurveyInfo(false,studentKey,name,grade,phoneNumber,day,day2,day3,startTime,endTime,startTime2,endTime2,startTime3,endTime3,key);
 
                 if(update){
                     databaseSurveyInfo.addListenerForSingleValueEvent(new ValueEventListener() {
