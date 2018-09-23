@@ -31,6 +31,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.socialActivity.SocialActivitiesActivity;
 import com.studentsTabLayout.MainActivity;
 import com.tureng.TurengTranslate;
 import com.user.StudentRegister;
@@ -221,6 +222,18 @@ public class ShowStudentMenu extends AppCompatActivity {
 
                         final Intent webView=new Intent(ShowStudentMenu.this, webView_activity.class);
                         startActivity(webView);
+
+                    }else if(finalI==6){
+
+                        final Intent activities=new Intent(ShowStudentMenu.this, SocialActivitiesActivity.class);
+
+
+                        activities.putExtra("phoneNumber",phoneNumber);
+                        activities.putExtra("studentKey",studentKey);
+
+
+
+                        startActivityForResult(activities, 1);
 
                     }
 

@@ -71,9 +71,10 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".webView_activity" />
         <activity android:name="com.StudentMenu.StudentSurveyApprovedActivity" />
-        <activity android:name="com.tureng.TurengTranslate"></activity>
-        <activity android:name="com.mailSender.GuestActivity"></activity>
-        <activity android:name="com.deneme.MainActivity"></activity>
+        <activity android:name="com.tureng.TurengTranslate" />
+        <activity android:name="com.mailSender.GuestActivity" />
+        <activity android:name="com.deneme.MainActivity" />
+        <activity android:name="com.socialActivity.SocialActivitiesActivity"></activity>
     </application>
 
 </manifest>

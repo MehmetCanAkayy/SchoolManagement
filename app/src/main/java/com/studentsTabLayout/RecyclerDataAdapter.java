@@ -319,7 +319,7 @@ class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapter.MyVie
 
                                         } else if (dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).getDers().equals("Activity") && control[0].equals("true")) {
                                             String LessonKeys = studentInfo.getLessonKey();
-                                            if (LessonKeys.equals("") && dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).getSelected()) {
+                                            if (LessonKeys.equals("") && !dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).getSelected()) {
                                                 LessonKeys = dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).getLessonKey();
                                                 dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).setSelected(false);
 
@@ -339,7 +339,7 @@ class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapter.MyVie
                                             // notifyDataSetChanged();
                                         } else if (dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).getDers().equals("Chat") && control[1].equals("true")) {
                                             String LessonKeys = studentInfo.getLessonKey();
-                                            if (LessonKeys.equals("") && dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).getSelected()) {
+                                            if (LessonKeys.equals("") && !dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).getSelected()) {
                                                 LessonKeys = dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).getLessonKey();
                                                 dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).setSelected(false);
 
@@ -358,7 +358,7 @@ class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapter.MyVie
                                             //notifyDataSetChanged();
                                         } else if (dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).getDers().equals("Social") && control[2].equals("true")) {
                                             String LessonKeys = studentInfo.getLessonKey();
-                                            if (LessonKeys.equals("") && dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).getSelected()) {
+                                            if (LessonKeys.equals("") && !dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).getSelected()) {
                                                 LessonKeys = dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).getLessonKey();
                                                 dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).setSelected(false);
 
@@ -378,7 +378,7 @@ class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapter.MyVie
                                             //notifyDataSetChanged();
                                         } else if (dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).getDers().equals("Speaking") && control[3].equals("true")) {
                                             String LessonKeys = studentInfo.getLessonKey();
-                                            if (LessonKeys.equals("") && dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).getSelected()) {
+                                            if (LessonKeys.equals("") && !dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).getSelected()) {
                                                 LessonKeys = dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).getLessonKey();
                                                 dummyParentDataItems.get(position).getChildDataItems().get(finalTextViewIndex).setSelected(false);
 
