@@ -54,9 +54,11 @@ public class Openning_screen extends AppCompatActivity {
                         startActivityForResult(intent,1);
                     }
                     else if(finalI==3){
-                        String name="misafir";
+                        /*String name="misafir";
                         intent.putExtra("misafir",name);
-                        startActivityForResult(intent,1);
+                        startActivityForResult(intent,1);*/
+                        Intent intent=new Intent(Openning_screen.this,webView_activity.class);
+                        startActivity(intent);
                     }
                 }
             });
