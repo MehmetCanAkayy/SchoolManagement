@@ -68,15 +68,12 @@
         <activity android:name="com.StudentMenu.StudentSurveyActivity" />
         <activity android:name=".ShowSurveyRequest" />
         <activity android:name=".SurveyRequest" />
-
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".webView_activity"></activity>
-
+        <activity android:name=".MainActivity" />
+        <activity android:name=".webView_activity" />
         <activity android:name="com.StudentMenu.StudentSurveyApprovedActivity" />
-        <activity android:name="com.tureng.TurengTranslate">
-
-        </activity>
-
+        <activity android:name="com.tureng.TurengTranslate"></activity>
+        <activity android:name="com.mailSender.GuestActivity"></activity>
+        <activity android:name="com.deneme.MainActivity"></activity>
     </application>
 
 </manifest>

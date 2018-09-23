@@ -6,7 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.GridLayout;
-import android.widget.Toast;
+
+import com.mailSender.GuestActivity;
 
 public class Openning_screen extends AppCompatActivity {
 
@@ -57,7 +58,7 @@ public class Openning_screen extends AppCompatActivity {
                         /*String name="misafir";
                         intent.putExtra("misafir",name);
                         startActivityForResult(intent,1);*/
-                        Intent intent=new Intent(Openning_screen.this,webView_activity.class);
+                        Intent intent=new Intent(Openning_screen.this,GuestActivity.class);
                         startActivity(intent);
                     }
                 }

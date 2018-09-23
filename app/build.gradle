@@ -44,8 +44,9 @@ dependencies {
 
     implementation 'org.jsoup:jsoup:1.8.3'
     implementation 'com.quinny898.library.persistentsearch:library:1.1.0-SNAPSHOT'
-
-
+    //compile 'javax.mail:mail:1.4.7'
+    compile 'com.sun.mail:android-mail:1.5.6'
+    compile 'com.sun.mail:android-activation:1.5.6'
 
     //implementation 'com.github.alamkanak:android-week-view:1.2.6'
 
