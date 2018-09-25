@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import com.alam_kanak.AlamKanakView;
 import com.firebaseDemo.StudentsActivity;
 import com.firebaseDemo.TeacherActivity;
+import com.restTime.ShowRestTimeRequest;
 import com.studentsTabLayout.MainActivity;
 import com.user.AdminRegister;
 import com.user.StudentRegister;
@@ -100,6 +101,11 @@ public class ShowAdminMenu extends AppCompatActivity {
                     else if(finalI == 6 ){
                         final Intent showSurveyRequest=new Intent(ShowAdminMenu.this, ShowSurveyRequest.class);
                         startActivityForResult(showSurveyRequest, 1);
+
+                    }
+                    else if(finalI == 7 ){
+                        final Intent showRestTimeRequest=new Intent(ShowAdminMenu.this, ShowRestTimeRequest.class);
+                        startActivityForResult(showRestTimeRequest, 1);
 
                     }
 

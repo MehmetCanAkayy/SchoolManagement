@@ -74,7 +74,8 @@
         <activity android:name="com.tureng.TurengTranslate" />
         <activity android:name="com.mailSender.GuestActivity" />
         <activity android:name="com.deneme.MainActivity" />
-        <activity android:name="com.socialActivity.SocialActivitiesActivity"></activity>
+        <activity android:name="com.socialActivity.SocialActivitiesActivity" />
+        <activity android:name="com.restTime.ShowRestTimeRequest"></activity>
     </application>
 
 </manifest>
