@@ -1,21 +1,17 @@
 package com.onur.easyspeakdemo;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.ImageView;
 
+import com.Clubs.ClubsAdd;
 import com.alam_kanak.AlamKanakView;
 import com.firebaseDemo.StudentsActivity;
 import com.firebaseDemo.TeacherActivity;
-import com.studentsTabLayout.MainActivity;
 import com.user.AdminRegister;
 import com.user.StudentRegister;
 import com.user.TeacherRegister;
@@ -101,6 +97,14 @@ public class ShowAdminMenu extends AppCompatActivity {
                         final Intent showSurveyRequest=new Intent(ShowAdminMenu.this, ShowSurveyRequest.class);
                         startActivityForResult(showSurveyRequest, 1);
 
+                    }
+                    else if(finalI== 7){
+                        final Intent intent=new Intent(ShowAdminMenu.this,Kampanyalar.class);
+                        startActivity(intent);
+                    }
+                    else if(finalI==8){
+                        final Intent intent=new Intent(ShowAdminMenu.this,ClubsAdd.class);
+                        startActivity(intent);
                     }
 
                 }

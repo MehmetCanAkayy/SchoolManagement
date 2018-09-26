@@ -1,0 +1,94 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/KampanyaTur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kampanya Türü:"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:id="@+id/yuzde"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="İndirim Yüzdesi Seçiniz:"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"  />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="Yüzde"/>
+        />
+    <TextView
+        android:id="@+id/kur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kaç Kur Alana?"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"  />
+
+    <Spinner
+        android:id="@+id/spinner3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="Kaç Kur Alana?"/>
+
+    <TextView
+        android:id="@+id/hediyeKur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kaç Kur Hediye?"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"  />
+
+    <Spinner
+        android:id="@+id/spinner4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="Kaç Kur Hediye?"/>
+
+    <EditText
+        android:id="@+id/hediye"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Hediye"/>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kampanya Adı"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/mesaj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Ekim 2018 %40 İNDİRİM KAMPANYASI"/>
+
+    <Button
+        android:id="@+id/yayınla"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Yayınla" />
+
+</LinearLayout>

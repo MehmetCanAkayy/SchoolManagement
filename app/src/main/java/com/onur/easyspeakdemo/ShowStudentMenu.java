@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 
+import com.Clubs.DenemeActivity;
 import com.StudentMenu.StudentSurveyActivity;
 import com.StudentMenu.StudentSurveyApprovedActivity;
 import com.StudentMenu.Survey;
@@ -215,6 +216,8 @@ public class ShowStudentMenu extends AppCompatActivity {
                         startActivity(intent);
                     }
                     else if(finalI==4){
+                        final Intent intent=new Intent(ShowStudentMenu.this,ShowCampaign.class);
+                        startActivity(intent);
 
                     }
                     else if(finalI==5){
@@ -222,6 +225,11 @@ public class ShowStudentMenu extends AppCompatActivity {
                         final Intent webView=new Intent(ShowStudentMenu.this, webView_activity.class);
                         startActivity(webView);
 
+                    }
+                    else if(finalI==6)
+                    {
+                        final Intent intent=new Intent(ShowStudentMenu.this,DenemeActivity.class);
+                        startActivity(intent);
                     }
 
 

@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.GridLayout;
-import android.widget.Toast;
+
+import com.Clubs.ClubsAdd;
+import com.Clubs.DenemeActivity;
 
 public class Openning_screen extends AppCompatActivity {
 
@@ -49,16 +51,22 @@ public class Openning_screen extends AppCompatActivity {
                         startActivityForResult(intent,1);
                     }
                     else if(finalI==2){
-                        String name="ogrenci";
+                      String name="ogrenci";
                         intent.putExtra("admin",name);
-                        startActivityForResult(intent,1);
+                        startActivityForResult(intent,1);/*
+
+                        Yapılacak Kampanya çekimi için
+                      Intent intent=new Intent(Openning_screen.this,ShowCampaign.class);
+                      startActivity(intent);*/
+                      /*  Intent intent=new Intent(Openning_screen.this,ClubsAdd.class);
+                        startActivity(intent);*/
+
                     }
                     else if(finalI==3){
-                        /*String name="misafir";
+                        String name="misafir";
                         intent.putExtra("misafir",name);
-                        startActivityForResult(intent,1);*/
-                        Intent intent=new Intent(Openning_screen.this,webView_activity.class);
-                        startActivity(intent);
+                        startActivityForResult(intent,1);
+
                     }
                 }
             });
