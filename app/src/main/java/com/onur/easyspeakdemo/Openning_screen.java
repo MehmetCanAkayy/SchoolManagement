@@ -63,8 +63,7 @@ public class Openning_screen extends AppCompatActivity {
 
                     }
                     else if(finalI==3){
-                        String name="misafir";
-                        intent.putExtra("misafir",name);
+                        Intent intent=new Intent(Openning_screen.this,GuestActivity.class);
 
                         startActivityForResult(intent,1);
 
