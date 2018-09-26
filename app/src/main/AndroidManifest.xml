@@ -75,11 +75,18 @@
         <activity android:name=".webView_activity" />
         <activity android:name="com.StudentMenu.StudentSurveyApprovedActivity" />
         <activity android:name="com.tureng.TurengTranslate" />
+
         <activity android:name=".Kampanyalar" />
         <activity android:name=".ShowCampaign" />
         <activity android:name="com.Clubs.ClubsAdd" />
         <activity android:name="com.Clubs.ImagesActivity" />
         <activity android:name="com.Clubs.DenemeActivity"></activity>
+
+        <activity android:name="com.mailSender.GuestActivity" />
+
+        <activity android:name="com.socialActivity.SocialActivitiesActivity" />
+        <activity android:name="com.restTime.ShowRestTimeRequest"></activity>
+
     </application>
 
 </manifest>
