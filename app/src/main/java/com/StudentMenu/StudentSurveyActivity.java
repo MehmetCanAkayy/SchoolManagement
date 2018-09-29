@@ -104,9 +104,9 @@ public class StudentSurveyActivity extends AppCompatActivity {
         Calendar date = Calendar.getInstance();
 
 
-        String[] days = new String[15];
+        String[] days = new String[11];
         days[0]="SECINIZ...";
-        for (int i = 1; i < 15; i++) {
+        for (int i = 1; i < 11; i++) {
             date.add(Calendar.DATE, 1);
             String dayName = date.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
             days[i] = format.format(date.getTime()) + " " + dayName;
@@ -123,6 +123,7 @@ public class StudentSurveyActivity extends AppCompatActivity {
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout
                 .simple_spinner_dropdown_item);
         spinnerDay.setAdapter(spinnerArrayAdapter);
+
 
 
         spinnerBaslangic = new Spinner(this);
@@ -152,7 +153,7 @@ public class StudentSurveyActivity extends AppCompatActivity {
         spinnerBaslangic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if (position == 1) {
+                if (position == 1||position==0) {
                     spinnerBitis.setEnabled(false);
                 } else {
                     int index = finalSpinnerBaslangic.getSelectedItemPosition();
@@ -163,6 +164,24 @@ public class StudentSurveyActivity extends AppCompatActivity {
                     spinnerBitis.setSelection(index);
                 }
             }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        spinnerDay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0) {
+                    spinnerBaslangic.setEnabled(false);
+                    spinnerBitis.setEnabled(false);
+
+                } else {
+
+                    spinnerBaslangic.setEnabled(true);
+                }
+            }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -206,7 +225,7 @@ public class StudentSurveyActivity extends AppCompatActivity {
         spinnerBaslangic2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if (position == 1) {
+                if (position == 1||position==0) {
                     spinnerBitis2.setEnabled(false);
                 } else {
                     int index = finalSpinnerBaslangic2.getSelectedItemPosition();
@@ -217,6 +236,24 @@ public class StudentSurveyActivity extends AppCompatActivity {
                     spinnerBitis2.setSelection(index);
                 }
             }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        spinnerDay2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0) {
+                    spinnerBaslangic2.setEnabled(false);
+                    spinnerBitis2.setEnabled(false);
+
+                } else {
+
+                    spinnerBaslangic2.setEnabled(true);
+                }
+            }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -260,7 +297,7 @@ public class StudentSurveyActivity extends AppCompatActivity {
         spinnerBaslangic3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if (position == 1) {
+                if (position == 1||position==0) {
                     spinnerBitis3.setEnabled(false);
                 } else {
                     int index = finalSpinnerBaslangic3.getSelectedItemPosition();
@@ -271,6 +308,24 @@ public class StudentSurveyActivity extends AppCompatActivity {
                     spinnerBitis3.setSelection(index);
                 }
             }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        spinnerDay3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0) {
+                    spinnerBaslangic3.setEnabled(false);
+                    spinnerBitis3.setEnabled(false);
+
+                } else {
+
+                    spinnerBaslangic3.setEnabled(true);
+                }
+            }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -293,7 +348,6 @@ public class StudentSurveyActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id){
             case R.id.kaydet:
-                Toast.makeText(getApplicationContext(),"Kaydet Selected",Toast.LENGTH_LONG).show();
 
 
 
@@ -304,102 +358,116 @@ public class StudentSurveyActivity extends AppCompatActivity {
                 String day = spinnerDay.getItemAtPosition(spinnerDay.getSelectedItemPosition()).toString();
                 String startTime= "";
                 String endTime="";
-                if(day.equals("SECINIZ...")){
-
-                    day="";
-                }else{
-                    startTime = spinnerBaslangic.getItemAtPosition(spinnerBaslangic.getSelectedItemPosition()).toString();
-                    endTime="";
-                    if(spinnerBaslangic.getSelectedItemPosition()==1){
-                        startTime = "10:30";
-                        endTime = "23:30";
-
-                    }else{
-                        endTime = spinnerBitis.getItemAtPosition(spinnerBitis.getSelectedItemPosition()).toString();
-                    }
-                }
-
-
-
-
-                String day2 = spinnerDay2.getItemAtPosition(spinnerDay2.getSelectedItemPosition()).toString();
-                String startTime2= "";
-                String endTime2="";
-                if(day2.equals("SECINIZ...")){
-
-                    day2="";
-                }else{
-                    startTime2 = spinnerBaslangic2.getItemAtPosition(spinnerBaslangic2.getSelectedItemPosition()).toString();
-                    endTime2="";
-                    if(spinnerBaslangic2.getSelectedItemPosition()==1){
-                        startTime2 = "10:30";
-                        endTime2 = "23:30";
-
-                    }else{
-                        endTime2 = spinnerBitis2.getItemAtPosition(spinnerBitis2.getSelectedItemPosition()).toString();
-                    }
-                }
-
-
                 String day3 = spinnerDay3.getItemAtPosition(spinnerDay3.getSelectedItemPosition()).toString();
 
                 String startTime3= "";
                 String endTime3="";
-                if(day3.equals("SECINIZ...")){
+                String day2 = spinnerDay2.getItemAtPosition(spinnerDay2.getSelectedItemPosition()).toString();
+                String startTime2= "";
+                String endTime2="";
+                if(day.equals("SECINIZ...")&&day2.equals("SECINIZ...")&&day3.equals("SECINIZ...")){
+                    Toast.makeText(getApplicationContext(),"En az bir tarih secmeniz gerekmetedir!",Toast.LENGTH_LONG).show();
 
-                    day3="";
-                }else{
-                    startTime3 = spinnerBaslangic3.getItemAtPosition(spinnerBaslangic3.getSelectedItemPosition()).toString();
-                    endTime3="";
-                    if(spinnerBaslangic3.getSelectedItemPosition()==1){
-                        startTime3 = "10:30";
-                        endTime3 = "23:30";
 
-                    }else{
-                        endTime3 = spinnerBitis3.getItemAtPosition(spinnerBitis3.getSelectedItemPosition()).toString();
-                    }
                 }
+                else if((!day.equals("SECINIZ...")&&spinnerBaslangic.getItemAtPosition(spinnerBaslangic.getSelectedItemPosition()).toString().equals("SECINIZ..."))||
+                        (!day2.equals("SECINIZ...")&&spinnerBaslangic2.getItemAtPosition(spinnerBaslangic2.getSelectedItemPosition()).toString().equals("SECINIZ..."))||
+                        (!day3.equals("SECINIZ...")&&spinnerBaslangic3.getItemAtPosition(spinnerBaslangic3.getSelectedItemPosition()).toString().equals("SECINIZ..."))){
+                    Toast.makeText(getApplicationContext(),"Saat de secmeniz gerekmektedir!",Toast.LENGTH_LONG).show();
 
-                System.out.println(day);
-                System.out.println(startTime);
-                System.out.println(endTime);
-                final SurveyInfo surveyInfo2= new SurveyInfo(false,studentKey,name,grade,phoneNumber,day,day2,day3,startTime,endTime,startTime2,endTime2,startTime3,endTime3,key);
 
-                if(update){
-                    databaseSurveyInfo.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
+                }
+                else {
 
-                            for (DataSnapshot surveySnapshot : dataSnapshot.getChildren() ){
-                                //Create Artist Class Object and Returning Value
-                                SurveyInfo surveyInfo =  surveySnapshot.getValue(SurveyInfo.class);
-                                surveyInfo2.surveyKey=surveyInfo.getSurveyKey();
 
-                                if(surveyInfo.getStudentKey().equals(studentKey)){
+                    if (day.equals("SECINIZ...")) {
 
-                                    surveySnapshot.getRef().setValue(surveyInfo2);
+                        day = "";
+                    } else {
+                        startTime = spinnerBaslangic.getItemAtPosition(spinnerBaslangic.getSelectedItemPosition()).toString();
+                        endTime = "";
+                        if (spinnerBaslangic.getSelectedItemPosition() == 1) {
+                            startTime = "10:30";
+                            endTime = "23:30";
+
+                        } else {
+                            endTime = spinnerBitis.getItemAtPosition(spinnerBitis.getSelectedItemPosition()).toString();
+                        }
+                    }
+
+
+                    if (day2.equals("SECINIZ...")) {
+
+                        day2 = "";
+                    } else {
+                        startTime2 = spinnerBaslangic2.getItemAtPosition(spinnerBaslangic2.getSelectedItemPosition()).toString();
+                        endTime2 = "";
+                        if (spinnerBaslangic2.getSelectedItemPosition() == 1) {
+                            startTime2 = "10:30";
+                            endTime2 = "23:30";
+
+                        } else {
+                            endTime2 = spinnerBitis2.getItemAtPosition(spinnerBitis2.getSelectedItemPosition()).toString();
+                        }
+                    }
+
+
+                    if (day3.equals("SECINIZ...")) {
+
+                        day3 = "";
+                    } else {
+                        startTime3 = spinnerBaslangic3.getItemAtPosition(spinnerBaslangic3.getSelectedItemPosition()).toString();
+                        endTime3 = "";
+                        if (spinnerBaslangic3.getSelectedItemPosition() == 1) {
+                            startTime3 = "10:30";
+                            endTime3 = "23:30";
+
+                        } else {
+                            endTime3 = spinnerBitis3.getItemAtPosition(spinnerBitis3.getSelectedItemPosition()).toString();
+                        }
+                    }
+
+                    System.out.println(day);
+                    System.out.println(startTime);
+                    System.out.println(endTime);
+                    final SurveyInfo surveyInfo2 = new SurveyInfo(false, studentKey, name, grade, phoneNumber, day, day2, day3, startTime, endTime, startTime2, endTime2, startTime3, endTime3, key);
+
+                    if (update) {
+                        databaseSurveyInfo.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                for (DataSnapshot surveySnapshot : dataSnapshot.getChildren()) {
+                                    //Create Artist Class Object and Returning Value
+                                    SurveyInfo surveyInfo = surveySnapshot.getValue(SurveyInfo.class);
+                                    surveyInfo2.surveyKey = surveyInfo.getSurveyKey();
+
+                                    if (surveyInfo.getStudentKey().equals(studentKey)) {
+
+                                        surveySnapshot.getRef().setValue(surveyInfo2);
+                                    }
                                 }
+
                             }
 
-                        }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                System.out.println("Student Verisi Çekilemedi.");
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            System.out.println("Student Verisi Çekilemedi.");
+                            }
+                        });
+                    } else {
+                        databaseSurveyInfo.child(key).setValue(surveyInfo2);
 
-                        }
-                    });
-                }else{
-                    databaseSurveyInfo.child(key).setValue(surveyInfo2);
+                    }
 
+
+                    Intent intent = new Intent();
+                    setResult(Activity.RESULT_OK, intent);
+
+                    finish();
+                    return true;
                 }
-
-
-                Intent intent = new Intent();
-                setResult(Activity.RESULT_OK, intent);
-
-                finish();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
