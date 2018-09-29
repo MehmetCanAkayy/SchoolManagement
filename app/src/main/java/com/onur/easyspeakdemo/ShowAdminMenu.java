@@ -97,20 +97,15 @@ public class ShowAdminMenu extends AppCompatActivity {
 
 
                     }
-                    else if(finalI == 6 ){
-                        final Intent showSurveyRequest=new Intent(ShowAdminMenu.this, ShowSurveyRequest.class);
-                        startActivityForResult(showSurveyRequest, 1);
-
-                    }
-                      else if(finalI== 7){
+                      else if(finalI== 6){
                         final Intent intent=new Intent(ShowAdminMenu.this,Kampanyalar.class);
                         startActivity(intent);
                     }
-                    else if(finalI==8) {
+                    else if(finalI==7) {
                         final Intent intent = new Intent(ShowAdminMenu.this, ClubsAdd.class);
                         startActivity(intent);
                     }
-                    else if(finalI == 9 ){
+                    else if(finalI == 8 ){
                         final Intent showRestTimeRequest=new Intent(ShowAdminMenu.this, ShowRestTimeRequest.class);
                         startActivityForResult(showRestTimeRequest, 1);
 

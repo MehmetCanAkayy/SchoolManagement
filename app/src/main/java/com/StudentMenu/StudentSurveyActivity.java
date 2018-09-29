@@ -1,11 +1,14 @@
 package com.StudentMenu;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.onur.easyspeakdemo.R;
+import com.tureng.TurengTranslate;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,36 +54,10 @@ public class StudentSurveyActivity extends AppCompatActivity {
     Spinner spinnerBaslangic3;
     private DatabaseReference databaseSurveyInfo;
     List<SurveyInfo> surveyList;
-    boolean update = false;
+    private ProgressDialog progressDialog;
 
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //Retriving data From Firebase
-        databaseSurveyInfo.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                surveyList.clear();
-
-                for (DataSnapshot surveySnapshot : dataSnapshot.getChildren()) {
-                    //Create Artist Class Object and Returning Value
-                    SurveyInfo surveyInfo = surveySnapshot.getValue(SurveyInfo.class);
-                    if(surveyInfo.getStudentKey().equals(studentKey)){
-                        update = true;
-                    }
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("Student Verisi Çekilemedi.");
-
-            }
-        });
-    }
 
 
 
@@ -430,48 +408,83 @@ public class StudentSurveyActivity extends AppCompatActivity {
                     System.out.println(day);
                     System.out.println(startTime);
                     System.out.println(endTime);
-                    final SurveyInfo surveyInfo2 = new SurveyInfo(false, studentKey, name, grade, phoneNumber, day, day2, day3, startTime, endTime, startTime2, endTime2, startTime3, endTime3, key);
+                    Calendar calendar = Calendar.getInstance();
+                    String today = calendar.get(Calendar.DATE) + " " + calendar.get(Calendar.MONTH)+ " " + calendar.get(Calendar.YEAR);
+                    final SurveyInfo surveyInfo2 = new SurveyInfo(today,false, studentKey, name, grade, phoneNumber, day, day2, day3, startTime, endTime, startTime2, endTime2, startTime3, endTime3, key);
+                    String[] data = new String[9];
+                    data[0] = day;
+                    data[1] = startTime;
+                    data[2] = endTime;
+                    data[3] = day2;
+                    data[4] = startTime2;
+                    data[5] = endTime2;
+                    data[6] = day3;
+                    data[7] = startTime3;
+                    data[8] = endTime3;
 
-                    if (update) {
-                        databaseSurveyInfo.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                for (DataSnapshot surveySnapshot : dataSnapshot.getChildren()) {
-                                    //Create Artist Class Object and Returning Value
-                                    SurveyInfo surveyInfo = surveySnapshot.getValue(SurveyInfo.class);
-                                    surveyInfo2.surveyKey = surveyInfo.getSurveyKey();
-
-                                    if (surveyInfo.getStudentKey().equals(studentKey)) {
-
-                                        surveySnapshot.getRef().setValue(surveyInfo2);
-                                    }
-                                }
-
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                System.out.println("Student Verisi Çekilemedi.");
-
-                            }
-                        });
-                    } else {
-                        databaseSurveyInfo.child(key).setValue(surveyInfo2);
-
-                    }
+                    databaseSurveyInfo.child(key).setValue(surveyInfo2);
+                    new SendEmailTask().execute(data);
 
 
-                    Intent intent = new Intent();
-                    setResult(Activity.RESULT_OK, intent);
-
-                    finish();
+//                    Intent intent = new Intent();
+//                    setResult(Activity.RESULT_OK, intent);
+//
+//                    finish();
                     return true;
                 }
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
+    class SendEmailTask extends AsyncTask<String[], Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(StudentSurveyActivity.this);
+            progressDialog.setTitle("Talep Olusturuluyor");
+            progressDialog.setMessage("Lutfen Bekleyin...");
+            progressDialog.setIndeterminate(false);
+            progressDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(String[]... params) {
+            String[] passed = new String[9];
+            passed = params[0];
+            try {
+                GmailSender sender = new GmailSender("EasySpeakDemo@gmail.com", "52548226");
+                //subject, body, sender, to
+                sender.sendMail("Survey Talebi",
+                        "Name: "+name + "\n" +"Phone Number: "+ phoneNumber +"\nGrade: " + grade +"\nTarih-1: "+passed[0]
+                        +"\nBaslangic-Bitis: " + passed[1] + " - " + passed[2] +"\nTarih-2: "+passed[3]
+                                +"\nBaslangic-Bitis: " + passed[4] + " - " + passed[5]+"\nTarih-3: "+passed[6]
+                                +"\nBaslangic-Bitis: " + passed[7] + " - " + passed[8],
+                        "EasySpeakDemo@gmail.com",
+                        "19.onurcelebi.95@gmail.com");
+
+                Log.i("Email sending", "send");
+            } catch (Exception e) {
+                Log.i("Email sending", "cannot send");
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            progressDialog.dismiss();
+
+            Intent intent = new Intent();
+            setResult(Activity.RESULT_OK, intent);
+
+            finish();
+        }
+    }
+
 
 
     public class CustomAdapter extends ArrayAdapter<String> {

@@ -19,6 +19,7 @@ public class SurveyInfo {
     String day2;
     String day3;
     String studentKey;
+    String today;
     boolean approved;
 
     public SurveyInfo(){
@@ -145,7 +146,15 @@ public class SurveyInfo {
         this.approved = approved;
     }
 
-    public SurveyInfo(boolean approved, String studentKey, String artistName, String artistGrade, String phoneNumber, String day, String day2, String day3, String startTime, String endTime, String startTime2, String endTime2, String startTime3, String endTime3, String surveyKey) {
+    public String getToday() {
+        return today;
+    }
+
+    public void setToday(String today) {
+        this.today = today;
+    }
+
+    public SurveyInfo(String today, boolean approved, String studentKey, String artistName, String artistGrade, String phoneNumber, String day, String day2, String day3, String startTime, String endTime, String startTime2, String endTime2, String startTime3, String endTime3, String surveyKey) {
         this.artistName = artistName;
         this.artistGrade = artistGrade;
         this.phoneNumber = phoneNumber;
@@ -162,6 +171,7 @@ public class SurveyInfo {
         this.studentKey = studentKey;
 
         this.approved = approved;
+        this.today = today;
 
 
     }

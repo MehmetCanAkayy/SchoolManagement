@@ -69,11 +69,8 @@
             android:name="com.teacherTabLayout.Main3Activity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.StudentMenu.StudentSurveyActivity" />
-        <activity android:name=".ShowSurveyRequest" />
-        <activity android:name=".SurveyRequest" />
         <activity android:name=".MainActivity" />
         <activity android:name=".webView_activity" />
-        <activity android:name="com.StudentMenu.StudentSurveyApprovedActivity" />
         <activity android:name="com.tureng.TurengTranslate" />
 
         <activity android:name=".Kampanyalar" />

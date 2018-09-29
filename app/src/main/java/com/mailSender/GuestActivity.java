@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
-import com.Clubs.DenemeActivity;
 import com.onur.easyspeakdemo.R;
 import com.onur.easyspeakdemo.ShowCampaign;
 import com.tureng.TurengTranslate;

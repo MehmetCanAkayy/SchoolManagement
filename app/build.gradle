@@ -47,14 +47,17 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.0.3'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
+
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 
     implementation 'org.jsoup:jsoup:1.8.3'
     implementation 'com.quinny898.library.persistentsearch:library:1.1.0-SNAPSHOT'
 
     //compile 'javax.mail:mail:1.4.7'
-    compile 'com.sun.mail:android-mail:1.6.2'
-    compile 'com.sun.mail:android-activation:1.6.2'
+    //compile  'javax.mail:javax.mail-api:1.6.0'
+
+    compile 'com.sun.mail:android-mail:1.6.0'
+    compile 'com.sun.mail:android-activation:1.6.0'
     compile 'com.github.ome450901:SimpleRatingBar:1.4.2'
 
 

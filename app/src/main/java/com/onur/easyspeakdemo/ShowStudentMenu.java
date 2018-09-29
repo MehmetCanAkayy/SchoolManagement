@@ -1,58 +1,37 @@
 package com.onur.easyspeakdemo;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
-import android.view.Window;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.Clubs.ClubsAdd;
 import com.Clubs.DenemeActivity;
 import com.StudentMenu.StudentSurveyActivity;
-import com.StudentMenu.StudentSurveyApprovedActivity;
-import com.StudentMenu.Survey;
 import com.StudentMenu.SurveyInfo;
-import com.firebaseDemo.Admin;
-import com.firebaseDemo.StudentsActivity;
-import com.firebaseDemo.TeacherActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.mailSender.GuestActivity;
 import com.restTime.restTimeClass;
 import com.socialActivity.SocialActivitiesActivity;
 import com.studentsTabLayout.MainActivity;
 import com.tureng.TurengTranslate;
-import com.user.StudentRegister;
-import com.user.TeacherRegister;
 
-import org.w3c.dom.Text;
-
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class ShowStudentMenu extends AppCompatActivity {
 
@@ -67,7 +46,7 @@ public class ShowStudentMenu extends AppCompatActivity {
     Dialog myDialog;
     ImageView closeButton;
     Button delete,update;
-    TextView txtName;
+    TextView txtName,txtTitle;
     boolean talepOlustur = true;
 
 
@@ -117,12 +96,41 @@ public class ShowStudentMenu extends AppCompatActivity {
 
                     }else if(finalI == 1 ){
                         final Intent studentSurvey=new Intent(ShowStudentMenu.this, StudentSurveyActivity.class);
-                        final Intent studentSurvey2=new Intent(ShowStudentMenu.this, StudentSurveyApprovedActivity.class);
-
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.add(Calendar.DATE, -10);
 
                         DatabaseReference databaseSurveyInfo;
                         databaseSurveyInfo = FirebaseDatabase.getInstance().getReference("surveyInfo");
                         List<String> phoneNumbers = new ArrayList<>();
+
+                        myDialog = new Dialog(ShowStudentMenu.this);
+
+
+                        myDialog.setContentView(R.layout.custon_rest_time);
+
+                        closeButton = myDialog.findViewById(R.id.close);
+                        delete = myDialog.findViewById(R.id.delete);
+                        update = myDialog.findViewById(R.id.update);
+                        txtName = myDialog.findViewById(R.id.content);
+                        txtTitle= myDialog.findViewById(R.id.title);
+                        txtTitle.setText("UYARI!");
+                        txtTitle.setTextColor(getResources().getColor(R.color.red));
+                        delete.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                myDialog.dismiss();
+                            }
+                        });
+
+
+                        closeButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                myDialog.dismiss();
+                            }
+                        });
+                        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
 
                         databaseSurveyInfo.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -131,54 +139,54 @@ public class ShowStudentMenu extends AppCompatActivity {
                                 for (DataSnapshot surveySnapshot : dataSnapshot.getChildren()) {
                                     //Create Artist Class Object and Returning Value
                                     SurveyInfo surveyInfo = surveySnapshot.getValue(SurveyInfo.class);
-                                    if(surveyInfo.isApproved()==false&&surveyInfo.getPhoneNumber().equals(phoneNumber)){
+                                    String[] parse = surveyInfo.getToday().split(" ");
+
+                                    if(surveyInfo.getPhoneNumber().equals(phoneNumber)){
                                         phoneNumbers.add(surveyInfo.getPhoneNumber());
-
-                                        studentSurvey.putExtra("phoneNumber",phoneNumber);
-                                        studentSurvey.putExtra("grade",grade);
-                                        studentSurvey.putExtra("name",name);
-                                        studentSurvey.putExtra("studentKey",studentKey);
-
-
-
-
-                                        startActivityForResult(studentSurvey, 1);
-                                    }
-                                    else if(surveyInfo.isApproved()==true&&surveyInfo.getPhoneNumber().equals(phoneNumber)){
-                                        phoneNumbers.add(surveyInfo.getPhoneNumber());
-
-                                        DatabaseReference databaseSurvey;
-                                        databaseSurvey = FirebaseDatabase.getInstance().getReference("surveys");
-
-                                        databaseSurvey.addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                                for (DataSnapshot surveySnapshot : dataSnapshot.getChildren()) {
-                                                    //Create Artist Class Object and Returning Value
-                                                    Survey surveyInfo = surveySnapshot.getValue(Survey.class);
-                                                    if(surveyInfo.getStudentsKey().equals(studentKey)){
-
-                                                        studentSurvey2.putExtra("day",surveyInfo.getDay());
-                                                        studentSurvey2.putExtra("baslangic",surveyInfo.getStartTime());
-                                                        studentSurvey2.putExtra("bitis",surveyInfo.getEndTime());
+                                        Calendar today = Calendar.getInstance();
+                                        today.set(Calendar.DATE, Integer.parseInt(parse[0]));
+                                        today.set(Calendar.MONTH, Integer.parseInt(parse[1]));
+                                        today.set(Calendar.YEAR, Integer.parseInt(parse[2]));
+                                        today.add(Calendar.DATE, 10);
 
 
 
+                                        if(calendar.get(Calendar.YEAR)>=Integer.parseInt(parse[2])){
+                                            if(calendar.get(Calendar.MONTH)>Integer.parseInt(parse[1])){
+                                                    surveySnapshot.getRef().removeValue();
+                                                    studentSurvey.putExtra("phoneNumber",phoneNumber);
+                                                    studentSurvey.putExtra("grade",grade);
+                                                    studentSurvey.putExtra("name",name);
+                                                    studentSurvey.putExtra("studentKey",studentKey);
+                                                    startActivityForResult(studentSurvey, 1);
+                                                    myDialog.dismiss();
+                                            }else if(calendar.get(Calendar.MONTH)==Integer.parseInt(parse[1])){
+                                                if(calendar.get(Calendar.DATE)>=Integer.parseInt(parse[0])){
+                                                    surveySnapshot.getRef().removeValue();
+                                                    studentSurvey.putExtra("phoneNumber",phoneNumber);
+                                                    studentSurvey.putExtra("grade",grade);
+                                                    studentSurvey.putExtra("name",name);
+                                                    studentSurvey.putExtra("studentKey",studentKey);
+                                                    startActivityForResult(studentSurvey, 1);
+                                                    myDialog.dismiss();
+                                                }else{
+                                                    txtName.setText(today.get(Calendar.DATE)+"/" + (today.get(Calendar.MONTH)+1) + "/" + today.get(Calendar.YEAR)  + " tarihinde talepte bulunabilirsiniz.");
+                                                    update.setVisibility(View.GONE);
+                                                    myDialog.show();
 
-                                                        startActivityForResult(studentSurvey2, 1);
-
-                                                    }
                                                 }
+                                            }else{
+                                                txtName.setText(today.get(Calendar.DATE)+"/" + (today.get(Calendar.MONTH)+1) + "/" + today.get(Calendar.YEAR)  + " tarihinde talepte bulunabilirsiniz.");
+                                                update.setVisibility(View.GONE);
+                                                myDialog.show();
 
                                             }
+                                        }else{
+                                            txtName.setText(today.get(Calendar.DATE)+"/" + (today.get(Calendar.MONTH)+1) + "/" + today.get(Calendar.YEAR)  + " tarihinde talepte bulunabilirsiniz.");
+                                            update.setVisibility(View.GONE);
+                                            myDialog.show();
 
-                                            @Override
-                                            public void onCancelled(DatabaseError databaseError) {
-                                                System.out.println("Student Verisi Çekilemedi.");
-
-                                            }
-                                        });
+                                        }
 
 
                                     }
@@ -391,6 +399,7 @@ public class ShowStudentMenu extends AppCompatActivity {
 
                             }
                         });
+                        myDialog.show();
 
 
                         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -405,33 +414,6 @@ public class ShowStudentMenu extends AppCompatActivity {
 
                 }
             });
-        }
-    }
-
-    public static int daysBetween2(Calendar day1, Calendar day2){
-        Calendar dayOne = (Calendar) day1.clone(),
-                dayTwo = (Calendar) day2.clone();
-
-        if (dayOne.get(Calendar.YEAR) == dayTwo.get(Calendar.YEAR)) {
-            return Math.abs(dayOne.get(Calendar.DAY_OF_YEAR) - dayTwo.get(Calendar.DAY_OF_YEAR));
-        } else {
-            if (dayTwo.get(Calendar.YEAR) > dayOne.get(Calendar.YEAR)) {
-                //swap them
-                Calendar temp = dayOne;
-                dayOne = dayTwo;
-                dayTwo = temp;
-            }
-            int extraDays = 0;
-
-            int dayOneOriginalYearDays = dayOne.get(Calendar.DAY_OF_YEAR);
-
-            while (dayOne.get(Calendar.YEAR) > dayTwo.get(Calendar.YEAR)) {
-                dayOne.add(Calendar.YEAR, -1);
-                // getActualMaximum() important for leap years
-                extraDays += dayOne.getActualMaximum(Calendar.DAY_OF_YEAR);
-            }
-
-            return extraDays - dayTwo.get(Calendar.DAY_OF_YEAR) + dayOneOriginalYearDays ;
         }
     }
 

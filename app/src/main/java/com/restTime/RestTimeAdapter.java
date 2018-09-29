@@ -1,9 +1,7 @@
 package com.restTime;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.CardView;
@@ -14,22 +12,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.StudentMenu.Survey;
-import com.StudentMenu.SurveyInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.onur.easyspeakdemo.R;
-import com.onur.easyspeakdemo.SurveyRequest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RestTimeAdapter extends RecyclerView.Adapter<RestTimeAdapter.ViewHolder> {

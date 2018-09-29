@@ -5,15 +5,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.StudentMenu.SurveyInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.onur.easyspeakdemo.R;
-import com.onur.easyspeakdemo.ShowSurveyRequest;
-import com.onur.easyspeakdemo.SurveyAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
