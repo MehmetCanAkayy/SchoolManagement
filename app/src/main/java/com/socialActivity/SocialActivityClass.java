@@ -6,7 +6,15 @@ public class SocialActivityClass {
     String studentKeys;
     String name;
     float rating;
+    int id;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public SocialActivityClass(){
 
