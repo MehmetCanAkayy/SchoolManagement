@@ -44,12 +44,15 @@ public class webView_activity extends AppCompatActivity {
 
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
 
-                webView.loadUrl("file:///android_asset/error.html");
+                //webView.loadUrl("file:///android_asset/error.html");
 
             }
 
             public void onPageFinished(WebView view, String url) {
                 // do your stuff here
+                webView.loadUrl("javascript:(function() { " +
+                        "var head = document.getElementsByClassName('table table-responsive')[0].style.display='none'; " +
+                        "})()");
                 swipe.setRefreshing(false);
             }
 
