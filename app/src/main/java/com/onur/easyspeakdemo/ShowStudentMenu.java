@@ -91,7 +91,6 @@ public class ShowStudentMenu extends AppCompatActivity {
                                 studentListWeek.putExtra("phoneNumber",phoneNumber);
                                 studentListWeek.putExtra("grade",grade);
 
-
                                 startActivityForResult(studentListWeek, 1);
 
                     }else if(finalI == 1 ){
@@ -236,31 +235,37 @@ public class ShowStudentMenu extends AppCompatActivity {
                     }
                     else if(finalI==2){
 
+                        Uri uri = Uri.parse("https://www.youtube.com/watch?v=E01-jA1-kpQ");
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
+                    }
+                    else if(finalI==3){
+
                         final Intent tureng=new Intent(ShowStudentMenu.this, TurengTranslate.class);
                         startActivity(tureng);
                     }
-                    else if(finalI==3){
+                    else if(finalI==4){
                         Uri uri = Uri.parse("https://sso.rumba.pearsoncmg.com/sso/login?service=https%3A%2F%2Fmyenglishlab.pearson-intl.com%2Frumba%2Flogin&profile=iokingmel&allowLangChange=true");
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
                     }
-                    else if(finalI==4){
+                    else if(finalI==5){
                         final Intent intent=new Intent(ShowStudentMenu.this,ShowCampaign.class);
                         startActivity(intent);
 
                     }
-                    else if(finalI==5){
+                    else if(finalI==6){
 
                         final Intent webView=new Intent(ShowStudentMenu.this, webView_activity.class);
                         startActivity(webView);
 
-                    }else if(finalI==6) {
+                    }else if(finalI==7) {
                         Intent intent=new Intent(ShowStudentMenu.this,DenemeActivity.class);
                         startActivityForResult(intent,1);
 
 
                     }
-                     else if(finalI==7){
+                     else if(finalI==8){
 
                         final Intent activities = new Intent(ShowStudentMenu.this, SocialActivitiesActivity.class);
 
@@ -275,7 +280,7 @@ public class ShowStudentMenu extends AppCompatActivity {
                         }
 
 
-                    else if(finalI==8){
+                    else if(finalI==9){
 
 
 
@@ -404,11 +409,6 @@ public class ShowStudentMenu extends AppCompatActivity {
 
                         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-                    }
-                    else if(finalI==6)
-                    {
-                        final Intent intent=new Intent(ShowStudentMenu.this,DenemeActivity.class);
-                        startActivity(intent);
                     }
 
 
