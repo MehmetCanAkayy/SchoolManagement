@@ -40,7 +40,7 @@
             android:ems="10"
             android:id="@+id/kul_ad"
             android:hint="Username"
-            android:layout_marginTop="170dp"
+            android:layout_marginTop="10dp"
             android:textColor="#FFF"
             android:paddingLeft="0dp"
             android:drawablePadding="5dp"
@@ -111,6 +111,20 @@
                 android:layout_margin="3dp"
 
                 android:src="@drawable/youtube" />
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/linkedin"
+                android:layout_margin="3dp"
+
+                android:src="@drawable/linkedin" />
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/twitter"
+                android:layout_margin="3dp"
+
+                android:src="@drawable/twitter" />
 
 
         </LinearLayout>

@@ -29,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageView facebookIcon;
     private ImageView instagramIcon;
     private ImageView youtubeIcon;
+    private ImageView linkedinIcon;
+    private ImageView twitterIcon;
+
 
 
     // List<String> kullanicilar = new ArrayList<String>();
@@ -179,6 +182,29 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Uri uri = Uri.parse("https://www.youtube.com/channel/UCM2Q_libBGlUMPYX63v5rKA?view_as=subscriber");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+
+            }
+        });
+
+        linkedinIcon = findViewById(R.id.linkedin);
+        linkedinIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Uri uri = Uri.parse("https://www.linkedin.com/company/easyspeakschoolofenglish/?originalSubdomain=tr");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+
+            }
+        });
+        twitterIcon = findViewById(R.id.twitter);
+        twitterIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Uri uri = Uri.parse("https://twitter.com/easyspeaktr");
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
 

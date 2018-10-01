@@ -21,7 +21,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme2">
         <activity
             android:name=".Openning_screen"
             android:theme="@style/AppTheme2">
@@ -69,7 +69,9 @@
             android:name="com.teacherTabLayout.Main3Activity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.StudentMenu.StudentSurveyActivity" />
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme2" />
         <activity android:name=".webView_activity" />
         <activity android:name="com.tureng.TurengTranslate" />
         <activity android:name=".Kampanyalar" />
