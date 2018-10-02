@@ -28,7 +28,48 @@
     <string name="coupon_code">A2T3XZ9</string>
     <string name="clear_icon_button">Show/Hide Clear Icon</string>
     <string name="end_icon_button">Add/Remove End Icon</string>
-
+    <string name="toefl">TOEFL sınavı nedir, koşulları nelerdir?\nTest of English as a Foreign Language (Yabancı Dil olarak İngilizce Sınavı)\nToefl Nedir: Dil bilgisi, kelime bilgisi, okuma, yazma, dinleme ve sözlü iletişim becerilerinizi ölçmekte kullanılan çok kapsamlı bir sınavdır. ABD ve Kanada\'da üniversite ve yüksek okullara kayıt koşuludur.\nSeviye: Intermediate - Upper Intermadiate - Advanced</string>
+    <string name="ielts">IELTS sınavı nedir, koşulları nelerdir?\nInternational English Language Testing System (Uluslararası İngilizce Dili Ölçüm Sistemi) \nIelts Nedir: Kişinin İngilizce iletişimde dinleme-okuma-yazma-konuşma becerisini ölçen bir sınavdır. İngiltere, İrlanda, Avustralya ve Yeni Zelanda\'daki üniversite ve yüksek okullara kayıt koşuludur. \nSeviye: Intermediate - Upper Intermadiate - Advanced
+</string>
+    <string name="toeic">TOEIC sınavı nedir, koşulları nelerdir?\nTest of English for International Communication (Uluslararası İletişim için İngilizce Sınavı)\nToeic Nedir: Mesleki İngilizce başarınızı değerlendirmede bir dünya standardıdır.Uluslararası öğrenciler ve meslek sahipleri için mesleki İngilizce sınavıdır. Sınav, kelime bilgisini, iş mektubu ve notlarını anlama yeteneğini ve ileri düzey dil bilgisi yapılarını kapsar. Kariyerini yükseltmek için İngilizce seviyesini ispat etmek isteyenlere yöneliktir.\nSeviye: Intermediate - Upper Intermadiate - Advanced
+    </string>
+    <string name="esol">Cambridge ESOL Sınavları
+\n\nKET sınavı nedir, koşulları nelerdir?
+\nKey English Test (Anahtar İngilizce Testi)
+\n
+\nKet Nedir: Geçilmesi gereken en düşük seviyeli sınavdır. Başlangıç seviyesindekiler içindir.
+\nSeviye. Beginner, Elementary
+\n
+\nPET sınavı nedir, koşulları nelerdir?
+\nPreliminary English Test (Ön İngilizce Sınavı)
+\n\n
+\nPet Nedir:Bu sınav günlük yaşamla ilgili yazma ve konuşmadan oluşmaktadır. Önceden tahmin edilebilir istekler, basit metinlerden okuma ve kişisel mektupları yazabilenler içindir.
+\nSeviye: Pre Intermediate, Intermediate, Upper Intermediate
+\n
+\nFCE sınavı nedir, koşulları nelerdir?
+\nFirst Certificate in English (İngilizce\'de İlk Sertifika)
+\n
+\nFCE Nedir: Bu sınav konuşma ve yazma bölümlerinden oluşmaktadır. Kendini ifade ederken daha geniş bir kelime dağarcığı kullanan, görüşlerini rahatça ifade edebilenler içindir.
+\nSeviye: Intermediate, Upper Intermediate, Advanced
+\n
+\nCAE sınavı nedir, koşulları nelerdir?
+\nCambridge Certificate of Advanced English (İleri İngilizce Cambridge Sertifikası)
+\n
+\nCAE Nedir: İngilizcesinin akademik seviyede olduğunu kanıtlamak isteyenlerin girmesi gereken ilk sınavdır.Akıcı bir İngilizce ile sosyal ve profesyonel alanda konuşabilenler içindir.
+\nSeviye: Upper Intermediate, Advanced
+\n
+\nCPE sınavı nedir, koşulları nelerdir?
+\nCertificate of Proficiency in English (İngilizce Ustalık Sertifikası)
+\n
+\nCPE Nedir:Cambridge sınavlarının en üst basamağıdır. Üniversite ve şirketlerde geçerliliği olan sertifikadır. Bu sertifika sahipleri İngilizceyi ana dilleri kadar iyi konuşabilirler.
+\nSeviye: Upper Intermediate, Advanced
+\n
+\nBEC sınavı nedir, koşulları nelerdir?
+\nBusiness English Certificate (İş İngilizcesi Sertifikası)
+\n
+\nBec Nedir: İş İngilizcesinde kullanılan kelimelere ve teknik dile hakim olmak gerekir. Preliminary(=PET), Vantage(=FCE), Higher(=CAE) olmak üzere üç seviyededir.
+\nSeviye: Upper Intermediate, Advanced
+</string>
 
     <string-array name="teachers">
         <item>Frank</item>

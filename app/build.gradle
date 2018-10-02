@@ -63,6 +63,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
     //implementation 'com.github.alamkanak:android-week-view:1.2.6'
+    implementation 'com.wajahatkarim3.EasyFlipView:EasyFlipView:2.1.0'
 
 
 }

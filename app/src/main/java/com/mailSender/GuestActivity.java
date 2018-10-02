@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
+import com.StudentMenu.AboutExams;
 import com.onur.easyspeakdemo.R;
 import com.onur.easyspeakdemo.ShowCampaign;
 import com.tureng.TurengTranslate;
@@ -120,6 +121,11 @@ public class GuestActivity extends AppCompatActivity {
                     else if(finalI==3)
                     {
                         Intent intent=new Intent(GuestActivity.this, TurengTranslate.class);
+                        startActivityForResult(intent,1);
+                    }
+                    else if(finalI==4)
+                    {
+                        Intent intent=new Intent(GuestActivity.this, AboutExams.class);
                         startActivityForResult(intent,1);
                     }
 

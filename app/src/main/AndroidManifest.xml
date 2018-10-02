@@ -82,6 +82,7 @@
         <activity android:name="com.mailSender.GuestActivity" />
         <activity android:name="com.socialActivity.SocialActivitiesActivity" />
         <activity android:name="com.restTime.ShowRestTimeRequest" />
+        <activity android:name="com.StudentMenu.AboutExams"></activity>
     </application>
 
 </manifest>

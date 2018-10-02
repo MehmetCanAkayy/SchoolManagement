@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.Clubs.DenemeActivity;
+import com.StudentMenu.AboutExams;
 import com.StudentMenu.StudentSurveyActivity;
 import com.StudentMenu.SurveyInfo;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mailSender.GuestActivity;
 import com.restTime.restTimeClass;
 import com.socialActivity.SocialActivitiesActivity;
 import com.studentsTabLayout.MainActivity;
@@ -409,6 +411,11 @@ public class ShowStudentMenu extends AppCompatActivity {
 
                         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+                    }
+                    else if(finalI==10)
+                    {
+                        Intent intent=new Intent(ShowStudentMenu.this, AboutExams.class);
+                        startActivityForResult(intent,1);
                     }
 
 
