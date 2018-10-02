@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<agency.tango.materialintroscreen.parallax.ParallaxLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+
+    android:paddingBottom="100dp">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="32dp"
+
+        android:layout_weight="1">
+        <LinearLayout
+
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <TextView
+            android:layout_marginTop="40dp"
+            android:textSize="36dp"
+            android:textStyle="bold"
+            android:gravity="center"
+
+            android:textColor="@color/greenyellow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SINAVA HAZIRLIK" />
+
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:gravity="center"
+
+                android:textColor="@color/red"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="İngilizce Sınava Hazırlık Kursları
+
+" />
+
+
+            <TextView
+                android:textSize="16dp"
+                android:layout_marginTop="20dp"
+
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="En çok kabul gören İngilizce dil sınavları için hazırlık kursları sunmaktayız. Sınav içeriğine ve sınav stratejilerine yoğunlaşarak istediğiniz puanla sınavları geçebilirsiniz.
+
+Easy Speak İngilizce Sınav Hazırlık kursları, IELTS, TOEFL gibi sınavlarda başarıya giden en hızlı yoldur. İhtiyaçlarınıza en çok hangi kursun uyduğunu öğrenmek için bizimle iletişime geçin" />
+
+
+            <TextView
+                android:textSize="16dp"
+                android:layout_marginTop="20dp"
+
+                android:textStyle="bold"
+                android:textColor="@color/yellow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sinavTxt" />
+
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+</agency.tango.materialintroscreen.parallax.ParallaxLinearLayout>

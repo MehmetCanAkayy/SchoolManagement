@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<agency.tango.materialintroscreen.parallax.ParallaxLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+
+    android:paddingBottom="100dp">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="32dp"
+
+        android:layout_weight="1">
+        <LinearLayout
+
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+            android:layout_marginTop="40dp"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:gravity="center"
+
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="İngilizce'yi Bizimle Öğrenin" />
+
+            <TextView
+                android:textSize="16dp"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kurumsal Eğitim
+" />
+            <TextView
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:textColor="@color/blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="İngilizce eğitimimiz şirket yönetimiyle birlikte belirlenecek gün ve saatlerde yapılarak şirketin çalışma saatleri olabildiğince az etkilenir. Eğitim için gerekli olan tüm materyaller EASY SPEAK tarafından temin edilir. Eğitim öncesinde seviye tespit sınavı yapılarak öğrencilerin İngilizce seviyeleri belirlenir ve bu doğrultuda homojen gruplar oluşturulur..
+" />
+
+            <TextView
+                android:textSize="16dp"
+                android:layout_marginTop="10dp"
+
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bireysel Eğitim
+" />
+            <TextView
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:textColor="@color/blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Easy Speak School Of English olarak İngilizce Eğitiminde; Genel İngilizce 5 Seviye, Uzmanlık İngilizcesi 2 seviyeden oluşmaktadır." />
+
+            <TextView
+                android:textSize="16dp"
+                android:layout_marginTop="10dp"
+
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="İş İnglizcesi
+" />
+            <TextView
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:textColor="@color/blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="İş hayatınızda İngilizce'nin yeri önemlidir çünkü dünya İngilizce aracılığı ile iletişim sağlıyor.Profesyonel anlamda, iş hayatına dair var olan İngilizcenizi geliştirmek, işinizle ve sosyal hayatınızla ilgili olarak kişisel gelişiminizi üst düzeylere taşımak bu programımız ile birlikte mümkün olmaktadır.
+" />
+            <TextView
+                android:textSize="16dp"
+                android:layout_marginTop="10dp"
+
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sınava Hazırlık
+" />
+            <TextView
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:textColor="@color/blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ÜDS ve TOEFL gibi İnglice sınavlarına hazırlık yapmak için bizi tercih edin." />
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+</agency.tango.materialintroscreen.parallax.ParallaxLinearLayout>

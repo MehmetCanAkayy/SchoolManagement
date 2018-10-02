@@ -7,6 +7,7 @@ import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.GridLayout;
 
+import com.intro.IntroMenu;
 import com.mailSender.GuestActivity;
 
 
@@ -64,6 +65,13 @@ public class Openning_screen extends AppCompatActivity {
                     }
                     else if(finalI==3){
                         Intent intent=new Intent(Openning_screen.this,GuestActivity.class);
+
+                        startActivityForResult(intent,1);
+
+
+                    }
+                    else if(finalI==4){
+                        Intent intent=new Intent(Openning_screen.this,IntroMenu.class);
 
                         startActivityForResult(intent,1);
 

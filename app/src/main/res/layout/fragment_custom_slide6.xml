@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<agency.tango.materialintroscreen.parallax.ParallaxLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+
+    android:paddingBottom="100dp">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="32dp"
+
+        android:layout_weight="1">
+        <LinearLayout
+
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <TextView
+            android:layout_marginTop="40dp"
+            android:textSize="36dp"
+            android:textStyle="bold"
+            android:gravity="center"
+
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kurumsal Egitim" />
+
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:gravity="center"
+
+                android:textColor="@color/red"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kurumlara Özel İngilizce Dersleri
+
+" />
+
+
+            <TextView
+                android:textSize="16dp"
+                android:layout_marginTop="20dp"
+
+                android:textStyle="bold"
+                android:textColor="@color/event_color_04"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kurumlara Özel İngilizce Dersleri
+Kurumunuzun faaliyet alanına ve beklentilerine yönelik özel programlar belirlemenin kurumsal dil eğitiminde en doğru yöntem olduğunu düşünmekteyiz. Bu yöntemle, öncelikle tercihinize göre kurumunuzda veya okulumuzda çalışanlarınız için bir seviye belirleme testi uygulanır ve standart olan Genel İngilizce programlarımız dışında iş alanlarınıza yönelik ve çalışanlarınızın seviyesine uygun eğitimler oluşturulur. Easy Speak İngilizce Dil Okulu’nda verilen kurumsal eğitimlerde;" />
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textSize="16dp"
+
+                android:textStyle="bold"
+                android:textColor="@color/c1LessonColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kurumsalTxt"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textSize="16dp"
+
+                android:textStyle="bold"
+                android:textColor="@color/event_color_04"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kurumsalTxt2"/>
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+</agency.tango.materialintroscreen.parallax.ParallaxLinearLayout>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<agency.tango.materialintroscreen.parallax.ParallaxLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+
+    android:paddingBottom="100dp">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="32dp"
+
+        android:layout_weight="1">
+        <LinearLayout
+
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+            android:layout_marginTop="50dp"
+            android:textSize="36dp"
+            android:textStyle="bold"
+            android:gravity="center"
+
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Egitimlerimiz" />
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textSize="24dp"
+                android:gravity="center"
+
+                android:textStyle="bold"
+                android:textColor="@color/blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Randevulu Egitim Sistemi
+" />
+            <TextView
+                android:textSize="16dp"
+                android:gravity="center"
+android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Eğitim alanında dünyanın en büyük ‘’ eğitim çözümleri’’ sağlayıcısı olarak faaliyet gösteren
+PEARSON yayınlarını eğitiminde kullanmakta olan Easy Speak, öğrencilerine aynı zamanda E-learning ve Versant Test sistemini sunmaktadır." />
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textSize="24dp"
+                android:gravity="center"
+
+                android:textStyle="bold"
+                android:textColor="@color/blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Profesyonellerden Eğitim Alın
+" />
+            <TextView
+                android:textSize="20dp"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Yabancı Öğretmenlerimiz İle Tanışın
+" />
+            <TextView
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/advencedLessonColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Öğretmenlerimiz yurtdışında eğitim görmüş, TEFL ve Celta sertifikalarına sahip işinin uzmanlarıdır." />
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+</agency.tango.materialintroscreen.parallax.ParallaxLinearLayout>

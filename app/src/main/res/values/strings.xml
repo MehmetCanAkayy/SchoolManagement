@@ -71,6 +71,41 @@
 \nSeviye: Upper Intermediate, Advanced
 </string>
 
+       <string name="kaliteTxt">\nEasy Speak, İngilizce dilini uluslararası eğitim standartlarına sadık kalarak, kaliteden ödün vermeden, öğrencilerine mümkün olan en kısa sürede ve kalıcı olarak öğretmeyi kendine görev bilmiştir. Bu amacı gerçekleştirmek ve öğrencilerin sonsuz güvenini kazanabilmek için aşağıdaki ilkeleri değişmez olarak kabul etmiştir.
+\n\nYurtdışı tecrübesi bulunan, alanlarında uzman, diplomalı ve sertifikalı öğretmenlerle eğitim verir.
+\n\nAlanında uzman olan uzman kişiler tarafından günlük düzenli olarak ücretsiz konuşma saatleri düzenlenir.
+\n\nKayıt politikamız ve eğitim odaklı sistemimiz nedeniyle mülakat ile kayıtlar alınır.
+    \n\nÖğrencilerini ihtiyaç duydukları alanlarda; ingilizce seviyelerine, yaş ortalamalarına, eğitim durumlarına ve karakterlerine en uygun sınıflara yerleştirir.
+    \n\nU oturma düzenine sahip maksimum 10 kişilik sınıflarda eğitim verilir.
+    \n\nUlusal ve uluslararası standartlara uygun bir eğitim verir.
+    \n\nÖğrencilerin gelişim ve değişimleri raporlarla test edilir.
+    \n\nKur sonunda devamsızlığı %10\'u aşmamış ve ev ödevlerini eksiksiz tamamladığı halde üst kura geçemeyen öğrencilere ücretsiz tekrar hakkı verir.
+</string>
+
+    <string name="kurumsalTxt">    \n1. Eğitiminizi kendi kurumunuzda veya okulumuzda alma özgürlüğüne sahipsiniz.
+    \n2. Dilerseniz öğrencilerimizin derse devam durumu, notları ve başarı düzeyleri raporlandırılarak kurumunuza periyodik olarak iletilir.
+    \n3. İngilizce dil eğitimi süresince tüm materyaller (kitaplar, dinleme materyalleri, multimedya materyalleri, aktiviteler ) okulumuz tarafından öğrencilerimize sağlanır.
+    \n4. Yoğun gruplarda eğitim zamanları konusunda karşılıklı görüşme ile esneklik sağlanabilir.
+    \n5. Öğrencilerimiz herhangi bir sebeple, katılamadıkları dersleri okulumuzda verilecek olan tekrar dersleri ile ücretsiz olarak telafi edebilirler.
+</string>
+
+    <string name="kurumsalTxt2">\n"Doğru öğrenme metodu ve kültürle harmanlanmış dil öğretimi ’’ ilkesini benimseyen kurumumuzda öğrencilerimiz özgün öğretim metodumuzla uzman eğitmenler eşliğinde dört beceriyi (dinleme-okuma-yazma-konuşma) birbiriyle uyum içerisinde dengeleyerek geliştirmeyi amaçlar.
+\n- Genel İngilizce
+    \n- İş İngilizcesi
+\nİngilizce eğitimimiz şirket yönetimiyle birlikte belirlenecek gün ve saatlerde yapılarak şirketin çalışma saatleri olabildiğince az etkilenir. Eğitim için gerekli olan tüm materyaller EASY SPEAK tarafından temin edilir. Eğitim öncesinde seviye tespit sınavı yapılarak öğrencilerin İngilizce seviyeleri belirlenir ve bu doğrultuda homojen gruplar oluşturulur. Seviye tespit sınavı sonuçlarının ardından şirket yönetiminin de talepleri dikkate alınarak eğitimin içeriği, süresi, niteliği gibi konular uzman Türk ve yabancı öğretmenlerimiz tarafından belirlenir. Eğitim süresince şirket yöneticileri genel performansları devam ve başarı durumlarıyla ilgili raporlar ile düzenli olarak bilgilendirilir.
+\nİngilizce Dil ihtiyaçlarınızla ilgili özel planlar oluşturmak amacıyla Kurumsal eğitim departmanımızla iletişime geçebilirsiniz: kurumsalizmit@easyspeak.com.tr
+</string>
+    <string name="isTxt">\nToplantılar - iletişim stratejileri
+    \nYönetim - teori ve pratik
+    \nMüzakereler - ikna, satış teknikleri, tarz
+    \nSunum Becerileri - hem şirket içi, hem şirket dışı
+    \nLiderlik ve diğer yönetim becerileri</string>
+    <string name="sinavTxt">YDS:YDS sınavı yılda iki kez yapılmaktadır. Bu sınavda 80 soru bulunmaktadır ve her sorunun ortalama 1.25 puan değeri vardır.
+\nTOEFL:TOEFL sınavı, ana dil İngilizce olmayanların Amerikan İngilizcesi bilgisini ölçmek amacıyla Amerika\'nın New Jersey eyaletinde bulunan ETS( Educational Testing Service ) tarafından dünyanın birçok merkezinde düzenlenen bir sinavdir.
+\nPT Academic
+\nIELTS:IELTS(The international English Langauge Testing System) adayların İngilizce yeteneklerini ölçen en güvenilir sınavlardan biridir. IELTS sınavı dört farklı modülden oluşmaktadır. Bu bölümler Listening, Reading, Writing ve Speaking\'dir.</string>
+
+
     <string-array name="teachers">
         <item>Frank</item>
         <item>Alice</item>

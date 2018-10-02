@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<agency.tango.materialintroscreen.parallax.ParallaxLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+
+    android:paddingBottom="100dp">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="32dp"
+
+        android:layout_weight="1">
+        <LinearLayout
+
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <TextView
+            android:layout_marginTop="40dp"
+            android:textSize="36dp"
+            android:textStyle="bold"
+            android:gravity="center"
+
+            android:textColor="@color/greenyellow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VIP EĞİTİM" />
+
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:gravity="center"
+
+                android:textColor="@color/blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Özel Dersler
+
+" />
+
+
+            <TextView
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"
+
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Size özel hazırlayacağımız eğitim programları hakkında bilgi almak için eğitim danışmanlarımızı arayabilirsiniz..." />
+
+
+            <TextView
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"
+
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0 262 323 33 03" />
+
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+</agency.tango.materialintroscreen.parallax.ParallaxLinearLayout>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<agency.tango.materialintroscreen.parallax.ParallaxLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+
+    android:paddingBottom="100dp">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="32dp"
+
+        android:layout_weight="1">
+        <LinearLayout
+
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <TextView
+            android:layout_marginTop="40dp"
+            android:textSize="36dp"
+            android:textStyle="bold"
+            android:gravity="center"
+
+            android:textColor="@color/second_slide_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bireysel Egitim" />
+
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:gravity="center"
+
+                android:textColor="@color/red"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Konuşma Odaklı Sistem
+" />
+
+
+            <TextView
+                android:textSize="16dp"
+                android:layout_marginTop="20dp"
+
+                android:textStyle="bold"
+                android:textColor="@color/b2LessonColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Activity: Tek bir seviyeden maksimum 9 öğrenciyle işlenir. Seviye kapsamında İngilizce Dil Bilgisi yapıları öğretilir." />
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textSize="16dp"
+
+                android:textStyle="bold"
+                android:textColor="@color/c1LessonColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Speaking: Tek bir seviyeden maksimum 11 öğrenciyle işlenir. Konuşma pratiği sağlanır.
+                "/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textSize="16dp"
+
+                android:textStyle="bold"
+                android:textColor="@color/event_color_04"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Social Class: Birbirini takip eden iki seviyenin öğrencileri 13 kişiyi geçmeyecek sınıflar halinde eğitme tabi tutulur. Konuşma ve dil bilgisi dışında kalan temel becerilerin pratiğini ve edinimini sağlamaktır.
+"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textSize="16dp"
+
+                android:textStyle="bold"
+                android:textColor="@color/event_color_02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chat: Bütün seviyelerden öğrencileri bir araya getirerek maksimum 20 kişilik sınıflarda İngilizce sohbet ortamı oluşturulur.
+"/>
+            <TextView
+            android:layout_marginTop="10dp"
+            android:textSize="16dp"
+
+            android:textStyle="bold"
+            android:textColor="@color/fuchsia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Survey: Ortalam 2 kişil sınıflarda, öğrencilerin 4 temel dil becerisini takip eden ünite bazlı değerlendirme sınavıdır. Öğrenci gelişim takibi öğretmenler tarafından yapılır.
+"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textSize="16dp"
+
+                android:textStyle="bold"
+                android:textColor="@color/event_color_01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Multimedia: Öğrencilerin gerekli pratiği yapabilmelerini mümkün kılan, kurs sistemiyle paralel çalışan, eğitimde edinimin önemli parçasıdır.
+"/>
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+</agency.tango.materialintroscreen.parallax.ParallaxLinearLayout>

@@ -64,6 +64,7 @@ dependencies {
 
     //implementation 'com.github.alamkanak:android-week-view:1.2.6'
     implementation 'com.wajahatkarim3.EasyFlipView:EasyFlipView:2.1.0'
+    compile 'agency.tango.android:material-intro-screen:0.0.5'
 
 
 }
